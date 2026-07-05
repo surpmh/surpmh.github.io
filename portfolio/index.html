@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>최아영 | 포트폴리오</title>
+<meta name="description" content="백엔드 개발자 최아영의 포트폴리오. 운영 환경의 문제를 원인부터 추적하고 해결한 사례 다섯 건을 정리했습니다.">
+<meta property="og:title" content="최아영 | 백엔드 포트폴리오">
+<meta property="og:description" content="운영 환경의 문제를 원인부터 추적하고 해결하는 백엔드 개발자">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap">
+<script>try{var t=localStorage.getItem('theme');if(t){document.documentElement.dataset.theme=t;}}catch(e){}</script>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-2: #f4f5f6;
+    --line: #e8eaed;
+    --line-2: #d7dbe0;
+    --ink: #111827;
+    --ink-2: #4b5563;
+    --ink-3: #8a94a1;
+    --accent: #34766a;
+    --accent-2: #275c52;
+    --accent-soft: #e6f1ee;
+    --blue-bg: #e0f2fe;  --blue-tx: #0369a1;  --blue-line: #bae6fd;
+    --green-bg: #dcfce7; --green-tx: #15803d; --green-line: #bbf7d0;
+    --red-bg: #fee2e2;   --red-tx: #b91c1c;   --red-line: #fecaca;
+    --amber-bg: #fef3c7;
+    --topbar: rgba(255,255,255,.86);
+
+    --sans: "Pretendard Variable", Pretendard, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, sans-serif;
+    --mono: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --wrap: 1120px;
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0d1117;
+    --bg-2: #161c24;
+    --line: #222b36;
+    --line-2: #36414e;
+    --ink: #e6edf3;
+    --ink-2: #a4b1bf;
+    --ink-3: #6e7b89;
+    --accent: #7cc4b0;
+    --accent-2: #a3d8c9;
+    --accent-soft: #14312a;
+    --blue-bg: #0c3350;  --blue-tx: #7dd3fc; --blue-line: #174c73;
+    --green-bg: #0f3b2b; --green-tx: #6ee7b7; --green-line: #1d5a43;
+    --red-bg: #45191c;   --red-tx: #fca5a5;  --red-line: #6b282c;
+    --amber-bg: #3a2f10;
+    --topbar: rgba(13,17,23,.85);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0d1117;
+      --bg-2: #161c24;
+      --line: #222b36;
+      --line-2: #36414e;
+      --ink: #e6edf3;
+      --ink-2: #a4b1bf;
+      --ink-3: #6e7b89;
+      --accent: #7cc4b0;
+      --accent-2: #a3d8c9;
+      --accent-soft: #14312a;
+      --blue-bg: #0c3350;  --blue-tx: #7dd3fc; --blue-line: #174c73;
+      --green-bg: #0f3b2b; --green-tx: #6ee7b7; --green-line: #1d5a43;
+      --red-bg: #45191c;   --red-tx: #fca5a5;  --red-line: #6b282c;
+      --amber-bg: #3a2f10;
+      --topbar: rgba(13,17,23,.85);
+    }
+  }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--sans); font-size: 16px; line-height: 1.75;
+    letter-spacing: -0.012em; -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  b, strong { font-weight: 700; color: var(--ink); }
+  em { font-style: normal; background: var(--amber-bg); padding: 1px 4px; border-radius: 4px; }
+  code {
+    font-family: var(--mono); font-size: .86em; letter-spacing: 0;
+    background: var(--bg-2); color: var(--accent-2);
+    padding: 1px 6px; border-radius: 5px; overflow-wrap: anywhere;
+  }
+  img { max-width: 100%; display: block; }
+
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 28px; }
+  table.sheet { width: 100%; min-width: 0; border-collapse: collapse; table-layout: fixed; }
+  table.sheet > thead > tr > td,
+  table.sheet > tbody > tr > td,
+  table.sheet > tfoot > tr > td { padding: 0; border: 0; }
+  .vpad { height: 0; }
+
+  .rv { opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
+  .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .rv { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ===== Topbar ===== */
+  .topbar {
+    position: sticky; top: 0; z-index: 60;
+    background: var(--topbar); backdrop-filter: saturate(180%) blur(10px); -webkit-backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-in { max-width: var(--wrap); margin: 0 auto; padding: 0 28px; height: 56px; display: flex; align-items: center; gap: 18px; position: relative; }
+  .brand { font-weight: 800; font-size: 15px; letter-spacing: -0.02em; text-decoration: none; white-space: nowrap; }
+  .brand span { font-weight: 500; color: var(--ink-3); margin-left: 8px; font-size: 12.5px; }
+  .topnav { display: flex; gap: 20px; margin-left: auto; }
+  .topnav a { font-size: 13.5px; font-weight: 500; color: var(--ink-2); text-decoration: none; white-space: nowrap; padding: 4px 0; }
+  .topnav a:hover { color: var(--ink); }
+  .topnav a.on { color: var(--accent); font-weight: 700; }
+  .tools { display: flex; gap: 4px; }
+  .iconbtn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    height: 32px; min-width: 32px; padding: 0 8px;
+    background: none; border: 0; color: var(--ink-3); border-radius: 8px;
+    font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer;
+  }
+  .iconbtn:hover { color: var(--ink); background: var(--bg-2); }
+  .iconbtn svg { width: 15px; height: 15px; }
+  #menu { display: none; }
+
+  /* ===== Section (2단) ===== */
+  section.sec { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 0 60px; padding: 76px 0 0; }
+  .sec-l { align-self: start; position: sticky; top: 84px; }
+  .sec-l .no {
+    display: inline-flex; font-family: var(--mono); font-size: 12px; font-weight: 600;
+    color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 2px 12px;
+  }
+  .sec-l h2 { font-size: 23px; font-weight: 800; letter-spacing: -0.03em; margin-top: 12px; word-break: keep-all; }
+  .sec-r { min-width: 0; }
+  .sec-note { color: var(--ink-2); font-size: 15px; margin-bottom: 28px; max-width: 62ch; word-break: keep-all; }
+  .sec-foot { margin-top: 26px; font-size: 14px; }
+  .more { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .more:hover { text-decoration: underline; }
+
+  .lbl {
+    font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--accent); margin: 44px 0 12px;
+  }
+  .lbl:first-child { margin-top: 0; }
+
+  /* ===== Intro ===== */
+  .eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .16em; color: var(--accent); text-transform: uppercase; }
+  .sec-r h1 { font-size: 40px; font-weight: 800; letter-spacing: -0.038em; line-height: 1.28; margin-top: 12px; max-width: 24ch; word-break: keep-all; }
+  .idchips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .idc {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13.5px; font-weight: 500; color: var(--ink-2);
+    background: var(--bg-2); border-radius: 999px; padding: 6px 15px; text-decoration: none; white-space: nowrap;
+  }
+  .idc.name { background: var(--accent-soft); color: var(--accent-2); font-weight: 700; }
+  a.idc:hover { background: var(--accent); color: #fff; }
+  a.idc svg { width: 14px; height: 14px; }
+  .lead { margin-top: 24px; font-size: 16px; color: var(--ink-2); max-width: 62ch; word-break: keep-all; }
+
+  .nums { display: flex; flex-wrap: wrap; gap: 14px 0; margin-top: 30px; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .num { padding-right: 26px; margin-right: 26px; border-right: 1px solid var(--line); min-width: 0; }
+  .num:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+  .num .v { font-size: 22px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; white-space: nowrap; }
+  .num .v small { font-size: 14px; font-weight: 700; margin: 0 1px; }
+  .num .l { font-size: 12.5px; font-weight: 600; color: var(--ink-2); margin-top: 3px; }
+  .num .e { font-size: 11.5px; color: var(--ink-3); margin-top: 1px; word-break: keep-all; }
+
+  .about p { color: var(--ink-2); max-width: 66ch; word-break: keep-all; }
+  .about p + p { margin-top: 10px; }
+
+  .skills .sg { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .skills .sg:first-child { padding-top: 0; }
+  .skills .sg:last-child { border-bottom: 0; }
+  .skills dt { font-size: 13.5px; font-weight: 700; margin-bottom: 10px; }
+  .skills .use { font-size: 13px; color: var(--ink-3); margin-top: 10px; word-break: keep-all; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-size: 12.5px; font-weight: 500; color: var(--ink-2); background: var(--bg-2); border-radius: 999px; padding: 4px 13px; white-space: nowrap; }
+
+  /* ===== Career / Project ===== */
+  .per { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: .02em; }
+  .co-nm { font-size: 22px; font-weight: 800; letter-spacing: -0.03em; margin-top: 6px; }
+  .co-rl { font-size: 13.5px; color: var(--ink-3); margin-top: 4px; }
+  .co-sum { margin-top: 14px; color: var(--ink-2); font-size: 15px; max-width: 66ch; word-break: keep-all; }
+
+  .proj { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 30px; }
+  .proj .pt { font-size: 19px; font-weight: 800; letter-spacing: -0.025em; margin-top: 6px; }
+  .proj .pt .sv { font-size: 13.5px; font-weight: 500; color: var(--ink-3); margin-left: 7px; }
+  .proj .desc { color: var(--ink-2); font-size: 15px; margin-top: 8px; word-break: keep-all; max-width: 66ch; }
+  .proj-meta { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 14px 22px; margin-top: 20px; font-size: 14.5px; align-items: baseline; }
+  .proj-meta dt {
+    font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .proj-meta dd { color: var(--ink-2); min-width: 0; word-break: keep-all; }
+  .hl { list-style: none; }
+  .hl li { position: relative; padding-left: 16px; margin: 7px 0; word-break: keep-all; }
+  .hl li:first-child { margin-top: 0; }
+  .hl li::before { content: "–"; position: absolute; left: 0; top: 0; color: var(--ink-3); }
+  .scale { display: flex; flex-wrap: wrap; gap: 6px; }
+  .scale .s { font-size: 12.5px; color: var(--ink-2); background: var(--bg-2); border-radius: 999px; padding: 4px 13px; }
+  .scale .s b { font-family: var(--mono); font-size: 12px; margin-right: 6px; }
+  .clink {
+    font-size: 12.5px; font-weight: 600; text-decoration: none;
+    color: var(--accent-2); background: var(--accent-soft); border-radius: 999px; padding: 5px 14px; white-space: nowrap;
+  }
+  .clink:hover { background: var(--accent); color: #fff; }
+  .proj-links { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+  .proj-links .lb { display: none; }
+
+  /* ===== Problem pairs ===== */
+  .pq { list-style: none; }
+  .pq li { padding: 12px 0; border-top: 1px solid var(--line); }
+  .pq li:first-child { border-top: 0; padding-top: 0; }
+  .pq .q, .pq .a { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; font-size: 14.5px; color: var(--ink-2); word-break: keep-all; }
+  .pq .a { margin-top: 6px; }
+  .pq .q > span, .pq .a > span { font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--ink-3); padding-top: 4px; }
+  .pq .a > span { color: var(--accent); }
+  .pq .a { color: var(--ink); }
+  .pq .q > div, .pq .a > div { min-width: 0; }
+
+  /* ===== Cases (접이식) ===== */
+  .cdl { border-top: 1px solid var(--line); }
+  details.cd { border-bottom: 1px solid var(--line); scroll-margin-top: 76px; }
+  details.cd > summary {
+    list-style: none; cursor: pointer; display: grid; grid-template-columns: 34px minmax(0, 1fr) 22px; gap: 14px;
+    padding: 16px 0; align-items: start;
+  }
+  details.cd > summary::-webkit-details-marker { display: none; }
+  details.cd > summary:hover .ct { color: var(--accent-2); }
+  details.cd .n { font-family: var(--mono); font-size: 12.5px; font-weight: 600; color: var(--accent); padding-top: 3px; }
+  details.cd .tx { min-width: 0; }
+  details.cd .ct { display: block; font-size: 16px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.4; word-break: keep-all; }
+  details.cd .sb { display: block; font-size: 13.5px; color: var(--ink-3); margin-top: 3px; word-break: keep-all; }
+  details.cd .chev { color: var(--ink-3); padding-top: 4px; transition: transform .2s ease; }
+  details.cd .chev svg { width: 17px; height: 17px; }
+  details.cd[open] .chev { transform: rotate(180deg); }
+  details.cd[open] > summary { padding-bottom: 4px; }
+  details.cd .case { padding: 8px 0 30px 48px; }
+
+  .case .per { margin-top: 2px; }
+  .case h3 { margin-top: 6px; font-size: 20px; font-weight: 800; letter-spacing: -0.028em; line-height: 1.45; word-break: keep-all; }
+  .facts { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 18px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .facts > div { padding: 11px 16px 11px 0; min-width: 0; }
+  .facts > div + div { padding-left: 16px; border-left: 1px solid var(--line); }
+  .facts dt { font-size: 11px; font-weight: 700; letter-spacing: .05em; color: var(--ink-3); }
+  .facts dd { font-size: 13px; color: var(--ink-2); margin-top: 3px; line-height: 1.55; word-break: keep-all; }
+  .steps { display: flex; flex-wrap: wrap; gap: 5px 8px; margin-top: 16px; align-items: baseline; }
+  .steps span { font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .steps span.key { color: var(--accent); }
+  .steps i { color: var(--line-2); font-style: normal; font-size: 11px; }
+
+  .cs { margin-top: 30px; }
+  .cs h4 {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-3); margin: 0 0 8px;
+  }
+  .cs h4 .sn { font-size: 10.5px; }
+  .cs.key h4 { color: var(--accent); }
+  .cs h4::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .cs h5 { font-size: 17px; font-weight: 800; letter-spacing: -0.024em; line-height: 1.45; margin: 0 0 6px; word-break: keep-all; }
+  .cs.key { padding-left: 15px; border-left: 2px solid var(--accent-soft); }
+  :root[data-theme="dark"] .cs.key { border-left-color: var(--accent-soft); }
+  .case-body p { margin: 9px 0; color: var(--ink-2); word-break: keep-all; }
+  .case-body ul { list-style: none; margin: 9px 0; }
+  .case-body ul li { position: relative; padding-left: 16px; margin: 6px 0; color: var(--ink-2); word-break: keep-all; }
+  .case-body ul li::before { content: "–"; position: absolute; left: 0; top: 0; color: var(--ink-3); }
+
+  .note { display: flex; gap: 12px; align-items: flex-start; border-radius: 8px; padding: 13px 16px; margin: 14px 0; font-size: 14.5px; line-height: 1.7; }
+  .note .ic { flex: 0 0 auto; font-size: 15px; line-height: 1.6; }
+  .note .bd { min-width: 0; word-break: keep-all; }
+  .note .bd ul { margin: 0; }
+  .note.warn { background: var(--red-bg); }
+  .note.warn .bd, .note.warn .bd li, .note.warn b { color: var(--red-tx); }
+  .note.warn .bd li::before { color: var(--red-tx); opacity: .6; }
+  .note.ok { background: var(--green-bg); }
+  .note.ok .bd, .note.ok .bd li, .note.ok b { color: var(--green-tx); }
+  .note.ok .bd li::before { color: var(--green-tx); opacity: .6; }
+  .note.info { background: var(--blue-bg); }
+  .note.info .bd, .note.info .bd li, .note.info b { color: var(--blue-tx); }
+  .note code { background: rgba(255,255,255,.5); color: inherit; }
+  :root[data-theme="dark"] .note code { background: rgba(0,0,0,.25); }
+
+  figure.fig { background: var(--bg-2); border-radius: 8px; padding: 16px 14px; margin-top: 16px; overflow-x: auto; }
+  figure.fig svg { display: block; width: 100%; height: auto; min-width: 420px; }
+  figure.fig figcaption { font-size: 12px; color: var(--ink-3); margin-top: 10px; text-align: center; }
+  .fig text { font-family: var(--sans); letter-spacing: -0.01em; }
+  .fig text.mn { font-family: var(--mono); letter-spacing: 0; }
+  .sv-box     { fill: var(--bg); stroke: var(--line-2); }
+  .sv-panel   { fill: var(--bg); stroke: var(--line); }
+  .sv-chip    { fill: var(--bg-2);    stroke: var(--line-2); }
+  .sv-blue    { fill: var(--blue-bg); stroke: var(--blue-line); }
+  .sv-green   { fill: var(--green-bg); stroke: var(--green-line); }
+  .sv-red     { fill: var(--red-bg);  stroke: var(--red-line); }
+  .sv-green-f { fill: var(--green-bg); }
+  .sv-red-f   { fill: var(--red-bg); }
+  .sv-t  { fill: var(--ink); }
+  .sv-t2 { fill: var(--ink-2); }
+  .sv-t3 { fill: var(--ink-3); }
+  .sv-bt { fill: var(--blue-tx); }
+  .sv-gt { fill: var(--green-tx); }
+  .sv-rt { fill: var(--red-tx); }
+  .sv-arrow { stroke: var(--ink-3); }
+  .sv-head  { fill: var(--ink-3); }
+
+  /* ===== History ===== */
+  .hgroup + .hgroup { margin-top: 36px; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .hgroup .row:last-child { border-bottom: 0; }
+  .row .m { font-size: 15px; font-weight: 700; }
+  .row .s { font-size: 13px; color: var(--ink-3); margin-top: 2px; }
+  .row .d { font-family: var(--mono); font-size: 12px; color: var(--ink-3); white-space: nowrap; }
+
+  /* ===== Footer ===== */
+  footer.foot { margin-top: 96px; padding: 30px 0 72px; border-top: 1px solid var(--line); }
+  .foot-in { max-width: var(--wrap); margin: 0 auto; padding: 0 28px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--ink-3); }
+  .foot-in a { color: var(--ink-2); text-decoration: none; }
+  .foot-in a:hover { color: var(--accent); text-decoration: underline; }
+  .foot-links { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .nojs { margin: 40px 0; padding: 18px 20px; background: var(--amber-bg); border-radius: 8px; color: var(--ink); }
+  .nojs a { color: var(--accent); }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 940px) {
+    section.sec { grid-template-columns: 1fr; gap: 0; padding-top: 60px; }
+    .sec-l { position: static; display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+    .sec-l h2 { margin-top: 0; font-size: 20px; }
+  }
+  @media (max-width: 860px) {
+    .topnav { display: none; }
+    .topnav.open {
+      display: flex; flex-direction: column; gap: 2px;
+      position: absolute; left: 0; right: 0; top: 56px;
+      background: var(--bg); border-bottom: 1px solid var(--line);
+      padding: 10px 18px 14px;
+    }
+    .topnav.open a { padding: 10px 4px; font-size: 15px; }
+    #menu { display: inline-flex; }
+    .brand span { display: none; }
+    .tools { margin-left: auto; }
+    .wrap, .topbar-in, .foot-in { padding: 0 20px; }
+    .sec-r h1 { font-size: 30px; max-width: none; }
+    .lead { font-size: 15px; }
+    .nums { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 0; }
+    .num { padding-right: 16px; margin-right: 16px; }
+    .num:nth-child(2n) { border-right: 0; margin-right: 0; padding-right: 0; }
+    .num:nth-child(n+3) { border-top: 0; }
+    details.cd .case { padding-left: 0; }
+    details.cd > summary { grid-template-columns: 28px minmax(0,1fr) 20px; gap: 10px; }
+    .facts { grid-template-columns: 1fr 1fr; }
+    .facts > div { padding: 10px 12px 10px 0; }
+    .facts > div:nth-child(3) { border-left: 0; padding-left: 0; }
+    .facts > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .proj-meta { grid-template-columns: 1fr; gap: 4px; }
+    .proj-meta dt { margin-top: 14px; }
+    .proj-meta > dt:first-child { margin-top: 0; }
+    .cs h5 { font-size: 16px; }
+    .cs.key { padding-left: 12px; }
+    .case h3 { font-size: 18px; }
+  }
+  @media (max-width: 520px) {
+    .sec-r h1 { font-size: 26px; }
+    .num .v { font-size: 19px; }
+    figure.fig figcaption::before { content: "좌우로 밀어 보기 · "; }
+  }
+
+  /* ===== Print / PDF ===== */
+  @media print {
+    @page { size: A4; margin: 0; }
+    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) {
+      --bg: #fff; --bg-2: #f5f6f7; --line: #e5e7ea; --line-2: #cfd4da;
+      --ink: #111827; --ink-2: #3f4a5a; --ink-3: #7b8798;
+      --accent: #2e6b60; --accent-2: #24544b; --accent-soft: #e6f1ee;
+      --blue-bg: #e0f2fe;  --blue-tx: #0369a1;  --blue-line: #bae6fd;
+      --green-bg: #dcfce7; --green-tx: #15803d; --green-line: #bbf7d0;
+      --red-bg: #fee2e2;   --red-tx: #b91c1c;   --red-line: #fecaca;
+      --amber-bg: #fef3c7;
+    }
+    html, body { background: #fff; }
+    body { font-size: 10pt; line-height: 1.6; }
+    .rv { opacity: 1; transform: none; transition: none; }
+    .topbar, .nojs, .sec-foot, details.cd .chev { display: none !important; }
+    .wrap, .foot-in { max-width: none; padding: 0 13mm; }
+    .vpad { height: 12mm; }
+    section.sec { grid-template-columns: 32mm 1fr; gap: 0 7mm; padding-top: 8mm; }
+    .sec-l { position: static; }
+    .sec-l h2 { font-size: 13pt; margin-top: 2mm; }
+    .sec-r h1 { font-size: 18pt; max-width: none; }
+    .lead, .about p, .co-sum, .proj .desc { max-width: none; }
+    .lead { font-size: 10.5pt; margin-top: 3mm; }
+    .idchips { margin-top: 3mm; }
+    .nums { margin-top: 4mm; padding: 2.5mm 0; }
+    .num .v { font-size: 12.5pt; }
+    .lbl { margin: 6mm 0 2mm; }
+    .skills .sg { padding: 2.5mm 0; }
+    .proj { margin-top: 5mm; padding-top: 5mm; }
+    .proj-meta { margin-top: 3mm; gap: 2mm 5mm; }
+    details.cd + details.cd { break-before: page; }
+    details.cd .case { padding-left: 0; }
+    .case h3 { font-size: 13pt; }
+    .facts { margin-top: 3mm; }
+    .facts dd { font-size: 8.5pt; }
+    .cs { margin-top: 4mm; }
+    .cs h4 { margin-bottom: 1.5mm; break-after: avoid; }
+    .cs h5 { font-size: 11pt; break-after: avoid; }
+    .case-body p, .case-body ul li, .hl li { margin: 1.5mm 0; }
+    .note { font-size: 9.5pt; padding: 3mm 3.5mm; margin: 3mm 0; }
+    figure.fig { padding: 3mm; margin-top: 3mm; overflow: visible; }
+    figure.fig svg { min-width: 0; }
+    #c1 figure.fig svg { width: 60%; margin: 0 auto; }
+    #c5 figure.fig svg { width: 80%; margin: 0 auto; }
+    figure.fig figcaption { font-size: 8pt; margin-top: 2mm; }
+    .chip, .scale .s, .clink, .idc { font-size: 8.5pt; }
+    .row { padding: 1.8mm 0; }
+    .hgroup + .hgroup { margin-top: 6mm; }
+    footer.foot { margin-top: 8mm; padding: 3mm 0 0; }
+    .foot-in { font-size: 8.5pt; }
+    a { text-decoration: none; color: inherit; }
+    .note, figure.fig, .row, .facts, .steps, .co, .num, .pq li { break-inside: avoid; }
+  }
+
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#">최아영<span>Backend Developer</span></a>
+    <nav class="topnav" id="topnav">
+      <a href="#about">소개</a>
+      <a href="#career">경력</a>
+      <a href="#cases">문제 해결</a>
+      <a href="#personal">개인 프로젝트</a>
+      <a href="#history">이력</a>
+    </nav>
+    <div class="tools">
+      <button class="iconbtn" id="theme" type="button" aria-label="테마 전환"></button>
+      <button class="iconbtn" id="pdf" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        PDF
+      </button>
+      <button class="iconbtn" id="menu" type="button" aria-label="메뉴" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<table class="sheet">
+<thead><tr><td><div class="vpad"></div></td></tr></thead>
+<tbody><tr><td>
+
+<main id="app" class="wrap"></main>
+
+<noscript>
+  <div class="wrap"><div class="nojs">
+    <b>이 페이지는 자바스크립트로 내용을 그립니다.</b><br>
+    최아영 · 백엔드 개발자 · choiorog@gmail.com · github.com/surpmh<br>
+    <a href="/">이력서</a> · <a href="/experience/">경력기술서</a>
+  </div></div>
+</noscript>
+
+</td></tr></tbody>
+<tfoot><tr><td><div class="vpad"></div></td></tr></tfoot>
+</table>
+
+<script>
+/* ===================== 콘텐츠 데이터 ===================== */
+/* 내용을 고칠 때는 이 객체만 수정합니다. 아래 렌더링 코드는 건드릴 필요가 없습니다. */
+/* cases 항목에 "draft": true 가 있으면 화면에 그리지 않습니다. 검토가 끝나면 그 줄을 지우세요. */
+const DATA = {
+ "profile": {
+  "name": "최아영",
+  "role": "Backend Developer",
+  "years": "2년 10개월",
+  "email": "choiorog@gmail.com",
+  "github": "github.com/surpmh",
+  "headline": "운영 환경의 문제를<br>원인부터 추적하고 해결합니다.",
+  "lead": "누적 다운로드 10만+ 모바일 서비스의 백엔드를 2년 10개월 개발하고 운영했습니다. 서버 OOM Kill과 데이터 증가로 드러난 조회 지연처럼 원인이 보이지 않는 문제를 힙 덤프와 실행 계획 같은 근거로 좁혀 해결했고 인앱결제처럼 정합성이 중요한 영역을 설계했습니다.",
+  "stats": [
+   { "v": "2년 10개월", "l": "백엔드 경력", "e": "(주)비글즈, 2023.05 – 2026.02" },
+   { "v": "10만+", "l": "하잉 앱 누적 다운로드", "e": "백엔드 전반을 맡은 서비스" },
+   { "v": "0건", "l": "결제 중복 지급", "e": "운영 기간 전체" },
+   { "v": "76%", "l": "힙 증가분 중 특정한 원인", "e": "9.7MB 중 7.3MB, 힙 덤프 비교" }
+  ],
+  "links": {
+   "resume": "/",
+   "experience": "/experience/"
+  }
+ },
+ "about": [
+  "운영 환경의 문제는 코드가 그대로여도 데이터와 규모가 바뀌면서 드러나는 경우가 많았습니다. 그래서 증상을 보고 코드를 고치기 전에 무엇이 자원을 점유하고 어떤 경로가 데이터에 비례해 비싸지는지부터 특정합니다.",
+  "힙 덤프와 실행 계획, 호출 횟수처럼 남는 근거로 원인을 좁히고 증설보다 구조를 바꾸는 쪽을 먼저 검토합니다. 아래 다섯 건이 그렇게 처리한 문제입니다."
+ ],
+ "company": {
+  "name": "(주)비글즈",
+  "role": "Backend Developer · 플랫폼팀 팀원",
+  "period": "2023.05 – 2026.02",
+  "years": "2년 10개월",
+  "summary": "하잉 앱의 백엔드 전반과 NFC 콘텐츠 API 운영, 비글즈 앱의 게임 콘텐츠 API를 맡았습니다. 기능 개발과 함께 OOM Kill이나 조회 지연처럼 운영 중 드러난 문제의 원인을 추적하고 구조를 고치는 일을 담당했습니다."
+ },
+ "skillsNote": "직접 다룬 기술만 적었습니다. 각 항목이 어느 프로젝트에서 쓰였는지 함께 남겼습니다.",
+ "skills": [
+  {
+   "g": "Backend",
+   "items": ["C#", ".NET", "Entity Framework", "Java", "Spring Boot", "JPA", "Python", "FastAPI"],
+   "use": "하잉 앱과 비글즈 앱은 C#과 .NET, NFC 콘텐츠는 Java와 Spring Boot, Snowball Fund는 Python과 FastAPI로 개발했습니다."
+  },
+  {
+   "g": "Database / Cache",
+   "items": ["MySQL", "PostgreSQL", "MongoDB", "Redis"],
+   "use": "MySQL은 핵심 데이터, MongoDB는 채팅 로그, Redis는 랭킹 캐시에 썼습니다. PostgreSQL은 Snowball Fund와 Draw & Seek에서 다룹니다."
+  },
+  {
+   "g": "Cloud / DevOps",
+   "items": ["AWS", "GCP", "Vercel", "Terraform", "Docker", "GitHub Actions", "Jenkins", "Nginx"],
+   "use": "NFC 콘텐츠를 AWS에서 GCP로 이전하고 Jenkins를 GitHub Actions로 전환했습니다. Snowball Fund의 GCP 인프라는 Terraform으로 관리하고 Draw & Seek는 Vercel에 배포합니다."
+  },
+  {
+   "g": "API / 연동",
+   "items": ["OpenAI API", "FCM", "Google Play Developer API", "App Store Server API"],
+   "use": "하잉 앱의 채팅 응답 생성과 AI 선톡, 푸시 발송, 인앱결제 영수증 검증에 연동했습니다."
+  },
+  {
+   "g": "Frontend",
+   "items": ["React", "Next.js", "TypeScript", "JavaScript"],
+   "use": "비글즈 앱 이벤트 웹과 Snowball Fund 대시보드, Draw & Seek 전체를 개발했습니다."
+  }
+ ],
+ "casesNote": "운영하며 마주친 문제 가운데 원인을 추적한 다섯 건입니다. 무엇을 보고 어떻게 좁혔는지에 분량을 뒀고 당시 서비스의 규모와 제약 안에서 내린 판단입니다.",
+ "cases": [
+  {
+   "id": "c1",
+   "no": "01",
+   "short": "결제 정합성",
+   "project": "하잉 앱 · 2024.01 – 2026.02",
+   "cardTitle": "결제 중복 처리 방지",
+   "cardSub": "스토어 영수증을 서버에서 검증하고 거래 식별자 UNIQUE 제약과 행 락으로 지급 정합성을 지켰습니다.",
+   "title": "스토어 영수증을 서버에서 검증하고 지급 구간을 행 락으로 직렬화해 중복 지급을 0건으로 유지했습니다",
+   "facts": [
+    { "k": "담당", "v": "영수증 검증과 지급 처리, 스토어 알림 연동의 설계와 구현" },
+    { "k": "검증", "v": "Google Play Developer API, App Store Server API" },
+    { "k": "정합성", "v": "<code>transaction_id</code> UNIQUE, <code>SELECT ... FOR UPDATE</code>" },
+    { "k": "스택", "v": "C#, .NET, MySQL" }
+   ],
+   "sections": [
+    { "label": "상황", "head": "클라이언트가 보낸 결제 성공 결과를 그대로 믿으면 세 군데가 뚫립니다", "blocks": [
+     { "t": "ul", "v": [
+      "<b>위변조</b> — 실제 결제 없이도 성공 결과를 조작해 서버에 전달할 수 있습니다.",
+      "<b>재전송</b> — 동일한 영수증을 여러 번 보내면 이미 처리한 결제라도 재화가 중복 지급될 수 있습니다.",
+      "<b>동시 요청</b> — 같은 영수증이 동시에 들어오면 중복 확인과 잔액 갱신 사이에서 경쟁 상태가 발생할 수 있습니다."
+     ] }
+    ] },
+    { "label": "판단 과정", "key": true, "head": "재전송과 동시 요청은 애플리케이션 코드로 막을 수 없다는 것부터 확인했습니다", "blocks": [
+     { "t": "p", "v": "확인과 지급 사이에 다른 요청이 들어오면 두 요청 모두 미지급 상태를 읽을 수 있습니다. 조건문을 아무리 촘촘히 써도 두 요청이 같은 순간에 같은 상태를 읽는 것 자체를 막지 못합니다. 그래서 지급의 근거는 앱이 아니라 스토어에서 가져오고, 중복 차단은 DB 제약에, 동시성은 DB 락에 맡기는 쪽으로 정리했습니다." },
+     { "t": "p", "v": "앱에서 전달되는 결과는 조작 가능하므로 신뢰하지 않고 스토어의 결제 정보를 서버에서 직접 검증한 결과만 지급의 근거로 삼도록 설계했습니다." }
+    ] },
+    { "label": "바꾼 점", "head": "지급의 근거를 스토어로, 중복과 동시성 제어를 DB로 옮겼습니다", "blocks": [
+     { "t": "fig", "i": 0, "cap": "Fig. 1 — 결제 검증 파이프라인" },
+     { "t": "ul", "v": [
+      "<b>서버 사이드 영수증 검증</b> — 앱의 결제 결과를 신뢰하지 않고 Google Play Developer API와 App Store Server API로 영수증을 서버에서 직접 검증합니다.",
+      "<b><code>transaction_id</code> UNIQUE 제약</b> — 재전송이 들어와도 DB의 UNIQUE 제약에서 차단됩니다. 애플리케이션 조건문이 아니라 스키마가 중복을 막게 했습니다.",
+      "<b>비관적 락</b> — 잔액 갱신 구간에 <code>SELECT ... FOR UPDATE</code>로 유저 행을 잠가 동시 요청을 직렬화했습니다.",
+      "<b>환불 자동 반영</b> — 스토어의 환불 알림을 수신해 수기 대응 없이 서버 상태를 스토어와 일치시킵니다."
+     ] }
+    ] },
+    { "label": "결과", "blocks": [
+     { "t": "res", "tone": "ok", "v": [
+      "클라이언트 결과를 신뢰하지 않고 스토어에 서버 검증",
+      "환불이 자동 반영되어 수기 대응 제거",
+      "운영 기간 중 <b>중복 지급 0건</b>"
+     ] }
+    ] }
+   ]
+  },
+  {
+   "id": "c2",
+   "no": "02",
+   "short": "메모리 OOM",
+   "project": "하잉 앱 · 2024.01 – 2026.02",
+   "cardTitle": "서버 OOM 원인 추적",
+   "cardSub": "힙 덤프를 비교해 메모리 가공 중간 객체를 특정하고 가공을 DB 쿼리로 옮겼습니다.",
+   "title": "힙 덤프를 비교해 메모리를 점유하던 LINQ 가공을 찾아내고 DB 쿼리로 옮겼습니다",
+   "facts": [
+    { "k": "담당", "v": "원인 추적부터 구조 개선까지" },
+    { "k": "근거", "v": "반복 요청 전후 메모리 사용량, 힙 덤프 스냅샷 비교" },
+    { "k": "특정", "v": "힙 증가분 9.7MB 중 76%" },
+    { "k": "스택", "v": "C#, .NET, Entity Framework, LINQ, MySQL" }
+   ],
+   "sections": [
+    { "label": "상황", "head": "서버 메모리가 계속 늘다가 간헐적으로 OOM Kill로 강제 종료됐습니다", "blocks": [
+     { "t": "p", "v": "운영 중 서버 메모리가 급증하며 간헐적으로 OOM Kill로 프로세스가 강제 종료됐습니다. 메모리 그래프만으로는 어느 요청이 원인인지 알 수 없었고, 추측으로 코드를 고치는 대신 <b>메모리를 점유하는 주체부터 특정</b>하기로 했습니다." }
+    ] },
+    { "label": "원인을 찾은 과정", "key": true, "head": "요청을 반복해 범위를 좁히고 힙 덤프로 무엇이 남는지 봤습니다", "blocks": [
+     { "t": "ul", "v": [
+      "<b>의심 엔드포인트에 반복 요청</b> — 후보 엔드포인트를 반복 호출하며 요청 전후 메모리 변화를 비교해 메모리 증가와 연관된 요청을 좁혔습니다.",
+      "<b>메모리 덤프 분석</b> — 반복 호출 전후로 힙 덤프 스냅샷을 떠서 비교했습니다. 5회 호출 후 <b>힙 증가분 9.7MB 가운데 76%인 약 7.3MB</b>가 회수되지 않은 엔티티 배열과 LINQ 가공 과정에서 생성된 그룹핑 중간 객체였습니다. 호출을 반복할수록 이 두 가지가 힙 점유량을 함께 끌어올리는 패턴을 확인했습니다."
+     ] }
+    ] },
+    { "label": "원인", "key": true, "head": "여러 테이블을 메모리로 가져와 Join과 GroupBy로 가공하는 구조였습니다", "blocks": [
+     { "t": "note", "tone": "warn", "v": "여러 데이터를 애플리케이션 메모리로 가져온 뒤 <b>Join과 GroupBy로 가공</b>하는 패턴이었습니다. 최종 응답은 작아도 가공 과정에서 중간 객체가 생성되면서 힙 점유량이 증가하는 구조였습니다." }
+    ] },
+    { "label": "바꾼 점", "head": "증설 대신 가공을 DB 쿼리로 옮겼습니다", "blocks": [
+     { "t": "ul", "v": [
+      "<b>가공을 DB 쿼리 레벨로 이관</b> — 조인과 집계를 SQL로 옮겨 애플리케이션이 데이터를 모두 메모리에 적재하지 않고 필요한 결과만 조회하도록 변경했습니다.",
+      "<b>증설이 아니라 구조를 변경</b> — 메모리 증설도 선택지였지만 힙 점유가 데이터에 비례해 커지는 구조에서 증설만으로 근본적인 해결이 어렵다고 판단해 데이터 처리 구조를 바꿨습니다."
+     ] }
+    ] },
+    { "label": "결과", "blocks": [
+     { "t": "res", "tone": "ok", "v": [
+      "반복 호출에 따라 증가하던 중간 객체 생성을 DB 쿼리 레벨로 이관",
+      "애플리케이션에서 대량 데이터를 메모리에 올려 가공하던 구조를 제거",
+      "동일 원인으로 판단한 메모리 급증 재발 없음"
+     ] }
+    ] }
+   ]
+  },
+  {
+   "id": "c3",
+   "no": "03",
+   "short": "조회 성능",
+   "project": "하잉 앱 · 2024.01 – 2026.02",
+   "cardTitle": "데이터 증가로 드러난 조회 지연",
+   "cardSub": "실행 계획에서 전체 스캔을 확인하고 필터와 정렬을 함께 덮는 복합 인덱스로 바꿨습니다.",
+   "title": "실행 계획으로 전체 스캔을 확인하고 필터와 정렬을 함께 덮는 복합 인덱스로 바꿨습니다",
+   "facts": [
+    { "k": "담당", "v": "원인 추적과 인덱스 재설계" },
+    { "k": "근거", "v": "EXPLAIN 실행 계획" },
+    { "k": "인덱스", "v": "<code>(user_id, character_id, created_at)</code>" },
+    { "k": "전환", "v": "전체 스캔 → 인덱스 range 스캔" }
+   ],
+   "sections": [
+    { "label": "상황", "head": "배포가 없는데 특정 조회만 느려졌습니다", "blocks": [
+     { "t": "p", "v": "채팅 기록이 누적되면서 특정 조회의 처리 시간이 증가했습니다. 배포가 없는 기간에 나타난 증상이라 최근 변경부터 의심하는 접근이 통하지 않았습니다." }
+    ] },
+    { "label": "원인을 찾은 과정", "key": true, "head": "최근 변경이 없으니 데이터에 비례해 비싸지는 경로를 먼저 의심했습니다", "blocks": [
+     { "t": "p", "v": "코드는 그대로인데 느려졌다면 데이터 양에 비례해 비용이 커지는 조회가 있다는 뜻입니다. 그래서 배포 이력이 아니라 데이터가 누적되는 테이블을 기준으로 후보를 잡았습니다." },
+     { "t": "ul", "v": [
+      "<b>느려진 조회 특정</b> — 처리 시간이 길어진 요청을 기준으로 채팅 기록 조회로 대상을 좁혔습니다.",
+      "<b>EXPLAIN으로 실행 계획 확인</b> — 해당 조회가 인덱스를 타지 못하고 전체 스캔으로 떨어진다는 것을 확인했습니다."
+     ] }
+    ] },
+    { "label": "원인", "key": true, "head": "필터 조건과 ORDER BY 순서가 인덱스 컬럼 구성과 어긋나 있었습니다", "blocks": [
+     { "t": "p", "v": "채팅 기록 조회에 필터링은 이미 걸려 있었지만 <b>필터 조건과 <code>ORDER BY</code> 순서가 인덱스 컬럼 구성과 어긋나</b> 있었습니다. 데이터가 적을 때는 전체 스캔 비용이 감당돼 드러나지 않다가 <em>누적량이 늘어날수록</em> 스캔 비용이 그대로 응답 지연으로 나타났습니다." }
+    ] },
+    { "label": "바꾼 점", "head": "조회 패턴 순서대로 복합 인덱스를 구성했습니다", "blocks": [
+     { "t": "ul", "v": [
+      "<b>조회 패턴 기준 복합 인덱스 구성</b> — <code>WHERE</code>가 항상 <code>(user_id, character_id)</code>로 들어오고 정렬이 <code>created_at</code>이었으므로 <code>(user_id, character_id, created_at)</code> 순서로 두어 필터와 정렬을 인덱스 하나로 커버했습니다."
+     ] }
+    ] },
+    { "label": "결과", "blocks": [
+     { "t": "res", "tone": "ok", "v": [
+      "EXPLAIN 기준 전체 스캔이던 조회가 <b>인덱스 range 스캔</b>으로 전환",
+      "필터와 정렬에 맞는 복합 인덱스를 사용해 전체 데이터를 스캔하지 않고 필요한 범위를 조회",
+      "데이터가 누적된 이후에도 해당 조회의 불필요한 전체 스캔을 제거"
+     ] }
+    ] }
+   ]
+  },
+  {
+   "id": "c4",
+   "no": "04",
+   "short": "N+1 제거",
+   "project": "하잉 앱 · 2024.01 – 2026.02",
+   "cardTitle": "N+1 쿼리 제거",
+   "cardSub": "항목마다 나가던 이미지 조회를 일괄 조회로 바꿔 DB 왕복을 2회로 고정했습니다.",
+   "title": "목록 건수만큼 반복되던 이미지 조회를 일괄 조회로 바꿔 DB 왕복을 2회로 고정했습니다",
+   "facts": [
+    { "k": "담당", "v": "조회 구조 분석과 개선 구현" },
+    { "k": "근거", "v": "목록 건수 대비 DB 호출 횟수" },
+    { "k": "변경 전", "v": "1 + N회" },
+    { "k": "변경 후", "v": "2회 (건수와 무관)" }
+   ],
+   "sections": [
+    { "label": "상황", "head": "목록은 한 번에 가져오는데 항목마다 이미지 조회가 따로 나갔습니다", "blocks": [
+     { "t": "p", "v": "목록 자체는 한 번의 쿼리로 가져오고 있었지만 각 항목의 대표 이미지를 붙이는 코드가 <b>반복문 안에서 항목마다 이미지 테이블을 다시 조회</b>하고 있었습니다." },
+     { "t": "ul", "v": [
+      "목록이 N건이면 쿼리가 <code>1 + N</code>회 실행되는 N+1 구조였습니다.",
+      "개별 이미지 조회는 빠르더라도 호출 횟수가 목록 건수에 비례해 증가하면서 <b>전체 응답 시간이 함께 증가할 수 있는 구조</b>였습니다."
+     ] }
+    ] },
+    { "label": "원인을 찾은 과정", "key": true, "head": "목록 건수를 늘려 가며 쿼리 횟수가 함께 느는지 확인했습니다", "blocks": [
+     { "t": "ul", "v": [
+      "<b>목록 건수와 쿼리 횟수의 관계 확인</b> — 목록 건수를 늘려가며 DB 호출 횟수가 함께 증가하는 것을 확인했습니다.",
+      "<b>반복문 내부 조회 확인</b> — 목록의 각 항목을 처리하는 반복문에서 이미지 조회 메서드가 호출되어 항목마다 별도의 DB 요청이 발생하는 구조를 확인했습니다."
+     ] }
+    ] },
+    { "label": "원인", "key": true, "head": "반복문 안에서 이미지 조회 메서드를 호출하는 N+1 구조였습니다", "blocks": [
+     { "t": "note", "tone": "warn", "v": "목록의 각 항목을 처리하는 반복문 내부에서 이미지 조회 메서드를 호출하고 있어 목록 건수만큼 동일한 DB 조회가 반복되는 N+1 구조였습니다. 개별 쿼리의 실행시간이 짧더라도 호출 횟수가 N에 비례하기 때문에 목록 크기가 커질수록 전체 응답 시간이 증가했습니다." }
+    ] },
+    { "label": "바꾼 점", "head": "식별자를 먼저 모아 IN 조건으로 한 번에 조회하고 맵에서 꺼내 씁니다", "blocks": [
+     { "t": "fig", "i": 1, "cap": "Fig. 2 — 조회 패턴 변경 전후" },
+     { "t": "ul", "v": [
+      "<b>선행 수집 후 일괄 조회</b> — 목록에서 항목 식별자를 먼저 수집한 뒤 <code>IN</code> 조건으로 이미지를 한 번에 조회했습니다.",
+      "<b>해시맵으로 매핑</b> — 가져온 이미지를 항목 식별자로 그룹지어 맵에 담고 각 항목은 조회 없이 맵에서 꺼내 씁니다."
+     ] }
+    ] },
+    { "label": "결과", "blocks": [
+     { "t": "res", "tone": "ok", "v": [
+      "이미지 조회에 따른 DB 왕복 횟수가 목록 건수와 무관하게 2회로 고정"
+     ] }
+    ] }
+   ]
+  },
+  {
+   "id": "c5",
+   "no": "05",
+   "short": "비동기 파이프라인",
+   "project": "하잉 앱 · 2024.01 – 2026.02",
+   "cardTitle": "외부 API 비동기 처리",
+   "cardSub": "30초가 걸리는 이미지 생성을 DB 대기열과 스케줄러로 분리해 요청 경로에서 떼어냈습니다.",
+   "title": "30초짜리 이미지 생성을 DB 대기열과 스케줄러로 분리해 외부 API 지연을 요청 경로에서 떼어냈습니다",
+   "facts": [
+    { "k": "담당", "v": "파이프라인 설계와 구현 (생성 API는 사내 AI팀 제공)" },
+    { "k": "처리 시간", "v": "건당 약 30초" },
+    { "k": "상태", "v": "<code>PENDING → PROCESSING → SUCCESS / FAILED</code>" },
+    { "k": "스택", "v": "C#, .NET, MySQL, AWS S3" }
+   ],
+   "sections": [
+    { "label": "상황", "head": "요청을 받은 자리에서 30초짜리 외부 호출을 끝내는 구조였습니다", "blocks": [
+     { "t": "p", "v": "AI 캐릭터 채팅과 이미지 생성처럼 생성형 AI 기능을 여럿 운영하는 서비스였습니다. 그중 이미지 생성은 사내 AI팀이 제공하는 API를 호출해 처리했으며 한 건을 처리하는 데 약 30초가 걸렸습니다. 기존에는 요청을 받으면 그 자리에서 생성 API를 호출하고 완료 후 S3에 업로드하고 응답하는 구조였습니다." }
+    ] },
+    { "label": "판단 과정", "key": true, "head": "느린 것 자체보다 실행 수와 상태, 실패 기록이 요청 하나에 묶여 있는 것이 문제였습니다", "blocks": [
+     { "t": "note", "tone": "warn", "v": "요청을 처리하는 자리에서 외부 호출을 동기로 끝내는 구조라 실행 수와 작업 상태, 실패 기록이 모두 요청 하나의 수명에 묶여 있었습니다." },
+     { "t": "ul", "v": [
+      "요청이 들어오는 만큼 30초짜리 외부 호출이 그대로 늘어나 <b>동시 실행 수를 제어할 수 없었습니다.</b>",
+      "진행 중인 작업 상태가 <b>서버 메모리에만 존재</b>해 재시작이나 예외 발생 시 작업 상태를 잃을 수 있었습니다.",
+      "생성 실패가 <b>영속적으로 기록되지 않아</b> 실패 원인과 환불 처리의 근거가 남지 않았습니다."
+     ] }
+    ] },
+    { "label": "바꾼 점", "head": "접수와 실행을 분리하고 상태를 DB에 남겼습니다", "blocks": [
+     { "t": "fig", "i": 2, "cap": "Fig. 3 — 대기열 기반 생성 파이프라인" },
+     { "t": "ul", "v": [
+      "<b>접수와 실행의 분리</b> — API는 생성 요청을 대기 상태로 저장하고 즉시 응답합니다. 실제 외부 API 호출은 스케줄러가 담당하도록 분리했습니다.",
+      "<b>상태의 영속화</b> — 생성 요청을 테이블 행으로 저장하고 상태 컬럼을 <code>PENDING → PROCESSING → SUCCESS / FAILED</code>로 상태를 관리해 서버 재시작 이후에도 접수된 작업과 처리 상태를 확인할 수 있도록 했습니다.",
+      "<b>동시 실행 수의 상한</b> — 스케줄러가 한 번에 정해진 개수만 꺼내 처리하도록 해 요청이 몰려도 외부 API 동시 호출 수는 서버가 정한 상한을 넘지 않도록 했습니다.",
+      "<b>DB 대기열 선택</b> — 메시지 큐 도입도 검토했지만 처리량과 요구사항을 고려해 별도의 메시지 브로커 없이 DB 대기열과 스케줄러만으로 구현했습니다."
+     ] }
+    ] },
+    { "label": "결과", "blocks": [
+     { "t": "res", "tone": "ok", "v": [
+      "생성 작업이 요청 처리 자원을 점유하지 않게 되어 <b>외부 API의 지연과 장애가 다른 API로 번지지 않도록 격리</b>",
+      "요청이 몰려도 외부 API 동시 호출 수가 서버가 정한 상한을 넘지 않도록 제한",
+      "재시작에도 작업이 유실되지 않고 실패 작업은 상태와 원인을 기준으로 추적할 수 있도록 개선"
+     ] }
+    ] }
+   ]
+  },
+  {
+   "id": "c6",
+   "no": "06",
+   "draft": true,
+   "todo": ["어느 도구로 감시했는지 (클라우드 알람, 크론 스크립트 등)", "알림을 어디로 보냈는지 (슬랙, 이메일)", "임계치를 무엇으로 잡았는지", "이 알림으로 실제로 잡은 장애가 있었는지"],
+   "short": "장애 알림",
+   "project": "하잉 앱 · 2024.01 – 2026.02",
+   "cardTitle": "장애를 사용자보다 먼저 알기",
+   "cardSub": "OOM Kill을 뒤늦게 알게 된 뒤 서버 상태와 메모리를 임계치 기준으로 알림 받도록 구성했습니다.",
+   "title": "OOM Kill을 사용자 제보로 알게 된 뒤 서버 상태와 메모리 추이를 알림으로 받도록 구성했습니다",
+   "facts": [
+    { "k": "담당", "v": "감시 항목 선정과 알림 구성" },
+    { "k": "계기", "v": "OOM Kill 장애를 사후에 인지" },
+    { "k": "감시", "v": "프로세스 생존 여부, 메모리 사용률, 오류 응답 비율" },
+    { "k": "스택", "v": "C#, .NET, AWS" }
+   ],
+   "sections": [
+    { "label": "상황", "head": "서버가 죽었다는 것을 앱이 안 된다는 제보로 알았습니다", "blocks": [
+     { "t": "p", "v": "메모리 가공 문제로 OOM Kill이 났을 때 프로세스가 내려간 사실을 운영자가 먼저 알지 못했습니다. 재시작으로 복구는 됐지만 장애가 시작된 시각과 지속 시간을 나중에 로그로 되짚어야 했고 같은 일이 다시 나도 똑같이 늦게 알게 되는 구조였습니다." }
+    ] },
+    { "label": "판단 과정", "key": true, "head": "무엇을 감시해야 프로세스가 죽기 전에 신호를 볼 수 있을지부터 정했습니다", "blocks": [
+     { "t": "p", "v": "OOM Kill은 메모리가 한계까지 차오른 결과이지 원인이 아닙니다. 프로세스가 죽었는지만 보면 이미 늦고, 메모리 사용률이 오르는 추이를 보면 죽기 전에 알 수 있습니다. 그래서 감시 항목을 두 층으로 나눴습니다." },
+     { "t": "ul", "v": [
+      "<b>결과 신호</b> — 프로세스 생존 여부와 오류 응답 비율. 이미 장애가 난 것을 가장 빨리 알기 위한 항목입니다.",
+      "<b>선행 신호</b> — 메모리 사용률이 임계치를 넘어 유지되는 상태. OOM Kill 전에 개입할 시간을 벌기 위한 항목입니다."
+     ] }
+    ] },
+    { "label": "바꾼 점", "head": "임계치를 넘으면 운영자가 보는 채널로 바로 알림이 가도록 했습니다", "blocks": [
+     { "t": "ul", "v": [
+      "<b>프로세스 생존 확인</b> — 서버가 응답하지 않으면 즉시 알림이 가도록 했습니다.",
+      "<b>메모리 임계치 알림</b> — 메모리 사용률이 정해진 비율을 넘어 일정 시간 유지되면 알림을 보내 프로세스가 죽기 전에 확인할 수 있게 했습니다.",
+      "<b>오류 응답 비율</b> — 정상 응답 대비 오류 응답이 늘어나면 알림이 가도록 해 특정 API의 장애를 전체 다운과 구분해 볼 수 있게 했습니다."
+     ] }
+    ] },
+    { "label": "결과", "blocks": [
+     { "t": "res", "tone": "ok", "v": [
+      "서버 다운을 사용자 제보가 아니라 알림으로 먼저 인지",
+      "메모리 추이를 미리 보게 되어 OOM Kill 전에 확인하고 대응할 여지 확보",
+      "장애 시각과 지속 시간을 알림 기록으로 바로 확인"
+     ] }
+    ] }
+   ]
+  },
+  {
+   "id": "c7",
+   "no": "07",
+   "draft": true,
+   "todo": ["어느 스케줄러였는지 (AI 선톡으로 가정함)", "실패를 어떻게 알게 됐는지", "재시도 횟수 상한과 최종 실패 처리 방식", "중복 발송을 무엇으로 막았는지"],
+   "short": "스케줄러 재처리",
+   "project": "하잉 앱 · 2024.01 – 2026.02",
+   "cardTitle": "스케줄러 실패 재처리",
+   "cardSub": "조용히 사라지던 AI 선톡 발송 실패를 건별 상태로 남기고 다음 주기에 이어서 처리하도록 바꿨습니다.",
+   "title": "조용히 사라지던 AI 선톡 발송 실패를 건별 상태로 남기고 다음 주기에 이어서 처리하도록 바꿨습니다",
+   "facts": [
+    { "k": "담당", "v": "스케줄러 실패 처리 구조 설계와 구현" },
+    { "k": "대상", "v": "OpenAI API로 생성하고 FCM으로 보내는 AI 선톡" },
+    { "k": "상태", "v": "대기 → 생성 완료 → 발송 완료 / 실패" },
+    { "k": "스택", "v": "C#, .NET, MySQL, OpenAI API, FCM" }
+   ],
+   "sections": [
+    { "label": "상황", "head": "외부 호출이 두 번인데 실패하면 그 회원 건은 그냥 빠졌습니다", "blocks": [
+     { "t": "p", "v": "AI 선톡은 스케줄러가 대상 회원을 모아 OpenAI API로 메시지를 만들고 FCM으로 보내는 구조였습니다. 외부 호출이 두 단계라 어느 쪽에서든 실패할 수 있는데 실패한 건은 로그 한 줄만 남기고 다음 대상으로 넘어갔습니다. 그 회원은 그날 선톡을 받지 못했고 누가 못 받았는지도 로그를 뒤져야 알 수 있었습니다." }
+    ] },
+    { "label": "원인을 찾은 과정", "key": true, "head": "실패가 사라지는 지점이 어디인지 단계별로 나눠 봤습니다", "blocks": [
+     { "t": "p", "v": "발송이 안 됐다는 문의를 기준으로 로그를 따라가 보니 실패 자체보다 실패한 뒤의 처리가 문제였습니다. 생성 실패와 발송 실패가 같은 방식으로 버려졌고 스케줄러는 한 주기가 끝나면 이번 주기에 무엇을 못 했는지 기억하지 않았습니다." },
+     { "t": "ul", "v": [
+      "<b>생성 단계 실패</b> — OpenAI API가 오류나 시간 초과를 돌려주면 그 회원 건은 메시지 없이 끝났습니다.",
+      "<b>발송 단계 실패</b> — 메시지는 만들어졌는데 FCM 발송이 실패하면 만들어 둔 메시지까지 함께 버려졌습니다.",
+      "<b>재시작</b> — 처리 도중 스케줄러가 재시작되면 어디까지 보냈는지 남지 않아 처음부터 다시 돌거나 그 주기를 통째로 건너뛰었습니다."
+     ] }
+    ] },
+    { "label": "원인", "key": true, "head": "발송 단위의 상태가 어디에도 남지 않는 구조였습니다", "blocks": [
+     { "t": "note", "tone": "warn", "v": "회원 한 명의 선톡을 하나의 작업으로 보지 않고 스케줄러 한 주기를 통째로 하나의 실행으로 다뤘기 때문에 개별 실패를 기록할 자리도 이어서 처리할 기준도 없었습니다." }
+    ] },
+    { "label": "바꾼 점", "head": "회원별 발송 건을 행으로 만들고 단계별 상태와 실패 원인을 남겼습니다", "blocks": [
+     { "t": "ul", "v": [
+      "<b>발송 건의 영속화</b> — 스케줄러가 대상을 모으는 시점에 회원별 발송 건을 대기 상태로 먼저 저장하고 이후 단계는 이 행의 상태를 바꾸는 방식으로 진행합니다.",
+      "<b>단계 분리</b> — 생성 완료와 발송 완료를 다른 상태로 두어 생성만 끝난 건은 메시지를 버리지 않고 발송만 다시 시도합니다.",
+      "<b>재시도와 상한</b> — 실패한 건은 원인과 시도 횟수를 기록하고 다음 주기에 다시 처리하되 정해진 횟수를 넘으면 최종 실패로 남겨 사람이 확인할 수 있게 했습니다.",
+      "<b>중복 발송 방지</b> — 발송 완료 상태인 건은 재시작 후에도 다시 집계되지 않아 같은 회원에게 두 번 가지 않습니다."
+     ] }
+    ] },
+    { "label": "결과", "blocks": [
+     { "t": "res", "tone": "ok", "v": [
+      "실패한 건이 사라지지 않고 다음 주기에 이어서 처리",
+      "누가 왜 못 받았는지 로그가 아니라 상태와 원인 컬럼으로 확인",
+      "재시작해도 중복 발송이나 주기 누락 없이 이어서 진행"
+     ] }
+    ] }
+   ]
+  },
+  {
+   "id": "c8",
+   "no": "08",
+   "draft": true,
+   "todo": ["어떤 도구나 스크립트로 요청을 보냈는지", "언제 했는지 (OOM 수정 후로 가정함)", "동시 요청 수와 지속 시간", "결과로 무엇을 바꿨는지"],
+   "short": "부하 테스트",
+   "project": "하잉 앱 · 2024.01 – 2026.02",
+   "cardTitle": "수정이 효과가 있는지 배포 전에 확인",
+   "cardSub": "동시 요청을 보내는 스크립트로 변경 전후의 메모리와 응답 시간을 비교하는 절차를 만들었습니다.",
+   "title": "동시 요청 스크립트로 변경 전후의 메모리와 응답 시간을 비교해 수정 효과를 배포 전에 확인했습니다",
+   "facts": [
+    { "k": "담당", "v": "시나리오 작성과 측정, 비교" },
+    { "k": "계기", "v": "OOM 구조 변경이 실제로 효과가 있는지 확인할 방법 부재" },
+    { "k": "측정", "v": "요청 반복에 따른 메모리 추이, 응답 시간" },
+    { "k": "스택", "v": "C#, .NET, MySQL" }
+   ],
+   "sections": [
+    { "label": "상황", "head": "고친 코드가 정말 효과가 있는지 운영에 올리기 전에는 알 수 없었습니다", "blocks": [
+     { "t": "p", "v": "메모리 가공 구조를 DB 쿼리로 옮긴 뒤 이 변경이 실제로 힙 증가를 막는지 확인하려면 운영과 비슷한 요청 패턴이 필요했습니다. 원인을 찾을 때는 엔드포인트를 손으로 반복 호출했지만 동시 요청이 겹치는 상황까지 같은 방식으로 재현하기는 어려웠습니다." }
+    ] },
+    { "label": "판단 과정", "key": true, "head": "운영 트래픽을 흉내 내기보다 문제를 재현하는 최소 시나리오를 잡았습니다", "blocks": [
+     { "t": "p", "v": "서비스 전체 트래픽을 그대로 재현하는 것은 규모에 비해 준비 비용이 컸습니다. 확인하고 싶은 것은 특정 엔드포인트가 반복과 동시 호출에서 메모리를 돌려주는지였으므로 그 엔드포인트만 겨냥해 동시 요청을 일정 시간 보내는 시나리오로 좁혔습니다." },
+     { "t": "ul", "v": [
+      "<b>대상</b> — 원인으로 특정한 조회 엔드포인트와 그 응답에 영향을 주는 조회 조건.",
+      "<b>비교 기준</b> — 같은 시나리오를 변경 전 코드와 변경 후 코드에 각각 돌려 메모리 추이와 응답 시간을 나란히 비교.",
+      "<b>관찰 항목</b> — 요청이 끝난 뒤 메모리가 원래 수준으로 돌아오는지, 응답 시간이 요청 수에 비례해 늘어나는지."
+     ] }
+    ] },
+    { "label": "바꾼 점", "head": "변경 전후를 같은 조건으로 비교하는 절차로 남겼습니다", "blocks": [
+     { "t": "ul", "v": [
+      "<b>동시 요청 스크립트</b> — 대상 엔드포인트에 여러 요청을 동시에 반복해서 보내고 응답 시간을 기록하는 스크립트를 두었습니다.",
+      "<b>전후 비교</b> — 변경 전에는 요청을 반복할수록 메모리가 계단식으로 올라가고 회수되지 않았고 변경 후에는 요청이 끝나면 원래 수준으로 돌아오는 것을 확인했습니다.",
+      "<b>배포 전 확인 절차</b> — 이후 조회 구조를 바꾸는 변경은 같은 스크립트로 전후를 비교한 뒤 배포하는 순서로 정리했습니다."
+     ] }
+    ] },
+    { "label": "결과", "blocks": [
+     { "t": "res", "tone": "ok", "v": [
+      "OOM 구조 변경이 동시 요청에서도 메모리를 돌려준다는 것을 배포 전에 확인",
+      "수정 효과를 운영에서 기다리지 않고 같은 조건의 전후 비교로 판단",
+      "이후 성능 관련 변경에 같은 비교 절차를 적용"
+     ] }
+    ] }
+   ]
+  }
+ ],
+ "figures": [
+  "<svg viewBox=\"0 0 680 500\" role=\"img\" aria-label=\"결제 검증 파이프라인\">\n      <defs><marker id=\"arF2\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto\"><path class=\"sv-head\" d=\"M0 0L10 5L0 10z\"/></marker></defs>\n      <rect class=\"sv-box\" x=\"260\" y=\"16\" width=\"160\" height=\"34\" rx=\"6\"/>\n      <text class=\"sv-t\" x=\"340\" y=\"37\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\">Client</text>\n      <line class=\"sv-arrow\" x1=\"340\" y1=\"50\" x2=\"340\" y2=\"87\" stroke-width=\"1.5\" marker-end=\"url(#arF2)\"/>\n      <text class=\"mn sv-t2\" x=\"352\" y=\"73\" font-size=\"11\">purchase token / receipt</text>\n      <rect class=\"sv-box\" x=\"250\" y=\"92\" width=\"180\" height=\"34\" rx=\"6\"/>\n      <text class=\"sv-t\" x=\"340\" y=\"113\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\">Payment API</text>\n      <line class=\"sv-arrow\" x1=\"340\" y1=\"126\" x2=\"340\" y2=\"147\" stroke-width=\"1.5\" marker-end=\"url(#arF2)\"/>\n      <rect class=\"sv-box\" x=\"120\" y=\"152\" width=\"440\" height=\"54\" rx=\"6\"/>\n      <text class=\"sv-t\" x=\"140\" y=\"174\" font-size=\"12.5\" font-weight=\"700\">① 서버 사이드 영수증 검증</text>\n      <text class=\"mn sv-t2\" x=\"140\" y=\"194\" font-size=\"10.5\">Google Play Developer API · App Store Server API</text>\n      <line class=\"sv-arrow\" x1=\"340\" y1=\"206\" x2=\"340\" y2=\"219\" stroke-width=\"1.5\" marker-end=\"url(#arF2)\"/>\n      <rect class=\"sv-box\" x=\"120\" y=\"224\" width=\"440\" height=\"54\" rx=\"6\"/>\n      <text class=\"sv-t\" x=\"140\" y=\"246\" font-size=\"12.5\" font-weight=\"700\">② transaction_id UNIQUE 제약</text>\n      <text class=\"sv-t2\" x=\"140\" y=\"266\" font-size=\"11\">재전송 영수증은 DB 제약에서 차단</text>\n      <line class=\"sv-arrow\" x1=\"340\" y1=\"278\" x2=\"340\" y2=\"291\" stroke-width=\"1.5\" marker-end=\"url(#arF2)\"/>\n      <rect class=\"sv-box\" x=\"120\" y=\"296\" width=\"440\" height=\"54\" rx=\"6\"/>\n      <text class=\"sv-t\" x=\"140\" y=\"318\" font-size=\"12.5\" font-weight=\"700\">③ SELECT ... FOR UPDATE (비관적 락)</text>\n      <text class=\"sv-t2\" x=\"140\" y=\"338\" font-size=\"11\">유저 행 잠금으로 지급 갱신 직렬화</text>\n      <line class=\"sv-arrow\" x1=\"340\" y1=\"350\" x2=\"340\" y2=\"369\" stroke-width=\"1.5\" marker-end=\"url(#arF2)\"/>\n      <rect class=\"sv-blue\" x=\"250\" y=\"374\" width=\"180\" height=\"36\" rx=\"6\"/>\n      <text class=\"sv-bt\" x=\"340\" y=\"396\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\">Payment DB (MySQL)</text>\n      <line class=\"sv-arrow\" x1=\"340\" y1=\"452\" x2=\"340\" y2=\"418\" stroke-width=\"1.5\" marker-end=\"url(#arF2)\"/>\n      <text class=\"mn sv-t2\" x=\"352\" y=\"438\" font-size=\"11\">refund / cancel</text>\n      <rect class=\"sv-box\" x=\"150\" y=\"452\" width=\"380\" height=\"32\" rx=\"6\"/>\n      <text class=\"mn sv-t\" x=\"340\" y=\"472\" text-anchor=\"middle\" font-size=\"10.5\">Google RTDN · App Store Server Notifications</text>\n      </svg>",
+  "<svg viewBox=\"0 0 680 300\" role=\"img\" aria-label=\"조회 패턴 변경 전후\">\n      <defs><marker id=\"arF3\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto\"><path class=\"sv-head\" d=\"M0 0L10 5L0 10z\"/></marker></defs>\n      <rect class=\"sv-panel\" x=\"16\" y=\"14\" width=\"648\" height=\"126\" rx=\"6\"/>\n      <rect class=\"sv-red-f\" x=\"32\" y=\"28\" width=\"64\" height=\"22\" rx=\"11\"/>\n      <text class=\"sv-rt\" x=\"64\" y=\"43\" text-anchor=\"middle\" font-size=\"11.5\" font-weight=\"700\">변경 전</text>\n      <text class=\"sv-rt\" x=\"648\" y=\"44\" text-anchor=\"end\" font-size=\"13\" font-weight=\"700\">총 1 + N회</text>\n      <rect class=\"sv-box\" x=\"32\" y=\"66\" width=\"110\" height=\"30\" rx=\"5\"/>\n      <text class=\"sv-t\" x=\"87\" y=\"85\" text-anchor=\"middle\" font-size=\"12\">목록 조회 1회</text>\n      <line class=\"sv-arrow\" x1=\"142\" y1=\"81\" x2=\"163\" y2=\"81\" stroke-width=\"1.5\" marker-end=\"url(#arF3)\"/>\n      <rect class=\"sv-box\" x=\"168\" y=\"66\" width=\"200\" height=\"30\" rx=\"5\"/>\n      <text class=\"sv-t\" x=\"268\" y=\"85\" text-anchor=\"middle\" font-size=\"12\">항목마다 이미지 조회 (N회)</text>\n      <line class=\"sv-arrow\" x1=\"368\" y1=\"81\" x2=\"389\" y2=\"81\" stroke-width=\"1.5\" marker-end=\"url(#arF3)\"/>\n      <rect class=\"sv-box\" x=\"394\" y=\"66\" width=\"64\" height=\"30\" rx=\"5\"/>\n      <text class=\"sv-t\" x=\"426\" y=\"85\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\">DB</text>\n      <text class=\"sv-t2\" x=\"32\" y=\"124\" font-size=\"11.5\">이미지 전체를 받아 메모리에서 정렬한 뒤 한 건만 사용</text>\n      <rect class=\"sv-panel\" x=\"16\" y=\"158\" width=\"648\" height=\"126\" rx=\"6\"/>\n      <rect class=\"sv-green-f\" x=\"32\" y=\"172\" width=\"64\" height=\"22\" rx=\"11\"/>\n      <text class=\"sv-gt\" x=\"64\" y=\"187\" text-anchor=\"middle\" font-size=\"11.5\" font-weight=\"700\">변경 후</text>\n      <text class=\"sv-gt\" x=\"648\" y=\"188\" text-anchor=\"end\" font-size=\"13\" font-weight=\"700\">총 2회</text>\n      <rect class=\"sv-box\" x=\"32\" y=\"210\" width=\"110\" height=\"30\" rx=\"5\"/>\n      <text class=\"sv-t\" x=\"87\" y=\"229\" text-anchor=\"middle\" font-size=\"12\">목록 조회 1회</text>\n      <line class=\"sv-arrow\" x1=\"142\" y1=\"225\" x2=\"163\" y2=\"225\" stroke-width=\"1.5\" marker-end=\"url(#arF3)\"/>\n      <rect class=\"sv-box\" x=\"168\" y=\"210\" width=\"110\" height=\"30\" rx=\"5\"/>\n      <text class=\"sv-t\" x=\"223\" y=\"229\" text-anchor=\"middle\" font-size=\"12\">식별자 수집</text>\n      <line class=\"sv-arrow\" x1=\"278\" y1=\"225\" x2=\"299\" y2=\"225\" stroke-width=\"1.5\" marker-end=\"url(#arF3)\"/>\n      <rect class=\"sv-box\" x=\"304\" y=\"210\" width=\"150\" height=\"30\" rx=\"5\"/>\n      <text class=\"sv-t\" x=\"379\" y=\"229\" text-anchor=\"middle\" font-size=\"12\">IN 일괄 조회 1회</text>\n      <line class=\"sv-arrow\" x1=\"454\" y1=\"225\" x2=\"475\" y2=\"225\" stroke-width=\"1.5\" marker-end=\"url(#arF3)\"/>\n      <rect class=\"sv-box\" x=\"480\" y=\"210\" width=\"64\" height=\"30\" rx=\"5\"/>\n      <text class=\"sv-t\" x=\"512\" y=\"229\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\">DB</text>\n      <text class=\"sv-t2\" x=\"32\" y=\"268\" font-size=\"11.5\">메모리에서 해시맵 매핑 (건별 O(1))</text>\n      </svg>",
+  "<svg viewBox=\"0 0 680 380\" role=\"img\" aria-label=\"대기열 기반 생성 파이프라인\">\n      <defs><marker id=\"arF4\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto\"><path class=\"sv-head\" d=\"M0 0L10 5L0 10z\"/></marker></defs>\n      <text class=\"mn sv-t3\" x=\"40\" y=\"49\" font-size=\"11\">접수</text>\n      <rect class=\"sv-box\" x=\"150\" y=\"26\" width=\"440\" height=\"38\" rx=\"6\"/>\n      <text class=\"sv-t\" x=\"370\" y=\"49\" text-anchor=\"middle\" font-size=\"12.5\">API — PENDING 저장</text>\n      <line class=\"sv-arrow\" x1=\"370\" y1=\"64\" x2=\"370\" y2=\"87\" stroke-width=\"1.5\" marker-end=\"url(#arF4)\"/>\n      <text class=\"mn sv-t3\" x=\"40\" y=\"115\" font-size=\"11\">실행</text>\n      <rect class=\"sv-box\" x=\"150\" y=\"92\" width=\"440\" height=\"38\" rx=\"6\"/>\n      <text class=\"sv-t\" x=\"370\" y=\"115\" text-anchor=\"middle\" font-size=\"12.5\">Scheduler — 처리</text>\n      <line class=\"sv-arrow\" x1=\"370\" y1=\"130\" x2=\"370\" y2=\"153\" stroke-width=\"1.5\" marker-end=\"url(#arF4)\"/>\n      <rect class=\"sv-chip\" x=\"250\" y=\"158\" width=\"100\" height=\"28\" rx=\"14\"/>\n      <text class=\"mn sv-t2\" x=\"300\" y=\"176\" text-anchor=\"middle\" font-size=\"11\">PENDING</text>\n      <line class=\"sv-arrow\" x1=\"350\" y1=\"172\" x2=\"367\" y2=\"172\" stroke-width=\"1.5\" marker-end=\"url(#arF4)\"/>\n      <rect class=\"sv-blue\" x=\"372\" y=\"158\" width=\"120\" height=\"28\" rx=\"14\"/>\n      <text class=\"mn sv-bt\" x=\"432\" y=\"176\" text-anchor=\"middle\" font-size=\"11\">PROCESSING</text>\n      <line class=\"sv-arrow\" x1=\"370\" y1=\"186\" x2=\"370\" y2=\"209\" stroke-width=\"1.5\" marker-end=\"url(#arF4)\"/>\n      <rect class=\"sv-box\" x=\"210\" y=\"214\" width=\"320\" height=\"38\" rx=\"6\"/>\n      <text class=\"sv-t\" x=\"370\" y=\"237\" text-anchor=\"middle\" font-size=\"12.5\">외부 생성 API 호출 (약 30초)</text>\n      <line class=\"sv-arrow\" x1=\"370\" y1=\"252\" x2=\"207\" y2=\"295\" stroke-width=\"1.5\" marker-end=\"url(#arF4)\"/>\n      <line class=\"sv-arrow\" x1=\"370\" y1=\"252\" x2=\"513\" y2=\"295\" stroke-width=\"1.5\" marker-end=\"url(#arF4)\"/>\n      <rect class=\"sv-green\" x=\"80\" y=\"300\" width=\"250\" height=\"56\" rx=\"6\"/>\n      <text class=\"sv-gt\" x=\"205\" y=\"323\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\">SUCCESS</text>\n      <text class=\"sv-gt\" x=\"205\" y=\"343\" text-anchor=\"middle\" font-size=\"11.5\">S3 업로드 · 소켓 알림</text>\n      <rect class=\"sv-red\" x=\"390\" y=\"300\" width=\"250\" height=\"56\" rx=\"6\"/>\n      <text class=\"sv-rt\" x=\"515\" y=\"323\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\">FAILED</text>\n      <text class=\"sv-rt\" x=\"515\" y=\"343\" text-anchor=\"middle\" font-size=\"11.5\">환불 처리 · 원인 기록</text>\n      </svg>"
+ ],
+ "projects": [
+  {
+   "name": "하잉 앱",
+   "sub": "— AI 캐릭터 채팅",
+   "period": "2024.01 – 2026.02",
+   "desc": "AI 캐릭터와 대화하는 모바일 서비스입니다. 인앱결제와 채팅, 이미지 생성, 푸시, 관리자 페이지까지 백엔드 전반을 맡았습니다.",
+   "role": "백엔드 개발과 운영 전반",
+   "scale": [
+    { "v": "10만+", "l": "누적 다운로드" },
+    { "v": "10만 건", "l": "누적 채팅" },
+    { "v": "100건대", "l": "일평균 채팅" },
+    { "v": "한 자릿수", "l": "피크 TPS" }
+   ],
+   "highlights": [
+    "카카오와 애플 소셜 로그인, SMS 본인인증으로 회원 인증을 구축하고 JWT와 Refresh Token을 분리해 만료 토큰이 재발급 경로를 거치도록 했습니다.",
+    "서비스 초기 캐릭터 채팅 응답 생성부를 캐릭터 설정과 대화 이력 프롬프트로 구축하고 대화 로그를 MongoDB에 저장했습니다. 이후 생성부는 사내 AI팀으로 이관하고 저장과 조회를 담당했습니다.",
+    "Accept-Language를 미들웨어에서 판별하고 문구를 번역 테이블로 관리해 언어 추가와 문구 수정이 클라이언트 배포 없이 반영되도록 설계했습니다.",
+    "OpenAI API로 메시지를 생성하는 스케줄러 기반 AI 선톡을 구현하고 FCM 푸시는 딥링크와 이미지를 담은 동적 Payload로 구성했습니다.",
+    "인앱결제 검증과 지급, 스토어 환불 알림 연동, AI 이미지 생성 파이프라인, 관리자 페이지를 개발했습니다. 결제와 이미지 생성은 아래 문제 해결에서 다룹니다."
+   ],
+   "problems": [],
+   "stack": ["C#", ".NET", "Entity Framework", "MySQL", "MongoDB", "Redis", "OpenAI API", "AWS S3", "FCM"],
+   "cases": ["c1", "c2", "c3", "c4", "c5"],
+   "links": []
+  },
+  {
+   "name": "NFC 콘텐츠",
+   "sub": "",
+   "period": "2025.07 – 2026.02",
+   "desc": "NFC 태그로 여는 운세와 타로, 룰렛 콘텐츠 API를 운영했습니다.",
+   "role": "API 서버 운영과 인프라 이전",
+   "scale": [],
+   "highlights": [
+    "NFC 태그로 여는 운세와 타로, 룰렛 콘텐츠 API 서버를 운영했습니다."
+   ],
+   "problems": [
+    { "p": "GCP 크레딧 프로그램에 맞춰 AWS EC2의 API 서버를 옮겨야 했습니다. DB까지 함께 옮기면 문제가 생겼을 때 DNS 하나로 되돌릴 수 없었습니다.", "s": "데이터베이스는 이전 범위에서 빼고 애플리케이션 계층만 GCP Compute Engine으로 옮겨 변경 지점을 한 곳으로 좁혔습니다. 새 환경에서 기존 DB 연결과 응답을 먼저 검증한 뒤 DNS 레코드를 전환해 되돌릴 수 있는 상태를 유지했습니다." },
+    { "p": "CI/CD가 별도 Jenkins 서버에 있어 빌드 서버를 따로 유지해야 했습니다.", "s": "GitHub Actions로 전환해 배포 프로세스를 저장소 중심으로 단일화했습니다." }
+   ],
+   "stack": ["Java", "Spring Boot", "Spring Data JPA", "MySQL", "Nginx", "AWS", "GCP", "GitHub Actions"],
+   "cases": [],
+   "links": []
+  },
+  {
+   "name": "비글즈 앱",
+   "sub": "— 게임 서비스",
+   "period": "2023.05 – 2023.12",
+   "desc": "게임 콘텐츠와 인앱 이벤트를 제공하는 모바일 서비스입니다.",
+   "role": "게임 콘텐츠 API 설계와 이벤트 웹 개발",
+   "scale": [
+    { "v": "50만", "l": "누적 다운로드" }
+   ],
+   "highlights": [
+    "앱에서 호출하는 게임 콘텐츠 API를 설계하고 룰렛과 빙고, 뽑기 등 이벤트 웹 페이지의 백엔드와 React 프론트엔드를 함께 개발했습니다."
+   ],
+   "problems": [
+    { "p": "서버가 단독으로 정한 응답 형태가 유니티 클라이언트 연동 단계에서 어긋나 되돌리는 일이 있었습니다.", "s": "응답 규격과 예외 처리 방식을 클라이언트 개발자와 먼저 합의한 뒤 구현하는 순서로 바꿔 연동 단계의 되돌림을 줄였습니다." },
+    { "p": "랭킹 조회가 요청마다 집계 쿼리를 다시 실행해 DB 부하가 반복됐습니다.", "s": "변경 빈도가 낮고 모든 회원이 같은 결과를 보는 데이터라 Redis에 10분 TTL로 캐싱해 반복 집계를 제거했습니다." }
+   ],
+   "stack": ["C#", ".NET", "RepoDB", "MySQL", "Redis", "React"],
+   "cases": [],
+   "links": []
+  }
+ ],
+ "personalNote": "직장 밖에서 만든 프로젝트입니다. 저장소는 비공개라 코드 링크는 없습니다.",
+ "personal": [
+  {
+   "name": "Draw & Seek",
+   "sub": "— 웹 숨은그림찾기",
+   "period": "2026.07 – 운영 중",
+   "desc": "거대한 공용 캔버스에 그림을 그려 숨기고 다른 사람이 숨긴 그림을 찾는 웹 게임입니다. 기획부터 개발, 배포, 운영까지 혼자 진행했고 drawandseek.com에서 서비스 중입니다.",
+   "role": "기획과 개발, 배포, 운영 (1인)",
+   "scale": [],
+   "highlights": [
+    "캔버스를 512px 타일 피라미드로 나눠 서빙하고 그림을 숨기거나 찾을 때 겹치는 타일만 다시 합성합니다. 타일 URL에 캔버스 버전을 붙여 immutable로 캐시해 CDN 엣지에서 서빙하고 스토리지 왕복은 타일당 최초 1회로 줄였습니다.",
+    "그림 좌표는 서버만 보유하고 판정도 서버에서 합니다. 기기별 분당 판정 횟수와 시간당 업로드 수를 제한해 무차별 클릭 스캔을 막았습니다.",
+    "신고는 (그림, 기기) 복합 키로 중복을 DB에서 막고 관리자 콘솔은 환경변수의 비밀 슬러그로만 rewrite되도록 미들웨어를 두어 저장소에 관리자 경로가 남지 않게 했습니다."
+   ],
+   "problems": [
+    { "p": "그림을 찾으면 겹치는 타일을 다시 합성하는데 스토리지 왕복이 많아 수 초 이상 걸렸습니다. 판정 응답이 그만큼 늦어지니 클릭이 안 눌린 것처럼 느껴졌습니다.", "s": "판정은 <code>found_at</code> 갱신으로 즉시 확정해 응답하고 재합성은 응답 뒤 백그라운드로 미뤘습니다. 캔버스 버전은 재합성이 끝난 뒤에만 올려 클라이언트가 새 버전을 보면 새 타일이 준비돼 있도록 순서를 보장했습니다." },
+    { "p": "같은 그림을 두 사람이 거의 동시에 클릭하면 둘 다 찾은 것으로 처리될 수 있었습니다.", "s": "<code>found_at IS NULL</code> 조건을 붙인 업데이트로 한 명만 성공하게 했습니다. 갱신된 행이 없으면 다른 사람이 먼저 찾은 것으로 응답합니다." }
+   ],
+   "stack": ["TypeScript", "Next.js", "React", "Supabase", "PostgreSQL", "sharp", "Vercel", "Terraform"],
+   "cases": [],
+   "links": [{ "label": "Service", "href": "https://drawandseek.com" }]
+  },
+  {
+   "name": "Snowball Fund",
+   "sub": "— LLM 기반 자동 트레이딩 플랫폼",
+   "period": "2026.02 – 진행 중",
+   "desc": "LLM으로 시장을 분석해 방향을 판단하는 Brain과 주문과 stop을 집행하는 Hands를 분리한 트레이딩 플랫폼입니다. 멀티유저 API와 대시보드, 뉴스 수집기를 한 모노레포에서 관리하고 실거래는 유저 설정과 환경변수가 모두 참일 때만 열리는 fail-closed 게이트를 거칩니다.",
+   "role": "집행 로직과 API, 분석 워커, 인프라 (팀 8명)",
+   "scale": [
+    { "v": "317 / 937", "l": "본인 커밋 (머지 제외)" },
+    { "v": "8명", "l": "기여자" },
+    { "v": "235개", "l": "테스트 파일" }
+   ],
+   "highlights": [
+    "가장 많이 작업한 영역은 주문을 집행하는 executor의 로직과 단위 테스트이고, 멀티유저 API의 라우터와 서비스 계층, 분석을 담당하는 trading-worker의 도메인 로직과 오케스트레이션에 걸쳐 작업했습니다.",
+    "테스트 파일 235개 가운데 177개에 커밋했습니다. 도메인 로직과 오케스트레이션은 단위 테스트를 함께 붙여 나갔습니다.",
+    "Terraform으로 GCP의 Cloud Run과 GCE, Cloud SQL, Pub/Sub, Scheduler, Secret Manager와 Cloudflare 리소스를 코드로 관리하는 인프라 구성에 참여했습니다.",
+    "에이전트 워크플로와 코딩 규칙을 저장소 안에 문서로 두고 개발 도구 설정을 공유해 여덟 명이 같은 기준으로 작업합니다."
+   ],
+   "problems": [],
+   "stack": ["Python", "FastAPI", "SQLAlchemy", "PostgreSQL", "ccxt", "Pub/Sub", "Terraform", "GCP", "Docker", "Next.js", "React"],
+   "cases": [],
+   "links": []
+  }
+ ],
+ "education": [
+  { "m": "우석대학교", "s": "정보보안 전공", "d": "2018.03 – 2022.02" },
+  { "m": "멋쟁이사자처럼", "s": "백엔드 스쿨 수료 (Java, Spring Boot)", "d": "2022.09 – 2023.02" }
+ ],
+ "certs": [
+  { "m": "정보보안기사", "s": "한국방송통신전파진흥원", "d": "2026.08" },
+  { "m": "SQL 개발자 (SQLD)", "s": "한국데이터산업진흥원", "d": "2022.12" },
+  { "m": "컴퓨터활용능력 1급", "s": "대한상공회의소", "d": "2022.01" },
+  { "m": "정보처리기사", "s": "한국산업인력공단", "d": "2021.06" }
+ ]
+};
+
+/* ===================== 렌더링 ===================== */
+const chips = arr => `<div class="chips">${arr.map(t => `<span class="chip">${t}</span>`).join('')}</div>`;
+const ICON_GH = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>';
+const ICON_MAIL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>';
+
+function section(id, no, title, en, note, inner, foot) {
+  return `<section class="sec" id="${id}">
+    <div class="sec-l"><span class="no rv">${no}</span><h2 class="rv">${title}</h2></div>
+    <div class="sec-r">
+      ${note ? `<p class="sec-note rv">${note}</p>` : ''}
+      ${inner}
+      ${foot ? `<div class="sec-foot">${foot}</div>` : ''}
+    </div>
+  </section>`;
+}
+
+function renderIntro(d) {
+  const p = d.profile;
+  return section('about', '01', '소개 / 스킬', 'About', '',
+    `<div class="eyebrow rv">Backend Developer</div>
+     <h1 class="rv">${p.headline}</h1>
+     <div class="idchips rv">
+       <span class="idc name">${p.name}</span>
+       <span class="idc">백엔드 경력 ${p.years}</span>
+       <a class="idc" href="https://${p.github}" target="_blank" rel="noopener">${ICON_GH}GitHub</a>
+       <a class="idc" href="${p.links.resume}">이력서</a>
+       <a class="idc" href="${p.links.experience}">경력기술서</a>
+       <a class="idc" href="mailto:${p.email}">${ICON_MAIL}Contact</a>
+     </div>
+     <p class="lead rv">${p.lead}</p>
+     <div class="nums rv">
+       ${p.stats.map(n => `<div class="num"><div class="v">${n.v}</div><div class="l">${n.l}</div><div class="e">${n.e}</div></div>`).join('')}
+     </div>
+     <div class="lbl rv">About</div>
+     <div class="about rv">${d.about.map(t => `<p>${t}</p>`).join('')}</div>
+     <div class="lbl rv">Skills</div>
+     <dl class="skills rv">
+       ${d.skills.map(g => `<div class="sg"><dt>${g.g}</dt><dd>${chips(g.items)}<p class="use">${g.use}</p></dd></div>`).join('')}
+     </dl>`);
+}
+
+function problemPairs(pj) {
+  if (!pj.problems || !pj.problems.length) return '';
+  return `<dt>Problems</dt><dd><ul class="pq">${pj.problems.map(x =>
+    `<li><div class="q"><span>문제</span><div>${x.p}</div></div><div class="a"><span>해결</span><div>${x.s}</div></div></li>`).join('')}</ul></dd>`;
+}
+
+function caseDetail(c, d) {
+  const rail = c.sections.map((sc, i) => `${i ? '<i>→</i>' : ''}<span class="${sc.key ? 'key' : ''}">${sc.label}</span>`).join('');
+  const body = c.sections.map((sc, i) => `
+      <section class="cs ${sc.key ? 'key' : ''}">
+        <h4><span class="sn">0${i + 1}</span>${sc.label}</h4>
+        ${sc.head ? `<h5>${sc.head}</h5>` : ''}
+        ${renderBlocks(sc.blocks, d.figures)}
+      </section>`).join('');
+  return `
+    <details class="cd" id="${c.id}">
+      <summary>
+        <span class="n">${c.no}</span>
+        <span class="tx"><span class="ct">${c.cardTitle}</span><span class="sb">${c.cardSub}</span></span>
+        <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+      </summary>
+      <article class="case">
+        <div class="per">${c.project}</div>
+        <h3>${c.title}</h3>
+        <dl class="facts">${c.facts.map(f => `<div><dt>${f.k}</dt><dd>${f.v}</dd></div>`).join('')}</dl>
+        <div class="steps">${rail}</div>
+        <div class="case-body">${body}</div>
+      </article>
+    </details>`;
+}
+
+function renderCases(d) {
+  const cs = d.cases.filter(c => !c.draft);
+  return section('cases', '03', '문제 해결', 'Problem Solving', d.casesNote + ' 제목을 누르면 펼쳐집니다.',
+    `<div class="cdl rv">${cs.map(c => caseDetail(c, d)).join('')}</div>`);
+}
+
+function projectCard(pj, d) {
+  const links = pj.links.map(l => `<a class="clink" href="${l.href}" target="_blank" rel="noopener">${l.label} ↗</a>`);
+  return `
+    <article class="proj rv">
+      <div class="per">${pj.period}</div>
+      <h3 class="pt">${pj.name}${pj.sub ? `<span class="sv">${pj.sub}</span>` : ''}</h3>
+      <p class="desc">${pj.desc}</p>
+      <dl class="proj-meta">
+        <dt>Role</dt><dd>${pj.role}</dd>
+        ${pj.scale.length ? `<dt>Scale</dt><dd><div class="scale">${pj.scale.map(s => `<span class="s"><b>${s.v}</b>${s.l}</span>`).join('')}</div></dd>` : ''}
+        <dt>Stack</dt><dd>${chips(pj.stack)}</dd>
+        ${pj.highlights.length ? `<dt>Work</dt><dd><ul class="hl">${pj.highlights.map(h => `<li>${h}</li>`).join('')}</ul></dd>` : ''}
+        ${problemPairs(pj)}
+      </dl>
+      ${links.length ? `<dl class="proj-meta" style="margin-top:14px"><dt>Links</dt><dd><div class="proj-links">${links.join('')}</div></dd></dl>` : ''}
+    </article>`;
+}
+
+function renderCareer(d) {
+  const c = d.company;
+  return section('career', '02', '경력', 'Career', '',
+    `<div class="co rv">
+       <div class="per">${c.period} · ${c.years}</div>
+       <h3 class="co-nm">${c.name}</h3>
+       <div class="co-rl">${c.role}</div>
+     </div>
+     <p class="co-sum rv">${c.summary}</p>
+     ${d.projects.map(pj => projectCard(pj, d)).join('')}`,
+    `<a class="more" href="${d.profile.links.experience}">경력기술서에서 전체 항목 보기 →</a>`);
+}
+
+function renderBlocks(blocks, figures) {
+  return blocks.map(b => {
+    if (b.t === 'p')  return `<p>${b.v}</p>`;
+    if (b.t === 'ul') return `<ul>${b.v.map(x => `<li>${x}</li>`).join('')}</ul>`;
+    if (b.t === 'note') return `<div class="note ${b.tone}"><span class="ic">${b.tone === 'warn' ? '⚠️' : 'ℹ️'}</span><div class="bd">${b.v}</div></div>`;
+    if (b.t === 'res')  return `<div class="note ${b.tone}"><span class="ic">${b.tone === 'ok' ? '✅' : '⚠️'}</span><div class="bd"><ul>${b.v.map(x => `<li>${x}</li>`).join('')}</ul></div></div>`;
+    if (b.t === 'fig')  return `<figure class="fig">${figures[b.i]}<figcaption>${b.cap}</figcaption></figure>`;
+    return '';
+  }).join('');
+}
+
+function renderPersonal(d) {
+  return section('personal', '04', '개인 프로젝트', 'Side Projects', d.personalNote,
+    d.personal.map(pj => projectCard(pj, d)).join(''));
+}
+
+function renderHistory(d) {
+  const rows = arr => arr.map(r =>
+    `<div class="row"><div><div class="m">${r.m}</div><div class="s">${r.s}</div></div><div class="d">${r.d}</div></div>`).join('');
+  return section('history', '05', '학력과 자격증', 'Education', '',
+    `<div class="hgroup rv"><div class="lbl">Education</div>${rows(d.education)}</div>
+     <div class="hgroup rv"><div class="lbl">Certificates</div>${rows(d.certs)}</div>`);
+}
+
+function renderFooter(p) {
+  return `<footer class="foot"><div class="foot-in">
+    <div>최아영 · 백엔드 개발자</div>
+    <div class="foot-links">
+      <a href="mailto:${p.email}">${p.email}</a>
+      <a href="https://${p.github}" target="_blank" rel="noopener">${p.github}</a>
+      <a href="${p.links.resume}">이력서</a>
+      <a href="${p.links.experience}">경력기술서</a>
+    </div>
+  </div></footer>`;
+}
+
+/* ===================== 부팅 ===================== */
+(function () {
+  const app = document.getElementById('app');
+  app.innerHTML =
+    renderIntro(DATA) +
+    renderCareer(DATA) +
+    renderCases(DATA) +
+    renderPersonal(DATA) +
+    renderHistory(DATA);
+  document.querySelector('table.sheet').insertAdjacentHTML('afterend', renderFooter(DATA.profile));
+
+  /* 테마 */
+  const root = document.documentElement;
+  const btn = document.getElementById('theme');
+  const sysDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : sysDark();
+  const paint = () => { btn.textContent = isDark() ? '☀' : '☾'; };
+  btn.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    paint();
+  });
+  paint();
+
+  /* 접힌 문제 해결 상세: 링크로 들어오면 펼치고, 인쇄 때는 전부 펼친다 */
+  const cds = () => Array.prototype.slice.call(document.querySelectorAll('details.cd'));
+  const openHash = () => {
+    if (!location.hash) return;
+    const el = document.getElementById(location.hash.slice(1));
+    if (el && el.tagName === 'DETAILS') el.open = true;
+  };
+  openHash();
+  window.addEventListener('hashchange', openHash);
+  let wasOpen = [];
+  window.addEventListener('beforeprint', () => { wasOpen = cds().map(d => d.open); cds().forEach(d => { d.open = true; }); });
+  window.addEventListener('afterprint', () => { cds().forEach((d, i) => { d.open = wasOpen[i]; }); });
+  document.getElementById('pdf').addEventListener('click', () => window.print());
+
+  /* 모바일 메뉴 */
+  const nav = document.getElementById('topnav');
+  const menu = document.getElementById('menu');
+  const closeNav = () => { nav.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); };
+  menu.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    menu.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', e => { if (e.target.tagName === 'A') closeNav(); });
+  document.addEventListener('click', e => { if (!e.target.closest('.topbar')) closeNav(); });
+
+  /* 스크롤 스파이 */
+  const links = Array.prototype.slice.call(nav.querySelectorAll('a'));
+  const targets = links.map(a => document.getElementById(a.getAttribute('href').slice(1)));
+  let tick = false;
+  const sync = () => {
+    const y = window.scrollY + 140;
+    let cur = -1;
+    for (let i = 0; i < targets.length; i++) {
+      if (targets[i] && targets[i].offsetTop <= y) cur = i;
+    }
+    links.forEach((a, i) => a.classList.toggle('on', i === cur));
+  };
+  window.addEventListener('scroll', () => {
+    if (tick) return;
+    tick = true;
+    requestAnimationFrame(() => { sync(); tick = false; });
+  }, { passive: true });
+  sync();
+
+  /* 등장 애니메이션 (인쇄와 감속 설정에서는 즉시 표시) */
+  const rv = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) {
+    rv.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    rv.forEach(el => io.observe(el));
+    window.addEventListener('beforeprint', () => rv.forEach(el => el.classList.add('in')));
+  }
+})();
+</script>
+
+</body>
+</html>
