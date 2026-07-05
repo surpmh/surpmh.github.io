@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>최아영 | 백엔드 개발자</title>
+<meta name="description" content="백엔드 개발자 최아영의 포트폴리오. 결제와 정산, 서비스 안정성, 성능 최적화 경험을 소개합니다.">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', 'Pretendard Variable', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    transition: background .45s ease, color .45s ease;
+  }
+  :root {
+    --bg: #FFFFFF;
+    --bg-soft: #F8FAFC;
+    --card: #FFFFFF;
+    --text: #111827;
+    --muted: #64748B;
+    --border: rgba(17, 24, 39, 0.08);
+    --accent: #111827;
+    --accent-strong: #000000;
+    --accent-soft: rgba(17, 24, 39, 0.06);
+    --on-accent: #ffffff;
+    --nav-bg: rgba(255, 255, 255, 0.72);
+    --shadow: 0 8px 30px rgba(17, 24, 39, 0.08);
+    --shadow-lg: 0 20px 48px rgba(17, 24, 39, 0.12);
+  }
+  :root[data-theme="dark"] {
+    --bg: #171717;
+    --bg-soft: #1F1F1F;
+    --card: #262626;
+    --text: #FAFAFA;
+    --muted: #A3A3A3;
+    --border: rgba(250, 250, 250, 0.12);
+    --accent: #EDEDED;
+    --accent-strong: #ffffff;
+    --accent-soft: rgba(237, 237, 237, 0.10);
+    --on-accent: #171717;
+    --nav-bg: rgba(23, 23, 23, 0.62);
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.5);
+  }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes popIn { from { opacity: 0; transform: translateY(10px) scale(.9); } to { opacity: 1; transform: none; } }
+  @keyframes overlayIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes modalIn { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: none; } }
+  @keyframes menuIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+  [data-desktop-nav] { display: flex; }
+  [data-mobile-only] { display: none; }
+  @media (max-width: 880px) {
+    [data-desktop-nav] { display: none !important; }
+    [data-mobile-only] { display: inline-flex !important; }
+  }
+  @media print {
+    :root, :root[data-theme="dark"] {
+      --bg: #fff !important; --bg-soft: #fff !important; --card: #fff !important;
+      --text: #111827 !important; --muted: #374151 !important; --border: #d4d8e0 !important;
+      --accent: #111827 !important; --accent-soft: #eef2ff !important; --on-accent: #ffffff !important;
+      --nav-bg: #fff !important; --shadow: none !important; --shadow-lg: none !important;
+    }
+    body { background: #fff !important; }
+    header, #progress-bar, #back-to-top, [data-overlay], [data-print-hide] { display: none !important; }
+    * { box-shadow: none !important; animation: none !important; }
+    [data-reveal] { opacity: 1 !important; transform: none !important; }
+    section, #skills > div, #projects > div, #certificates > div, #contact > div { padding-top: 20px !important; padding-bottom: 20px !important; }
+    #home { padding-top: 6px !important; }
+    #skills, #projects, #certificates, #contact { border: none !important; }
+    div[style*="box-shadow"], section, footer { break-inside: avoid; }
+    a { color: inherit !important; text-decoration: none !important; }
+    @page { margin: 1.3cm; }
+  }
+</style>
+</helmet>
+<div style="min-height:100vh; position:relative; overflow-x:hidden;">
+
+  <div id="progress-bar" ref="{{ setBar }}" style="position:fixed; top:0; left:0; height:3px; width:0%; background:var(--accent); z-index:200; transition:width .12s linear; border-top-right-radius:3px; border-bottom-right-radius:3px;"></div>
+
+  <header style="position:sticky; top:0; z-index:100; backdrop-filter:blur(16px) saturate(1.4); -webkit-backdrop-filter:blur(16px) saturate(1.4); background:var(--nav-bg); border-bottom:1px solid var(--border);">
+    <nav style="max-width:1140px; margin:0 auto; padding:0 24px; height:68px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a onClick="{{ goHome }}" style="display:flex; align-items:center; gap:10px; cursor:pointer; text-decoration:none;">
+        <span style="font-weight:700; font-size:16px; color:var(--text); letter-spacing:-.01em;">{{ t.nameShort }}</span>
+      </a>
+
+      <div data-desktop-nav style="gap:2px; align-items:center;">
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="8">
+          <a onClick="{{ item.onClick }}" style="{{ item.style }}">{{ item.label }}</a>
+        </sc-for>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div style="display:flex; padding:3px; border-radius:10px; background:var(--accent-soft); border:1px solid var(--border);">
+          <button onClick="{{ setKo }}" style="{{ koStyle }}">KO</button>
+          <button onClick="{{ setEn }}" style="{{ enStyle }}">EN</button>
+        </div>
+        <button onClick="{{ toggleTheme }}" aria-label="Toggle theme" style="width:38px; height:38px; display:flex; align-items:center; justify-content:center; border-radius:10px; border:1px solid var(--border); background:transparent; color:var(--text); cursor:pointer; transition:background .2s;" style-hover="background:var(--accent-soft);">
+          <sc-if value="{{ isDark }}" hint-placeholder-val="{{ true }}">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+          </sc-if>
+          <sc-if value="{{ isLight }}" hint-placeholder-val="{{ true }}">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+          </sc-if>
+        </button>
+        <button data-mobile-only onClick="{{ toggleMenu }}" aria-label="Menu" style="width:38px; height:38px; align-items:center; justify-content:center; border-radius:10px; border:1px solid var(--border); background:transparent; color:var(--text); cursor:pointer; transition:background .2s;" style-hover="background:var(--accent-soft);">
+          <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ true }}">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+          </sc-if>
+          <sc-if value="{{ menuClosed }}" hint-placeholder-val="{{ true }}">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg>
+          </sc-if>
+        </button>
+      </div>
+    </nav>
+
+    <sc-if value="{{ menuOpen }}">
+      <div data-mobile-only style="border-top:1px solid var(--border); padding:12px 16px 18px; flex-direction:column; gap:3px; animation:menuIn .22s cubic-bezier(.16,1,.3,1) both;">
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="8">
+          <a onClick="{{ item.onClick }}" style="{{ item.mobileStyle }}">
+            <span>{{ item.label }}</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style="opacity:.4;"><path d="m9 18 6-6-6-6"></path></svg>
+          </a>
+        </sc-for>
+      </div>
+    </sc-if>
+  </header>
+
+  <section id="home" style="position:relative; max-width:1140px; margin:0 auto; padding:clamp(64px,11vh,120px) 24px clamp(40px,6vh,64px);">
+    <div data-print-hide style="position:absolute; inset:0; pointer-events:none; background:radial-gradient(680px 420px at 15% -5%, var(--accent-soft), transparent 65%); z-index:0;"></div>
+    <div style="position:relative; z-index:1; max-width:820px;">
+      <sc-if value="{{ showAvail }}" hint-placeholder-val="{{ true }}">
+        <div data-print-hide style="display:inline-flex; align-items:center; gap:8px; padding:6px 14px; border-radius:999px; border:1px solid var(--border); background:var(--card); box-shadow:var(--shadow); font-size:13px; font-weight:500; color:var(--muted); margin-bottom:28px;">
+          <span style="width:8px; height:8px; border-radius:50%; background:var(--muted); box-shadow:0 0 0 3px var(--accent-soft);"></span>
+          {{ t.availability }}
+        </div>
+      </sc-if>
+      <p style="font-size:16px; font-weight:500; color:var(--accent); margin:0 0 14px; letter-spacing:.01em;">{{ t.eyebrow }}</p>
+      <h1 style="font-size:clamp(46px,8vw,88px); line-height:1.02; font-weight:800; letter-spacing:-.03em; margin:0 0 20px; color:var(--text);">{{ t.role }}</h1>
+      <div data-print-hide style="display:flex; align-items:center; flex-wrap:wrap; font-size:clamp(22px,4vw,40px); line-height:1.15; font-weight:600; letter-spacing:-.02em; color:var(--text); margin:0 0 26px; min-height:1.3em;">
+        <span style="color:var(--accent);">{{ typed }}</span>
+      </div>
+      <p style="font-size:clamp(17px,2vw,20px); line-height:1.65; color:var(--muted); max-width:600px; margin:0 0 36px;">{{ t.desc }}</p>
+      <div data-print-hide style="display:flex; flex-wrap:wrap; gap:14px;">
+        <a onClick="{{ downloadResume }}" style="display:inline-flex; align-items:center; gap:9px; padding:14px 26px; border-radius:13px; background:var(--accent); color:var(--on-accent); font-size:15px; font-weight:600; text-decoration:none; cursor:pointer; box-shadow:var(--shadow); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;" style-hover="transform:translateY(-2px); box-shadow:var(--shadow-lg); opacity:.9;">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg>
+          {{ t.btnResume }}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" style="max-width:1140px; margin:0 auto; padding:clamp(64px,9vh,104px) 24px;">
+    <div data-reveal ref="{{ reveal }}" style="display:flex; align-items:center; gap:11px; margin-bottom:38px;">
+      <span style="width:28px; height:2px; background:var(--accent); border-radius:2px;"></span>
+      <span style="font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);">{{ t.about.label }}</span>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:clamp(30px,4vw,60px); align-items:start;">
+      <div data-reveal ref="{{ reveal }}">
+        <h2 style="font-size:clamp(28px,3.6vw,42px); line-height:1.2; font-weight:800; letter-spacing:-.02em; margin:0 0 24px; color:var(--text); white-space:pre-line;">{{ t.about.title }}</h2>
+        <p style="font-size:17px; line-height:1.75; color:var(--muted); margin:0 0 20px; max-width:540px;">{{ t.about.p1 }}</p>
+        <p style="font-size:17px; line-height:1.75; color:var(--muted); margin:0; max-width:540px;">{{ t.about.p2 }}</p>
+      </div>
+      <div data-reveal data-reveal-delay=".08s" ref="{{ reveal }}">
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:18px; padding:30px; box-shadow:var(--shadow);">
+          <div style="display:flex; align-items:baseline; gap:6px; margin-bottom:6px;">
+            <span style="font-size:clamp(28px,3.5vw,36px); font-weight:800; letter-spacing:-.03em; color:var(--accent); line-height:1.15;">{{ t.about.years }}</span>
+          </div>
+          <div style="font-size:14px; font-weight:500; color:var(--muted); margin-bottom:26px;">{{ t.about.yearsLabel }}</div>
+          <div style="height:1px; background:var(--border); margin-bottom:24px;"></div>
+          <div style="font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:11px;">{{ t.about.interestLabel }}</div>
+          <div style="font-size:15px; line-height:1.6; color:var(--text); font-weight:500;">{{ t.about.interestValue }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="skills" style="background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div style="max-width:1140px; margin:0 auto; padding:clamp(64px,9vh,104px) 24px;">
+      <div data-reveal ref="{{ reveal }}" style="margin-bottom:44px;">
+        <div style="display:flex; align-items:center; gap:11px; margin-bottom:16px;">
+          <span style="width:28px; height:2px; background:var(--accent); border-radius:2px;"></span>
+          <span style="font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);">{{ t.skills.label }}</span>
+        </div>
+        <h2 style="font-size:clamp(28px,3.6vw,42px); line-height:1.15; font-weight:800; letter-spacing:-.02em; margin:0 0 12px; color:var(--text);">{{ t.skills.title }}</h2>
+        <p style="font-size:17px; line-height:1.6; color:var(--muted); margin:0; max-width:520px;">{{ t.skills.subtitle }}</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(272px,1fr)); gap:20px;">
+
+        <div data-reveal data-reveal-delay="0s" ref="{{ reveal }}" style="height:100%;">
+          <div style="height:100%; background:var(--card); border:1px solid var(--border); border-radius:18px; padding:26px; box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-5px); box-shadow:var(--shadow-lg);">
+            <div style="display:flex; align-items:center; gap:13px; margin-bottom:20px;">
+              <span style="width:44px; height:44px; border-radius:12px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="8" x="2" y="2" rx="2"></rect><rect width="20" height="8" x="2" y="14" rx="2"></rect><path d="M6 6h.01"></path><path d="M6 18h.01"></path></svg>
+              </span>
+              <span style="font-size:16px; font-weight:700; color:var(--text);">{{ t.skills.cat.backend }}</span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:9px;">
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>Java</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>Spring Boot</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>Spring Security</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>Spring Data JPA</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>C#</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>REST API</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>JWT</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>.NET</span>
+            </div>
+          </div>
+        </div>
+
+        <div data-reveal data-reveal-delay=".06s" ref="{{ reveal }}" style="height:100%;">
+          <div style="height:100%; background:var(--card); border:1px solid var(--border); border-radius:18px; padding:26px; box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-5px); box-shadow:var(--shadow-lg);">
+            <div style="display:flex; align-items:center; gap:13px; margin-bottom:20px;">
+              <span style="width:44px; height:44px; border-radius:12px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg>
+              </span>
+              <span style="font-size:16px; font-weight:700; color:var(--text);">{{ t.skills.cat.database }}</span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:9px;">
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>MySQL</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>Redis</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>MongoDB</span>
+            </div>
+          </div>
+        </div>
+
+        <div data-reveal data-reveal-delay=".12s" ref="{{ reveal }}" style="height:100%;">
+          <div style="height:100%; background:var(--card); border:1px solid var(--border); border-radius:18px; padding:26px; box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-5px); box-shadow:var(--shadow-lg);">
+            <div style="display:flex; align-items:center; gap:13px; margin-bottom:20px;">
+              <span style="width:44px; height:44px; border-radius:12px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>
+              </span>
+              <span style="font-size:16px; font-weight:700; color:var(--text);">{{ t.skills.cat.cloud }}</span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:9px;">
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>AWS EC2</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>AWS S3</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>AWS CloudWatch</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>GCP</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>Slack Webhook</span>
+            </div>
+          </div>
+        </div>
+
+        <div data-reveal data-reveal-delay=".18s" ref="{{ reveal }}" style="height:100%;">
+          <div style="height:100%; background:var(--card); border:1px solid var(--border); border-radius:18px; padding:26px; box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-5px); box-shadow:var(--shadow-lg);">
+            <div style="display:flex; align-items:center; gap:13px; margin-bottom:20px;">
+              <span style="width:44px; height:44px; border-radius:12px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path></svg>
+              </span>
+              <span style="font-size:16px; font-weight:700; color:var(--text);">{{ t.skills.cat.architecture }}</span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:9px;">
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>React</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>JavaScript</span>
+            </div>
+          </div>
+        </div>
+
+        <div data-reveal data-reveal-delay=".24s" ref="{{ reveal }}" style="height:100%;">
+          <div style="height:100%; background:var(--card); border:1px solid var(--border); border-radius:18px; padding:26px; box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-5px); box-shadow:var(--shadow-lg);">
+            <div style="display:flex; align-items:center; gap:13px; margin-bottom:20px;">
+              <span style="width:44px; height:44px; border-radius:12px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+              </span>
+              <span style="font-size:16px; font-weight:700; color:var(--text);">{{ t.skills.cat.tools }}</span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:9px;">
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>Git</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>IntelliJ</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>Notion</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>Jira</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>Claude Code</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>Claude Skills</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <section id="experience" style="max-width:1140px; margin:0 auto; padding:clamp(64px,9vh,104px) 24px;">
+    <div data-reveal ref="{{ reveal }}" style="margin-bottom:44px;">
+      <div style="display:flex; align-items:center; gap:11px; margin-bottom:16px;">
+        <span style="width:28px; height:2px; background:var(--accent); border-radius:2px;"></span>
+        <span style="font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);">{{ t.exp.label }}</span>
+      </div>
+      <h2 style="font-size:clamp(28px,3.6vw,42px); line-height:1.15; font-weight:800; letter-spacing:-.02em; margin:0; color:var(--text);">{{ t.exp.title }}</h2>
+    </div>
+
+    <div style="position:relative;">
+      <div style="position:absolute; left:7px; top:10px; bottom:10px; width:2px; background:var(--border);"></div>
+      <sc-for list="{{ expItems }}" as="item" hint-placeholder-count="2">
+        <div style="position:relative; display:flex; gap:clamp(18px,3vw,30px); padding-bottom:28px;">
+          <div style="flex-shrink:0; width:16px; display:flex; justify-content:center;">
+            <span style="width:16px; height:16px; border-radius:50%; background:var(--accent); border:3px solid var(--bg); box-shadow:0 0 0 2px var(--accent); margin-top:8px; z-index:1;"></span>
+          </div>
+          <div data-reveal ref="{{ reveal }}" style="flex:1; min-width:0; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:clamp(22px,3vw,28px); box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px); box-shadow:var(--shadow-lg);">
+            <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:18px;">
+              <div>
+                <div style="font-size:19px; font-weight:700; color:var(--text); letter-spacing:-.01em;">{{ item.role }}</div>
+                <div style="font-size:15px; font-weight:600; color:var(--accent); margin-top:4px;">{{ item.company }}</div>
+              </div>
+              <span style="font-size:13px; font-weight:500; color:var(--muted); white-space:nowrap; padding:7px 13px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--border); font-family:'JetBrains Mono', ui-monospace, monospace;">{{ item.period }}</span>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:7px; margin-bottom:22px;">
+              <sc-for list="{{ item.stack }}" as="tech" hint-placeholder-count="5">
+                <span style="padding:5px 11px; border-radius:8px; background:var(--accent-soft); color:var(--accent); font-size:12.5px; font-weight:600; font-family:'JetBrains Mono', ui-monospace, monospace;">{{ tech }}</span>
+              </sc-for>
+            </div>
+
+            <p style="font-size:15px; line-height:1.75; color:var(--muted); margin:0;">{{ item.summary }}</p>
+
+            <sc-for list="{{ item.projects }}" as="pj" hint-placeholder-count="4">
+              <div style="border-top:1px solid var(--border); margin-top:22px; padding-top:20px;">
+                <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; justify-content:space-between; margin-bottom:10px;">
+                  <div style="font-size:16px; font-weight:700; color:var(--text); letter-spacing:-.01em;">{{ pj.title }}</div>
+                  <sc-if value="{{ pj.period }}">
+                    <span style="font-size:12.5px; font-weight:500; color:var(--muted); font-family:'JetBrains Mono', ui-monospace, monospace;">{{ pj.period }}</span>
+                  </sc-if>
+                </div>
+                <sc-for list="{{ pj.paras }}" as="para" hint-placeholder-count="2">
+                  <p style="font-size:14.5px; line-height:1.75; color:var(--muted); margin:0 0 10px;">{{ para }}</p>
+                </sc-for>
+                <sc-if value="{{ pj.result }}">
+                  <div style="display:flex; gap:10px; align-items:flex-start; margin-top:4px;">
+                    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--accent)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style="margin-top:2px; flex-shrink:0;"><path d="M20 6 9 17l-5-5"></path></svg>
+                    <span style="font-size:14.5px; line-height:1.65; color:var(--text); font-weight:600;">{{ pj.result }}</span>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="projects" style="background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div style="max-width:1140px; margin:0 auto; padding:clamp(64px,9vh,104px) 24px;">
+    <div data-reveal ref="{{ reveal }}" style="margin-bottom:36px;">
+      <div style="display:flex; align-items:center; gap:11px; margin-bottom:16px;">
+        <span style="width:28px; height:2px; background:var(--accent); border-radius:2px;"></span>
+        <span style="font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);">{{ t.projects.label }}</span>
+      </div>
+      <h2 style="font-size:clamp(28px,3.6vw,42px); line-height:1.15; font-weight:800; letter-spacing:-.02em; margin:0 0 12px; color:var(--text);">{{ t.projects.title }}</h2>
+      <p style="font-size:17px; line-height:1.6; color:var(--muted); margin:0; max-width:540px;">{{ t.projects.subtitle }}</p>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:28px;">
+      <sc-for list="{{ projList }}" as="p" hint-placeholder-count="2">
+        <div data-reveal ref="{{ reveal }}" style="background:var(--card); border:1px solid var(--border); border-radius:22px; overflow:hidden; box-shadow:var(--shadow);">
+          <div style="padding:clamp(26px,3.5vw,40px); display:flex; flex-direction:column; gap:20px;">
+            <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;">
+              <span style="padding:5px 12px; border-radius:999px; background:var(--accent-soft); font-size:12px; font-weight:700; color:var(--accent);">{{ p.catLabel }}</span>
+              <sc-if value="{{ p.team }}">
+                <span style="display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:999px; border:1px solid var(--border); font-size:12px; font-weight:600; color:var(--muted);"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>{{ p.team }}</span>
+              </sc-if>
+            </div>
+            <div>
+              <h3 style="font-size:clamp(24px,3vw,32px); font-weight:800; letter-spacing:-.02em; color:var(--text); margin:0 0 12px;">{{ p.name }}</h3>
+              <p style="font-size:15.5px; line-height:1.65; color:var(--muted); margin:0;">{{ p.summary }}</p>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:28px;">
+              <div>
+                <div style="font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:5px;">{{ t.projects.roleLabel }}</div>
+                <div style="font-size:14px; font-weight:600; color:var(--text);">{{ p.role }}</div>
+              </div>
+              <div>
+                <div style="font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:5px;">{{ t.projects.periodLabel }}</div>
+                <div style="font-size:14px; font-weight:600; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;">{{ p.period }}</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:7px;">
+              <sc-for list="{{ p.stack }}" as="tech" hint-placeholder-count="6">
+                <span style="padding:5px 11px; border-radius:8px; background:var(--bg-soft); border:1px solid var(--border); font-size:12px; font-weight:600; color:var(--muted); font-family:'JetBrains Mono', ui-monospace, monospace;">{{ tech }}</span>
+              </sc-for>
+            </div>
+            <div data-print-hide style="display:flex; flex-wrap:wrap; gap:10px; margin-top:auto; padding-top:4px;">
+              <sc-if value="{{ p.github }}">
+                <a href="{{ p.github }}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:12px; background:var(--accent); color:var(--on-accent); font-size:14px; font-weight:600; text-decoration:none; transition:opacity .2s;" style-hover="opacity:.85;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>{{ t.projects.github }}</a>
+              </sc-if>
+              <sc-if value="{{ p.demo }}">
+                <a href="{{ p.demo }}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:12px; border:1px solid var(--border); background:transparent; color:var(--text); font-size:14px; font-weight:600; text-decoration:none; transition:background .2s;" style-hover="background:var(--bg-soft);"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>{{ t.projects.demo }}</a>
+              </sc-if>
+            </div>
+          </div>
+
+          <div style="border-top:1px solid var(--border); padding:clamp(26px,3.5vw,40px);">
+            <div style="font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:16px;">{{ t.projects.highlightsLabel }}</div>
+            <div style="display:flex; flex-direction:column; gap:11px;">
+              <sc-for list="{{ p.highlights }}" as="h" hint-placeholder-count="6">
+                <div style="display:flex; gap:10px; align-items:flex-start;">
+                  <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--accent)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style="margin-top:3px; flex-shrink:0;"><path d="M20 6 9 17l-5-5"></path></svg>
+                  <span style="font-size:14.5px; line-height:1.65; color:var(--text);">{{ h }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    </div>
+  </section>
+
+  <div id="certificates">
+    <div style="max-width:1140px; margin:0 auto; padding:clamp(64px,9vh,104px) 24px;">
+      <div data-reveal ref="{{ reveal }}" style="margin-bottom:44px;">
+        <div style="display:flex; align-items:center; gap:11px; margin-bottom:16px;">
+          <span style="width:28px; height:2px; background:var(--accent); border-radius:2px;"></span>
+          <span style="font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);">{{ t.certs.label }}</span>
+        </div>
+        <h2 style="font-size:clamp(28px,3.6vw,42px); line-height:1.15; font-weight:800; letter-spacing:-.02em; margin:0; color:var(--text);">{{ t.certs.title }}</h2>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(282px,1fr)); gap:20px;">
+        <sc-for list="{{ certItems }}" as="c" hint-placeholder-count="3">
+          <div data-reveal ref="{{ reveal }}" style="height:100%;">
+            <div style="height:100%; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:16px; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-5px); box-shadow:var(--shadow-lg);">
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+                <span style="width:44px; height:44px; border-radius:12px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+                </span>
+                <span style="font-size:12.5px; font-weight:500; color:var(--muted); font-family:'JetBrains Mono', ui-monospace, monospace;">{{ c.date }}</span>
+              </div>
+              <div>
+                <div style="font-size:16px; font-weight:700; color:var(--text); line-height:1.4;">{{ c.name }}</div>
+                <div style="font-size:13.5px; font-weight:500; color:var(--muted); margin-top:6px;">{{ c.issuer }}</div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <section id="education" style="max-width:1140px; margin:0 auto; padding:clamp(64px,9vh,104px) 24px;">
+    <div data-reveal ref="{{ reveal }}" style="margin-bottom:44px;">
+      <div style="display:flex; align-items:center; gap:11px; margin-bottom:16px;">
+        <span style="width:28px; height:2px; background:var(--accent); border-radius:2px;"></span>
+        <span style="font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);">{{ t.edu.label }}</span>
+      </div>
+      <h2 style="font-size:clamp(28px,3.6vw,42px); line-height:1.15; font-weight:800; letter-spacing:-.02em; margin:0; color:var(--text);">{{ t.edu.title }}</h2>
+    </div>
+
+    <div style="position:relative; max-width:760px;">
+      <div style="position:absolute; left:7px; top:10px; bottom:10px; width:2px; background:var(--border);"></div>
+      <sc-for list="{{ eduItems }}" as="e" hint-placeholder-count="2">
+        <div style="position:relative; display:flex; gap:clamp(18px,3vw,30px); padding-bottom:22px;">
+          <div style="flex-shrink:0; width:16px; display:flex; justify-content:center;">
+            <span style="width:16px; height:16px; border-radius:50%; background:var(--accent); border:3px solid var(--bg); box-shadow:0 0 0 2px var(--accent); margin-top:8px; z-index:1;"></span>
+          </div>
+          <div data-reveal ref="{{ reveal }}" style="flex:1; min-width:0; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:22px 24px; box-shadow:var(--shadow); display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px); box-shadow:var(--shadow-lg);">
+            <div>
+              <div style="font-size:18px; font-weight:700; color:var(--text); letter-spacing:-.01em;">{{ e.degree }}</div>
+              <div style="font-size:15px; font-weight:600; color:var(--accent); margin-top:4px;">{{ e.school }}</div>
+            </div>
+            <span style="font-size:13px; font-weight:500; color:var(--muted); white-space:nowrap; padding:7px 13px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--border); font-family:'JetBrains Mono', ui-monospace, monospace;">{{ e.period }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <div id="contact" style="background:var(--bg-soft); border-top:1px solid var(--border);">
+    <div style="max-width:760px; margin:0 auto; padding:clamp(72px,11vh,120px) 24px; text-align:center;">
+      <div data-reveal ref="{{ reveal }}">
+        <div style="display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:18px;">
+          <span style="width:28px; height:2px; background:var(--accent); border-radius:2px;"></span>
+          <span style="font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);">{{ t.contact.label }}</span>
+        </div>
+        <h2 style="font-size:clamp(32px,5vw,52px); line-height:1.1; font-weight:800; letter-spacing:-.03em; margin:0 0 18px; color:var(--text);">{{ t.contact.title }}</h2>
+        <p style="font-size:clamp(16px,2vw,19px); line-height:1.65; color:var(--muted); margin:0 auto; max-width:480px;">{{ t.contact.subtitle }}</p>
+      </div>
+
+      <div data-reveal data-reveal-delay=".08s" ref="{{ reveal }}" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-top:44px; text-align:left;">
+        <a href="{{ contact.emailHref }}" style="display:flex; align-items:center; gap:15px; padding:20px; border-radius:16px; background:var(--card); border:1px solid var(--border); text-decoration:none; box-shadow:var(--shadow); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;" style-hover="transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:var(--accent);">
+          <span style="width:46px; height:46px; flex-shrink:0; border-radius:12px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          </span>
+          <span style="min-width:0;">
+            <span style="display:block; font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:4px;">{{ t.contact.emailLabel }}</span>
+            <span style="display:block; font-size:14.5px; font-weight:600; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-family:'JetBrains Mono', ui-monospace, monospace;">{{ contact.email }}</span>
+          </span>
+        </a>
+        <a href="{{ contact.github }}" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:15px; padding:20px; border-radius:16px; background:var(--card); border:1px solid var(--border); text-decoration:none; box-shadow:var(--shadow); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;" style-hover="transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:var(--accent);">
+          <span style="width:46px; height:46px; flex-shrink:0; border-radius:12px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+          </span>
+          <span style="min-width:0;">
+            <span style="display:block; font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:4px;">{{ t.contact.github }}</span>
+            <span style="display:block; font-size:14.5px; font-weight:600; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-family:'JetBrains Mono', ui-monospace, monospace;">{{ contact.githubDisplay }}</span>
+          </span>
+        </a>
+        <sc-if value="{{ contact.blog }}">
+          <a href="{{ contact.blog }}" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:15px; padding:20px; border-radius:16px; background:var(--card); border:1px solid var(--border); text-decoration:none; box-shadow:var(--shadow); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;" style-hover="transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:var(--accent);">
+            <span style="width:46px; height:46px; flex-shrink:0; border-radius:12px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center;">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+            </span>
+            <span style="min-width:0;">
+              <span style="display:block; font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:4px;">{{ t.contact.blog }}</span>
+              <span style="display:block; font-size:14.5px; font-weight:600; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-family:'JetBrains Mono', ui-monospace, monospace;">{{ contact.blogDisplay }}</span>
+            </span>
+          </a>
+        </sc-if>
+        <sc-if value="{{ contact.linkedin }}">
+          <a href="{{ contact.linkedin }}" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:15px; padding:20px; border-radius:16px; background:var(--card); border:1px solid var(--border); text-decoration:none; box-shadow:var(--shadow); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;" style-hover="transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:var(--accent);">
+            <span style="width:46px; height:46px; flex-shrink:0; border-radius:12px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center;">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </span>
+            <span style="min-width:0;">
+              <span style="display:block; font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:4px;">{{ t.contact.linkedin }}</span>
+              <span style="display:block; font-size:14.5px; font-weight:600; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-family:'JetBrains Mono', ui-monospace, monospace;">{{ contact.linkedinDisplay }}</span>
+            </span>
+          </a>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+
+  <footer style="border-top:1px solid var(--border); background:var(--bg);">
+    <div style="max-width:1140px; margin:0 auto; padding:32px 24px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+      <div>
+        <div style="font-size:14px; font-weight:700; color:var(--text);">{{ t.nameShort }}</div>
+        <div style="font-size:12.5px; color:var(--muted); margin-top:2px;">{{ t.footer.tagline }}</div>
+      </div>
+      <div style="font-size:13px; color:var(--muted);">© 2026 {{ t.nameShort }}. {{ t.footer.rights }}</div>
+    </div>
+  </footer>
+
+  <sc-if value="{{ showTop }}">
+    <button id="back-to-top" onClick="{{ scrollTop }}" aria-label="Back to top" style="position:fixed; bottom:28px; right:28px; z-index:120; width:46px; height:46px; border-radius:14px; border:1px solid var(--border); background:var(--card); color:var(--text); cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-lg); animation:popIn .3s cubic-bezier(.16,1,.3,1) both; transition:transform .18s ease, background .18s ease;" style-hover="transform:translateY(-3px); background:var(--accent); color:var(--on-accent);">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12 7-7 7 7"></path><path d="M12 19V5"></path></svg>
+    </button>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: &quot;100%&quot;, &quot;height&quot;: 780 },
+  &quot;defaultLang&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;ko&quot;, &quot;en&quot;], &quot;default&quot;: &quot;ko&quot;, &quot;tsType&quot;: &quot;'ko' | 'en'&quot;, &quot;section&quot;: &quot;Content&quot; },
+  &quot;showAvailability&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Hero&quot; },
+  &quot;resumeUrl&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Content&quot; },
+  &quot;email&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;cdd816@naver.com&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Contact&quot; },
+  &quot;githubUrl&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;https://github.com/surpmh&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Contact&quot; },
+  &quot;blogUrl&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Contact&quot; },
+  &quot;linkedinUrl&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Contact&quot; }
+}">
+class Component extends DCLogic {
+  state = {
+    theme: 'light',
+    lang: 'ko',
+    typed: '',
+    showTop: false,
+    activeSection: 'home',
+    menuOpen: false,
+  };
+
+  STRINGS = {
+    ko: {
+      nameShort: '최아영',
+      nav: { home: '홈', about: '소개', skills: '기술', experience: '경력', projects: '프로젝트', certificates: '자격증', education: '학력', contact: '연락처' },
+      availability: '새로운 기회에 열려 있습니다',
+      eyebrow: '안녕하세요, 최아영입니다',
+      role: '백엔드 개발자',
+      desc: '확장 가능한 API와 신뢰할 수 있는 서비스를 설계하고 만듭니다.',
+      btnProjects: '프로젝트 보기',
+      btnResume: '이력서 다운로드',
+      typed: ['서비스가 멈추지 않게 만드는 개발', '성능과 비용을 함께 고민하는 개발', '결제와 정산 데이터의 무결성', '어떤 스택이든 빠르게 적응'],
+      about: {
+        label: '소개',
+        title: '보이지 않는 곳에서\n서비스를 지탱하는 개발자',
+        p1: '비글즈에서 다운로드 40만+ 서비스의 백엔드를 개발하고 운영했습니다. 재화 정산의 동시성 제어, 인앱 결제 서버 검증, 전역 예외 처리와 장애 알림처럼 서비스가 멈추지 않게 만드는 일에 집중해 왔습니다.',
+        p2: '문제를 마주하면 증상보다 원인을 먼저 찾습니다. 서버가 메모리 부족(OOM)으로 불안정해졌을 때 인스턴스를 늘리는 대신 원인이 된 로직을 고쳐 추가 비용 없이 해결했습니다. 성능과 비용, 안정성을 함께 고민하는 습관은 이 과정에서 몸에 뱄습니다.',
+        years: '2년 8개월',
+        yearsLabel: '실무 경력',
+        interestLabel: '관심 분야',
+        interestValue: '서비스 안정성, 성능 최적화, 결제 시스템',
+      },
+      skills: {
+        label: '기술',
+        title: '기술 스택',
+        subtitle: '실무와 팀 프로젝트에서 사용해 온 도구와 기술입니다.',
+        cat: { backend: '백엔드', database: '데이터베이스 / 캐시', cloud: '클라우드 / DevOps', architecture: '프론트엔드', tools: '협업 도구' },
+      },
+      exp: {
+        label: '경력',
+        title: '경력 사항',
+        respLabel: '담당 업무',
+        achLabel: '주요 성과',
+        items: [
+          {
+            role: '백엔드 개발자',
+            company: '비글즈',
+            period: '2023.05 - 2026.02',
+            stack: ['C#', '.NET', 'Java', 'Spring Boot', 'Spring Data JPA', 'MariaDB', 'MySQL', 'MongoDB', 'Redis', 'React'],
+            summary: '가상 펫 힐링 앱 비글즈(다운로드 40만+)와 AI 힐링 상담 앱 하잉(10만+)을 만드는 스타트업에서 백엔드 개발자로 일했습니다. 팀 리더 퇴사 후에는 서버 개발을 혼자 맡아 우선순위를 다시 세우고 기획자, 프론트 개발자와 일정을 조율하면서 결제와 정산의 신뢰성, 서비스 안정성, 성능과 비용 최적화를 책임졌습니다.',
+            projects: [
+              {
+                title: '비글즈 - 재화 정산과 인앱 결제 시스템 안정화',
+                period: '',
+                paras: [
+                  '유저 재화를 정산하는 로직은 동시 요청이 겹치면 중복 정산이 발생할 수 있는 구조였습니다. 정산 로직에 비관적 락을 적용해 동시 접속 상황에서도 중복 정산을 차단하고, 재화 데이터의 무결성을 지켰습니다.',
+                  '결제는 클라이언트 검증만으로는 부정 결제를 막기 어려웠기에 인앱 결제 영수증을 서버에서 검증하도록 전환했고, Google RTDN과 App Store 서버 알림을 연동해 환불 이벤트가 사람 손을 거치지 않고 자동 처리되도록 만들었습니다.',
+                ],
+                result: '락 기반 정산과 자동 환불 파이프라인으로 부정 결제와 수기 대응 오류를 줄였습니다.',
+              },
+              {
+                title: '하잉 - 성능과 비용 최적화',
+                period: '',
+                paras: [
+                  '하잉 서버가 메모리 부족(OOM)으로 불안정해지는 장애가 발생했습니다. 인스턴스 증설로 덮는 대신 메모리를 과다 사용하던 원인 로직을 찾아 수정했고, 추가 인프라 비용 없이 장애를 해결했습니다.',
+                  '반복 조회가 많은 API에는 Redis 캐싱을 도입해 평균 응답 시간을 31ms에서 17ms로 약 45% 단축했습니다.',
+                ],
+                result: '성능과 비용, 안정성을 함께 고민하는 습관을 이 과정에서 익혔습니다.',
+              },
+              {
+                title: 'NFC 인형 콘텐츠 서비스 백엔드 개발',
+                period: '',
+                paras: [
+                  '인형에 내장된 NFC 태그를 스캔하면 전용 콘텐츠를 제공하는 신규 서비스의 백엔드를 맡았습니다. 인형마다 고유 UUID를 부여해 태그를 식별하고, 스캔 시 해당 콘텐츠를 내려주는 API를 Spring Boot, Spring Data JPA, MySQL로 설계했습니다.',
+                ],
+                result: '실물 제품과 디지털 콘텐츠를 잇는 식별 체계를 처음부터 설계한 경험이었습니다.',
+              },
+              {
+                title: '운영 체계 정비와 어드민 개발',
+                period: '',
+                paras: [
+                  '전역 예외 처리를 정비하고 Slack 자동 알림을 연동해, 예외가 발생하면 팀이 즉시 인지하고 대응할 수 있는 체계를 만들었습니다. 튜플 기반이라 필드 의미가 드러나지 않던 응답 구조는 DTO로 전환해, 코드만 읽어도 데이터의 의미가 보이도록 유지보수성을 개선했습니다.',
+                  '실무로 처음 접한 C#과 .NET을 공식 문서와 프로젝트로 빠르게 익혀 곧바로 투입됐고, 어드민과 이벤트 페이지는 React로 직접 개발하며 서비스 전체 흐름을 이해하게 됐습니다.',
+                ],
+                result: '장애를 빠르게 인지하는 구조와 읽기 좋은 코드로 운영 부담을 줄였습니다.',
+              },
+            ],
+          },
+        ],
+      },
+      certs: {
+        label: '자격증',
+        title: '자격증',
+        items: [
+          { name: 'SQL 개발자 (SQLD)', issuer: '한국데이터산업진흥원', date: '2022.12.02' },
+          { name: '컴퓨터활용능력 1급', issuer: '대한상공회의소', date: '2022.01.28' },
+          { name: '정보처리기사', issuer: '한국산업인력공단', date: '2021.06.02' },
+        ],
+      },
+      edu: {
+        label: '학력',
+        title: '학력',
+        items: [
+          { degree: '정보보안 전공', school: '우석대학교', period: '2018.03 - 2022.02' },
+          { degree: '백엔드 스쿨 수료 (Java, Spring)', school: '멋쟁이사자처럼', period: '2022.09 - 2023.02' },
+        ],
+      },
+      projects: {
+        label: '프로젝트',
+        title: '프로젝트',
+        subtitle: '직접 만들어 운영 중인 개인 프로젝트와 백엔드 스쿨 팀 프로젝트입니다.',
+        filters: { all: '전체', api: 'API / 서버', infra: '성능 / 운영' },
+        detail: '자세히', github: 'GitHub', demo: '데모', close: '닫기',
+        roleLabel: '역할', periodLabel: '기간', endedLabel: '서비스 종료', otherTitle: '팀 프로젝트',
+        highlightsLabel: '담당 역할', stackLabel: '기술 스택',
+        items: [
+          {
+            id: 'drawandseek', category: 'api', featured: true,
+            name: 'Draw & Seek',
+            summary: '그림을 그려 거대한 공유 캔버스 어딘가에 숨기면 다른 사용자가 캔버스를 탐험하며 숨은 그림을 찾아내는 웹 게임입니다. Claude Code를 활용해 기획부터 개발, 배포, 운영까지 혼자 진행하고 있는 개인 프로젝트입니다.',
+            role: '기획, AI 활용 개발, 운영',
+            period: '2026.07 - 운영 중',
+            team: '1인 개인 프로젝트',
+            stack: ['Claude Code', 'TypeScript', 'Next.js', 'React', 'Supabase', 'PostgreSQL', 'Vercel'],
+            highlights: [
+              'Claude Code로 전체 개발을 진행하고 요구사항 정의와 결과물 검증, 배포와 운영을 직접 수행',
+              '그림 업로드, 숨기기, 찾기, 랭킹, 지난 기록 API를 Next.js API 라우트로 구축',
+              '지도처럼 확대, 이동하며 탐색하는 타일 기반 캔버스(z/x/y 타일 API) 설계',
+              'sharp를 활용해 업로드된 그림을 캔버스 타일에 합성하는 서버 이미지 파이프라인 구현',
+              'Supabase(PostgreSQL, Storage)로 그림 데이터와 이미지 저장소 관리',
+              '콘텐츠 관리를 위한 어드민 콘솔과 인증 구현',
+              'Vercel 배포와 커스텀 도메인(drawandseek.com) 운영',
+            ],
+            github: 'https://github.com/surpmh/draw-and-seek', demo: 'https://drawandseek.com',
+          },
+          {
+            id: 'vegetable', category: 'api', featured: false,
+            name: '멋쟁이 채소처럼',
+            summary: '버려지는 못난이 농산물의 소비를 위한 기업과 농가 간의 농산물 매매 플랫폼',
+            role: '백엔드 개발',
+            period: '2022.12 - 2023.02',
+            team: '7인 팀(백엔드)',
+            stack: ['Java', 'Spring Boot', 'Spring Security', 'Spring Data JPA', 'MySQL', 'Redis', 'JWT', 'OAuth 2.0'],
+            highlights: [
+              '네이버 문자 발송 API를 사용한 문자 인증 구현',
+              'Redis를 활용해 인증번호 관리',
+              '기업과 농가 리스트와 상세 조회 기능 구현',
+              '농산물 가격정보 Open API 연동',
+              '기업과 농가 위치 정보를 지도 API 사용해 마커 표시',
+              '마커에 상세페이지를 연결하여 사용자 편의성 극대화',
+            ],
+            github: 'https://github.com/surpmh/like-awesome-vegetable', demo: '',
+          },
+        ],
+      },
+      contact: {
+        label: '연락처',
+        title: '함께 만들어요',
+        subtitle: '새로운 기회와 협업에 열려 있습니다. 편하게 연락 주세요.',
+        emailLabel: '이메일', github: 'GitHub', blog: '블로그', linkedin: 'LinkedIn',
+      },
+      footer: { tagline: '백엔드 개발자', rights: 'All rights reserved.', built: '이 사이트는 직접 디자인하고 제작했습니다.' },
+    },
+    en: {
+      nameShort: 'Ayeong Choi',
+      nav: { home: 'Home', about: 'About', skills: 'Skills', experience: 'Experience', projects: 'Projects', certificates: 'Certificates', education: 'Education', contact: 'Contact' },
+      availability: 'Open to new opportunities',
+      eyebrow: "Hi, I'm Ayeong Choi",
+      role: 'Backend Developer',
+      desc: 'I design and build scalable APIs, secure systems, and reliable services.',
+      btnProjects: 'View Projects',
+      btnResume: 'Download Resume',
+      typed: ['Keeping services running', 'Balancing performance and cost', 'Payment & settlement integrity', 'Fast to adapt to any stack'],
+      about: {
+        label: 'About',
+        title: 'A developer who keeps services\nrunning behind the scenes',
+        p1: 'At Beagles I built and operated the backend of a 400K+ download service, focusing on the work that keeps it running: concurrency control for currency settlement, server-side in-app purchase verification, global exception handling, and incident alerting.',
+        p2: "When something breaks, I look for the cause before the symptom. When our server became unstable with out-of-memory errors, I fixed the offending logic instead of scaling up instances, resolving it at zero extra cost. That's how thinking about performance, cost, and stability together became a habit.",
+        years: '2 yrs 8 mos',
+        yearsLabel: 'Experience',
+        interestLabel: 'Interests',
+        interestValue: 'Service reliability, performance tuning, payment systems',
+      },
+      skills: {
+        label: 'Skills',
+        title: 'Tech Stack',
+        subtitle: 'Tools and technologies from work and team projects.',
+        cat: { backend: 'Backend', database: 'Database / Cache', cloud: 'Cloud / DevOps', architecture: 'Frontend', tools: 'Collaboration' },
+      },
+      exp: {
+        label: 'Experience',
+        title: 'Work Experience',
+        respLabel: 'Responsibilities',
+        achLabel: 'Achievements',
+        items: [
+          {
+            role: 'Backend Developer',
+            company: 'Beagles',
+            period: '2023.05 - 2026.02',
+            stack: ['C#', '.NET', 'Java', 'Spring Boot', 'Spring Data JPA', 'MariaDB', 'MySQL', 'MongoDB', 'Redis', 'React'],
+            summary: "Backend developer at the startup behind Beagles, a virtual-pet healing app (400K+ downloads), and Hi-ing, an AI counseling app (100K+). After the team lead's departure I carried server development solo, re-setting priorities and coordinating schedules with planners and frontend developers while owning payment and settlement reliability, service stability, and performance and cost optimization.",
+            projects: [
+              {
+                title: 'Beagles - Currency Settlement and IAP Hardening',
+                period: '',
+                paras: [
+                  'The settlement logic could produce duplicate payouts when concurrent requests overlapped. I applied pessimistic locking so settlement stays correct even under concurrent access, protecting currency-data integrity.',
+                  'Client-side checks alone could not stop fraudulent purchases, so I moved in-app purchase receipt verification to the server and wired up Google RTDN and App Store server notifications so refund events are handled automatically, without manual work.',
+                ],
+                result: 'Lock-based settlement and an automated refund pipeline reduced fraudulent purchases and manual-handling errors.',
+              },
+              {
+                title: 'Hi-ing - Performance and Cost Optimization',
+                period: '',
+                paras: [
+                  'The Hi-ing server became unstable with out-of-memory errors. Instead of papering over it by scaling up instances, I found and fixed the memory-hungry logic, resolving the incident at zero extra infra cost.',
+                  'For read-heavy APIs, I introduced Redis caching and cut average response time from 31ms to 17ms, about 45%.',
+                ],
+                result: 'This is where thinking about performance, cost, and stability together became a habit.',
+              },
+              {
+                title: 'NFC Plush-Toy Content Service Backend',
+                period: '',
+                paras: [
+                  'I owned the backend for a new service that serves exclusive content when the NFC tag embedded in a plush toy is scanned. Each toy carries a unique UUID, and I designed the APIs that resolve the tag and serve the matching content with Spring Boot, Spring Data JPA, and MySQL.',
+                ],
+                result: 'An experience of designing, from scratch, the identification scheme linking physical products to digital content.',
+              },
+              {
+                title: 'Operations and Admin Tools',
+                period: '',
+                paras: [
+                  'I overhauled global exception handling and connected automated Slack alerts, so the team notices and responds the moment an exception occurs. I also migrated tuple-based responses, where field meanings were opaque, to DTOs, making the data self-explanatory from the code alone.',
+                  'I picked up C# and .NET, which I first encountered on the job, from official docs and real projects fast enough to contribute immediately, and built the admin and event pages in React, which gave me a view of the whole service.',
+                ],
+                result: 'Fast incident detection and readable code lowered the day-to-day operational load.',
+              },
+            ],
+          },
+        ],
+      },
+      certs: {
+        label: 'Certificates',
+        title: 'Certifications',
+        items: [
+          { name: 'SQLD (SQL Developer)', issuer: 'Korea Data Agency', date: '2022.12.02' },
+          { name: 'Computer Specialist in Spreadsheet & Database, Level 1', issuer: 'Korea Chamber of Commerce & Industry', date: '2022.01.28' },
+          { name: 'Engineer Information Processing', issuer: 'HRD Korea', date: '2021.06.02' },
+        ],
+      },
+      edu: {
+        label: 'Education',
+        title: 'Education',
+        items: [
+          { degree: 'B.S. in Information Security', school: 'Woosuk University', period: '2018.03 - 2022.02' },
+          { degree: 'Backend School (Java, Spring)', school: 'LIKELION', period: '2022.09 - 2023.02' },
+        ],
+      },
+      projects: {
+        label: 'Projects',
+        title: 'Projects',
+        subtitle: 'A personal project I built and operate, plus a backend-school team project.',
+        filters: { all: 'All', api: 'API / Server', infra: 'Performance / Ops' },
+        detail: 'Details', github: 'GitHub', demo: 'Demo', close: 'Close',
+        roleLabel: 'Role', periodLabel: 'Period', endedLabel: 'Service ended', otherTitle: 'Team projects',
+        highlightsLabel: 'What I did', stackLabel: 'Tech Stack',
+        items: [
+          {
+            id: 'drawandseek', category: 'api', featured: true,
+            name: 'Draw & Seek',
+            summary: 'A web game where you draw a picture and hide it somewhere on a huge shared canvas, and other players explore the canvas to find it. A personal project I plan, build, deploy, and operate solo using Claude Code.',
+            role: 'Planning, AI-driven development, operations',
+            period: '2026.07 - Live',
+            team: 'Solo personal project',
+            stack: ['Claude Code', 'TypeScript', 'Next.js', 'React', 'Supabase', 'PostgreSQL', 'Vercel'],
+            highlights: [
+              'Drove the entire build with Claude Code, defining requirements, reviewing output, and handling deploys and operations myself',
+              'Built the drawing upload, hide/find, ranking, and history APIs as Next.js API routes',
+              'Designed a tile-based canvas (z/x/y tile API) you can pan and zoom like a map',
+              'Implemented a server-side image pipeline that composites uploaded drawings into canvas tiles with sharp',
+              'Managed drawing data and image storage with Supabase (PostgreSQL, Storage)',
+              'Built an admin console with authentication for content management',
+              'Deployed on Vercel with a custom domain (drawandseek.com)',
+            ],
+            github: 'https://github.com/surpmh/draw-and-seek', demo: 'https://drawandseek.com',
+          },
+          {
+            id: 'vegetable', category: 'api', featured: false,
+            name: 'Like Awesome Vegetable',
+            summary: 'A produce-trading platform connecting companies and farms to create demand for discarded "ugly" produce.',
+            role: 'Backend Developer',
+            period: '2022.12 - 2023.02',
+            team: '7-person team (Backend)',
+            stack: ['Java', 'Spring Boot', 'Spring Security', 'Spring Data JPA', 'MySQL', 'Redis', 'JWT', 'OAuth 2.0'],
+            highlights: [
+              'Implemented SMS verification with the Naver message-sending API',
+              'Managed verification codes with Redis',
+              'Built list and detail views for companies and farms',
+              'Integrated the public produce-price Open API',
+              'Displayed company and farm locations as markers with a map API',
+              'Linked markers to detail pages to maximize usability',
+            ],
+            github: 'https://github.com/surpmh/like-awesome-vegetable', demo: '',
+          },
+        ],
+      },
+      contact: {
+        label: 'Contact',
+        title: "Let's build together",
+        subtitle: "I'm open to new opportunities and collaboration. Feel free to reach out.",
+        emailLabel: 'Email', github: 'GitHub', blog: 'Blog', linkedin: 'LinkedIn',
+      },
+      footer: { tagline: 'Backend Developer', rights: 'All rights reserved.', built: 'Designed & built by myself.' },
+    },
+  };
+
+  NAV_IDS = ['home', 'about', 'skills', 'experience', 'projects', 'certificates', 'education', 'contact'];
+
+  componentDidMount() {
+    let theme = null, lang = null;
+    try { theme = localStorage.getItem('ayeong-theme'); } catch (e) {}
+    try { lang = localStorage.getItem('ayeong-lang'); } catch (e) {}
+    if (!theme) {
+      theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    }
+    if (!lang) lang = this.props.defaultLang || 'ko';
+    this.applyTheme(theme);
+    this.setState({ lang });
+
+    this._onScroll = () => {
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      const y = window.scrollY || doc.scrollTop || 0;
+      const pct = max > 0 ? (y / max) * 100 : 0;
+      if (this._bar) this._bar.style.width = pct + '%';
+      const show = y > 420;
+      let active = 'home';
+      for (const id of this.NAV_IDS) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 130) active = id;
+      }
+      if (show !== this.state.showTop || active !== this.state.activeSection) {
+        this.setState({ showTop: show, activeSection: active });
+      }
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+  }
+
+  componentWillUnmount() {
+    if (this._typeTimer) clearTimeout(this._typeTimer);
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+  }
+
+  applyTheme(theme) {
+    try { document.documentElement.setAttribute('data-theme', theme); document.documentElement.style.colorScheme = theme; } catch (e) {}
+    try { localStorage.setItem('ayeong-theme', theme); } catch (e) {}
+    this.setState({ theme });
+  }
+
+  toggleTheme = () => this.applyTheme(this.state.theme === 'dark' ? 'light' : 'dark');
+
+  setLang = (lang) => {
+    try { localStorage.setItem('ayeong-lang', lang); } catch (e) {}
+    this.setState({ lang });
+  };
+
+  toggleMenu = () => this.setState(s => ({ menuOpen: !s.menuOpen }));
+
+  tick = () => {
+    const arr = (this.STRINGS[this.state.lang] || this.STRINGS.en).typed;
+    const full = arr[this._ti % arr.length];
+    if (!this._deleting) {
+      this._tj++;
+      if (this._tj >= full.length) {
+        this._deleting = true;
+        this.setState({ typed: full });
+        this._typeTimer = setTimeout(this.tick, 1500);
+        return;
+      }
+    } else {
+      this._tj--;
+      if (this._tj <= 0) { this._deleting = false; this._ti++; this._tj = 0; }
+    }
+    this.setState({ typed: full.slice(0, this._tj) });
+    this._typeTimer = setTimeout(this.tick, this._deleting ? 40 : 85);
+  };
+
+  navTo = (id) => {
+    this.setState({ menuOpen: false });
+    const el = document.getElementById(id);
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + (window.scrollY || 0) - 76;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  };
+
+  scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  downloadResume = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const url = this.props.resumeUrl;
+    if (url) {
+      const a = document.createElement('a');
+      a.href = url; a.download = ''; a.target = '_blank'; a.rel = 'noopener';
+      document.body.appendChild(a); a.click(); a.remove();
+    } else {
+      try { window.print(); } catch (err) {}
+    }
+  };
+
+  reveal = (el) => {
+    if (!el) return;
+    return; // static page: no scroll-reveal
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    const d = el.getAttribute('data-reveal-delay') || '0s';
+    el.style.transition = 'opacity .7s cubic-bezier(.16,1,.3,1) ' + d + ', transform .7s cubic-bezier(.16,1,.3,1) ' + d;
+    el.style.willChange = 'opacity, transform';
+    if (!this._io) {
+      this._io = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          if (en.isIntersecting) {
+            en.target.style.opacity = '1';
+            en.target.style.transform = 'none';
+            this._io.unobserve(en.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+    }
+    this._io.observe(el);
+  };
+
+  renderVals() {
+    const lang = this.state.lang;
+    const s = this.STRINGS[lang] || this.STRINGS.en;
+    const active = this.state.activeSection;
+    const navItems = this.NAV_IDS.map(id => ({
+      id,
+      label: s.nav[id],
+      onClick: () => this.navTo(id),
+      style: {
+        padding: '8px 13px', fontSize: '14px', fontWeight: 500, cursor: 'pointer',
+        textDecoration: 'none', borderRadius: '9px', transition: 'color .2s, background .2s',
+        color: active === id ? 'var(--accent)' : 'var(--muted)',
+        background: active === id ? 'var(--accent-soft)' : 'transparent',
+      },
+      mobileStyle: {
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '13px 12px', fontSize: '15px', fontWeight: 600, cursor: 'pointer',
+        textDecoration: 'none', borderRadius: '10px', transition: 'background .2s, color .2s',
+        color: active === id ? 'var(--accent)' : 'var(--text)',
+        background: active === id ? 'var(--accent-soft)' : 'transparent',
+      },
+    }));
+    const segBase = {
+      border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 700,
+      padding: '5px 11px', borderRadius: '8px', letterSpacing: '.03em',
+      transition: 'background .2s, color .2s', fontFamily: 'inherit',
+    };
+    const koActive = lang === 'ko';
+    return {
+      t: { nameShort: s.nameShort, availability: s.availability, eyebrow: s.eyebrow, role: s.role, desc: s.desc, btnProjects: s.btnProjects, btnResume: s.btnResume, about: s.about, skills: s.skills, exp: s.exp, certs: s.certs, edu: s.edu, projects: s.projects, contact: s.contact, footer: s.footer },
+      contact: (() => {
+        const email = this.props.email || 'cdd816@naver.com';
+        const github = this.props.githubUrl || 'https://github.com/surpmh';
+        const blog = this.props.blogUrl || '';
+        const linkedin = this.props.linkedinUrl || '';
+        const strip = (u) => u.replace(/^https?:\/\//, '').replace(/\/$/, '');
+        return {
+          email, github, blog, linkedin,
+          emailHref: 'mailto:' + email,
+          githubDisplay: strip(github),
+          blogDisplay: blog ? strip(blog) : '',
+          linkedinDisplay: linkedin ? strip(linkedin) : '',
+        };
+      })(),
+      reveal: this.reveal,
+      expItems: s.exp.items,
+      certItems: s.certs.items,
+      eduItems: s.edu.items,
+      projList: s.projects.items.map(p => ({ ...p, catLabel: s.projects.filters[p.category] })),
+      isDark: this.state.theme === 'dark',
+      isLight: this.state.theme !== 'dark',
+      typed: s.typed[0],
+      showTop: this.state.showTop,
+      menuOpen: this.state.menuOpen,
+      menuClosed: !this.state.menuOpen,
+      showAvail: this.props.showAvailability !== false,
+      resumeHref: this.props.resumeUrl || 'resume.pdf',
+      downloadResume: this.downloadResume,
+      navItems,
+      koStyle: { ...segBase, background: koActive ? 'var(--accent)' : 'transparent', color: koActive ? 'var(--on-accent)' : 'var(--muted)' },
+      enStyle: { ...segBase, background: !koActive ? 'var(--accent)' : 'transparent', color: !koActive ? 'var(--on-accent)' : 'var(--muted)' },
+      setKo: () => this.setLang('ko'),
+      setEn: () => this.setLang('en'),
+      toggleTheme: this.toggleTheme,
+      toggleMenu: this.toggleMenu,
+      goHome: this.scrollTop,
+      goProjects: () => this.navTo('projects'),
+      setBar: (el) => { this._bar = el; },
+      scrollTop: this.scrollTop,
+    };
+  }
+}
+</script>
+</body>
+</html>
