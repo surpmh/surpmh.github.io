@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>더블찬스 캠페인</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#fff3f6; --bg2:#ffe9d6;
+    --ink:#5b4a52; --sub:#a08a93;
+    --accent:#ff6b81; --accent-deep:#f04a64;
+    --gold:#f5a623; --card:#ffffff;
+    --reel-h:92px;
+    color-scheme: light;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    font-family:'Jua','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+    color:var(--ink);
+    background:linear-gradient(160deg,var(--bg1),var(--bg2));
+    min-height:100dvh;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+    -webkit-tap-highlight-color:transparent;
+    user-select:none;-webkit-user-select:none;
+  }
+  #fx{position:fixed;inset:0;pointer-events:none;z-index:50}
+
+  .deco{position:fixed;font-size:34px;opacity:.5;animation:float 6s ease-in-out infinite;z-index:0}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-18px) rotate(6deg)}}
+
+  main{position:relative;z-index:1;width:min(92vw,400px)}
+  .screen{display:none;text-align:center}
+  .screen.active{display:block;animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
+  @keyframes pop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+
+  .card{
+    background:var(--card);border-radius:28px;
+    padding:38px 26px 32px;
+    box-shadow:0 18px 50px rgba(240,74,100,.16);
+  }
+  .banner{font-size:14px;letter-spacing:.35em;color:var(--accent);margin-bottom:10px}
+  h1{font-size:34px;line-height:1.25;margin-bottom:6px}
+  .btn{
+    display:block;width:100%;padding:17px 0;border:none;border-radius:18px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-deep));
+    color:#fff;font-family:inherit;font-size:20px;cursor:pointer;
+    box-shadow:0 8px 20px rgba(240,74,100,.35);
+    transition:transform .15s;
+  }
+  .btn:active{transform:scale(.96)}
+  .hint{margin-top:14px;font-size:13px;color:var(--sub)}
+
+  /* 룰렛 */
+  .reel{
+    position:relative;height:calc(var(--reel-h)*3);
+    border-radius:22px;overflow:hidden;background:#fff7f9;
+    border:2px solid #ffdbe2;
+  }
+  .reel-strip{will-change:transform}
+  .reel-item{
+    height:var(--reel-h);display:flex;align-items:center;justify-content:center;
+    font-size:44px;color:#c9b2ba;
+  }
+  .reel-item.hit{color:var(--accent-deep);animation:hitpop .4s cubic-bezier(.2,1.6,.4,1)}
+  @keyframes hitpop{from{transform:scale(1)}50%{transform:scale(1.22)}to{transform:scale(1)}}
+  .reel-band{
+    position:absolute;left:0;right:0;top:var(--reel-h);height:var(--reel-h);
+    border-top:2px solid var(--accent);border-bottom:2px solid var(--accent);
+    background:rgba(255,107,129,.06);pointer-events:none;
+  }
+  .reel-fade{position:absolute;left:0;right:0;height:var(--reel-h);pointer-events:none}
+  .reel-fade.top{top:0;background:linear-gradient(#fff7f9,rgba(255,247,249,0))}
+  .reel-fade.bottom{bottom:0;background:linear-gradient(rgba(255,247,249,0),#fff7f9)}
+
+  /* 결과 */
+  .tag{font-size:20px;margin-bottom:8px}
+  .big{font-size:58px;line-height:1.1;color:var(--accent-deep);margin:6px 0 10px}
+  .big.jackpot{color:var(--gold);text-shadow:0 3px 0 #ffe3ae}
+  .big.lose{color:#9aa3ad}
+  .msg{font-size:17px;color:var(--sub);margin-bottom:4px}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<span class="deco" style="top:8%;left:8%">🎈</span>
+<span class="deco" style="top:14%;right:10%;animation-delay:1.2s">🍀</span>
+<span class="deco" style="bottom:12%;left:12%;animation-delay:2.1s">🎁</span>
+<span class="deco" style="bottom:18%;right:8%;animation-delay:.6s">✨</span>
+
+<main>
+  <!-- 룰렛 (당첨 티켓만 거친다) -->
+  <section id="roll" class="screen">
+    <div class="card">
+      <div class="banner">DOUBLE CHANCE</div>
+      <h1 style="font-size:24px;margin-bottom:18px">과연 결과는...?</h1>
+      <div class="reel">
+        <div class="reel-strip" id="strip"></div>
+        <div class="reel-fade top"></div>
+        <div class="reel-fade bottom"></div>
+        <div class="reel-band"></div>
+      </div>
+      <div class="hint">화면을 탭하면 바로 멈춰요</div>
+    </div>
+  </section>
+
+  <!-- 결과 -->
+  <section id="result" class="screen">
+    <div class="card">
+      <div class="banner">DOUBLE CHANCE</div>
+      <div class="tag" id="r-tag"></div>
+      <div class="big" id="r-big"></div>
+      <div class="msg" id="r-msg"></div>
+    </div>
+  </section>
+
+  <!-- 잘못된 접근 -->
+  <section id="invalid" class="screen">
+    <div class="card">
+      <h1>🤔</h1>
+      <div class="msg" style="margin-top:10px">올바른 티켓이 아니에요.<br>QR 코드를 다시 스캔해 주세요!</div>
+    </div>
+  </section>
+</main>
+
+<script>
+'use strict';
+/* 티켓 데이터: generate.py가 아래 base64를 교체한다. {토큰:횟수} 형태, 횟수 0은 꽝 */
+const PACKED = /*TICKETS*/"eyJja3FzeCI6MTAsImYzN203Ijo1LCI2NWJxeCI6MSwicDhqbWEiOjB9"/*TICKETS*/;
+const TICKETS = JSON.parse(atob(PACKED));
+
+const $ = id => document.getElementById(id);
+const show = id => {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  $(id).classList.add('active');
+};
+
+const token = new URLSearchParams(location.search).get('t');
+const count = token && TICKETS[token] !== undefined ? TICKETS[token] : null;   // 더 뽑기 횟수, 0은 꽝
+/* 화면 분기는 스크립트 맨 아래에서 한다 */
+
+const RESULTS = {
+  10: { tag: '🎰 잭팟!!',   big: '+10번 더!!', cls: 'jackpot', msg: '말도 안 돼, 최고 등수 당첨이에요!', confetti: 320, gold: true },
+  5:  { tag: '🎉 대박 당첨', big: '+5번 더!',   cls: '',        msg: '다섯 번이나 더 뽑을 수 있어요!',   confetti: 180, gold: false },
+  1:  { tag: '🎁 당첨',     big: '+1번 더!',   cls: '',        msg: '기회가 한 번 더 생겼어요!',        confetti: 90,  gold: false },
+  0:  { tag: '😢 아쉬워요', big: '꽝',         cls: 'lose',    msg: '다음 티켓에 행운이 있을 거예요.',  confetti: 0,   gold: false }
+};
+const label = n => n === 0 ? '꽝' : '+' + n;
+
+/* ---------- 룰렛 ---------- */
+const ITEM_H = 92;
+let rolling = false, skipped = false;
+
+function startRoll() {
+  show('roll');
+  const result = count;
+  const LOOP = ['+1', '꽝', '+5', '꽝', '+1', '+10', '꽝', '+1', '꽝', '+5', '꽝', '+1'];
+  const items = ['+5'];                       // 시작 시 가운데 칸을 채우는 필러
+  for (let i = 0; i < 4; i++) items.push(...LOOP);
+  items.push(label(result));
+  items.push(result === 0 ? '+1' : '꽝');     // 마지막 칸 아래 필러
+  const target = items.length - 2;
+
+  const strip = $('strip');
+  strip.innerHTML = items.map(v => '<div class="reel-item">' + v + '</div>').join('');
+
+  const startY = 0, endY = -(target - 1) * ITEM_H;
+  const dur = 2200, t0 = performance.now();
+  rolling = true; skipped = false;
+
+  function step(now) {
+    let p = Math.min(1, (now - t0) / dur);
+    if (skipped) p = 1;
+    const e = 1 - Math.pow(1 - p, 4);
+    strip.style.transform = 'translateY(' + (startY + (endY - startY) * e) + 'px)';
+    if (p < 1) { requestAnimationFrame(step); return; }
+    rolling = false;
+    strip.children[target].classList.add('hit');
+    setTimeout(showResult, 600);
+  }
+  requestAnimationFrame(step);
+}
+
+$('roll').addEventListener('pointerdown', () => { if (rolling) skipped = true; });
+
+/* ---------- 결과 ---------- */
+function showResult() {
+  const r = RESULTS[count];
+  $('r-tag').textContent = r.tag;
+  $('r-big').textContent = r.big;
+  $('r-big').className = 'big ' + r.cls;
+  $('r-msg').textContent = r.msg;
+  show('result');
+  if (r.confetti) burst(r.confetti, r.gold);
+}
+
+/* ---------- 컨페티 ---------- */
+function burst(count, gold) {
+  const cvs = $('fx'), ctx = cvs.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const W = innerWidth, H = innerHeight;
+  cvs.width = W * dpr; cvs.height = H * dpr;
+  cvs.style.width = W + 'px'; cvs.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+
+  const colors = gold
+    ? ['#ffd166', '#ffb703', '#f5a623', '#fff1c1', '#ff6b81']
+    : ['#ff6b81', '#ffd166', '#7fd8be', '#82aaff', '#f9a8d4'];
+  const parts = [];
+  for (let i = 0; i < count; i++) {
+    parts.push({
+      x: W / 2 + (Math.random() - .5) * 120,
+      y: H * 0.3,
+      vx: (Math.random() - .5) * 10,
+      vy: -Math.random() * 12 - 2,
+      w: Math.random() * 8 + 4,
+      h: Math.random() * 5 + 3,
+      rot: Math.random() * Math.PI,
+      vr: (Math.random() - .5) * .3,
+      c: colors[i % colors.length],
+      life: 130 + Math.random() * 70
+    });
+  }
+  (function tick() {
+    ctx.clearRect(0, 0, W, H);
+    let alive = 0;
+    for (const p of parts) {
+      if (p.life <= 0) continue;
+      alive++;
+      p.life--; p.x += p.vx; p.y += p.vy; p.vy += .25; p.vx *= .99; p.rot += p.vr;
+      ctx.save();
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.globalAlpha = Math.min(1, p.life / 40);
+      ctx.fillStyle = p.c;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    }
+    if (alive) requestAnimationFrame(tick);
+    else ctx.clearRect(0, 0, W, H);
+  })();
+}
+
+/* ---------- 시작: 꽝은 바로 결과, 당첨은 룰렛 자동 시작 ---------- */
+if (count === null) show('invalid');
+else if (count === 0) showResult();
+else startRoll();
+</script>
+</body>
+</html>

@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>최아영 | 포트폴리오</title>
+<meta name="description" content="백엔드 개발자 최아영의 포트폴리오">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --text: #37352f;
+    --text-2: #787774;
+    --text-3: #9b9a97;
+    --bg: #ffffff;
+    --line: #e9e9e7;
+    --line-soft: #f1f1ef;
+    --block: #f7f7f5;
+    --sel: #eeeef0;
+
+    --blue-bg: #e7f3f8;   --blue-tx: #0b6e99;
+    --red-bg: #fbe4e4;    --red-tx: #b12b28;
+    --green-bg: #ddedea;  --green-tx: #0f7b6c;
+    --yellow-bg: #fbf3db;
+    --sans: "Pretendard", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Malgun Gothic", sans-serif;
+    --mono: "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  html { scroll-behavior: smooth; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Layout ===== */
+  .shell { display: flex; align-items: flex-start; max-width: 1180px; margin: 0 auto; }
+
+  .toc {
+    position: sticky; top: 0; flex: 0 0 236px; width: 236px;
+    height: 100vh; overflow-y: auto; padding: 56px 20px 56px 28px;
+  }
+  .toc-head {
+    font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--text-3); padding: 0 8px; margin-bottom: 10px;
+  }
+  .toc a {
+    display: block; padding: 5px 8px; border-radius: 4px;
+    font-size: 13.5px; line-height: 1.45; color: var(--text-2);
+    text-decoration: none; transition: background .12s, color .12s;
+  }
+  .toc a:hover { background: var(--sel); }
+  .toc a.on { color: var(--text); font-weight: 600; background: var(--sel); }
+  .toc a .n { color: var(--text-3); font-variant-numeric: tabular-nums; margin-right: 7px; font-weight: 500; }
+  .toc a.sub { padding-left: 30px; font-size: 12.5px; }
+  .toc .gap { height: 12px; }
+
+  .doc { flex: 1 1 auto; min-width: 0; max-width: 790px; padding: 56px 60px 140px; }
+
+  /* 인쇄 시 모든 페이지 위아래에 반복되는 여백
+     (@page margin: 0 이어야 브라우저 머리글과 바닥글이 찍히지 않음) */
+  table.sheet { width: 100%; border-collapse: collapse; }
+  table.sheet > thead > tr > td,
+  table.sheet > tbody > tr > td,
+  table.sheet > tfoot > tr > td { padding: 0; border: 0; }
+  .vpad { height: 0; }
+
+  /* ===== Print button ===== */
+  .print-btn {
+    position: fixed; top: 20px; right: 20px; z-index: 50;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--text); color: #fff; border: none; border-radius: 8px;
+    padding: 10px 16px; font-size: 13.5px; font-weight: 600; cursor: pointer;
+    font-family: inherit; box-shadow: 0 3px 12px rgba(0,0,0,.16);
+  }
+  .print-btn:hover { opacity: .88; }
+  .print-btn svg { width: 15px; height: 15px; }
+
+  /* ===== Cover ===== */
+  .cover { padding-bottom: 8px; }
+  .cover .emoji { font-size: 58px; line-height: 1; display: block; margin-bottom: 16px; }
+  .cover h1 { font-size: 40px; font-weight: 800; letter-spacing: -0.032em; line-height: 1.22; }
+  .cover .tag { font-size: 17px; color: var(--text-2); margin-top: 14px; line-height: 1.6; }
+  .cover .stackline {
+    font-family: var(--mono); font-size: 13px; color: var(--text-3);
+    margin-top: 14px; letter-spacing: 0; line-height: 1.9;
+  }
+  .idcard {
+    display: grid; grid-template-columns: 92px 1fr; gap: 6px 12px;
+    margin-top: 28px; padding: 18px 20px; background: var(--block); border-radius: 6px;
+    font-size: 14px;
+  }
+  .idcard dt { color: var(--text-3); font-weight: 500; }
+  .idcard a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .idcard a:hover { border-color: var(--text-3); }
+
+  /* ===== Headings ===== */
+  h2.sec {
+    font-size: 27px; font-weight: 700; letter-spacing: -0.025em;
+    margin: 70px 0 4px; padding-top: 14px; line-height: 1.3;
+    display: flex; align-items: baseline; gap: 11px;
+  }
+  h2.sec .num { font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--text-3); letter-spacing: 0; }
+  .sec-note { color: var(--text-2); font-size: 15px; margin: 6px 0 0; }
+
+  h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 40px 0 10px; line-height: 1.4; }
+  h4 {
+    font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--text-3); margin: 22px 0 7px;
+  }
+  h5 { font-size: 15px; font-weight: 700; margin: 18px 0 3px; }
+
+  p { margin: 9px 0; }
+  p.lead { color: var(--text-2); }
+  em { font-style: normal; background: var(--yellow-bg); padding: 1px 3px; border-radius: 3px; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 46px 0; }
+
+  /* ===== Lists ===== */
+  ul.b { list-style: none; margin: 9px 0; }
+  ul.b > li { position: relative; padding-left: 21px; margin: 5px 0; }
+  ul.b > li::before {
+    content: ""; position: absolute; left: 6px; top: 12px;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--text-3);
+  }
+  ol.n { list-style: none; counter-reset: s; margin: 9px 0; }
+  ol.n > li { position: relative; padding-left: 30px; margin: 6px 0; counter-increment: s; }
+  ol.n > li::before {
+    content: counter(s, decimal-leading-zero);
+    position: absolute; left: 0; top: 0;
+    font-family: var(--mono); font-size: 12.5px; color: var(--text-3); line-height: 1.95;
+  }
+
+  /* ===== Inline ===== */
+  code {
+    font-family: var(--mono); font-size: 13.5px;
+    background: var(--red-bg); color: var(--red-tx);
+    padding: 1.5px 5px; border-radius: 3px; letter-spacing: 0;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 9px 0; }
+  .chip {
+    font-size: 12.5px; font-weight: 500; color: var(--text-2);
+    background: var(--block); border: 1px solid var(--line);
+    border-radius: 4px; padding: 2px 9px; white-space: nowrap;
+  }
+  .chip.k { background: var(--blue-bg); border-color: transparent; color: var(--blue-tx); font-weight: 600; }
+
+  /* ===== Callout ===== */
+  .callout {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: var(--block); border-radius: 5px;
+    padding: 15px 17px; margin: 14px 0; font-size: 15px; line-height: 1.7;
+  }
+  .callout .ic { font-size: 17px; line-height: 1.5; flex: 0 0 auto; }
+  .callout .bd { min-width: 0; }
+  .callout .bd > :first-child { margin-top: 0; }
+  .callout .bd > :last-child { margin-bottom: 0; }
+  .callout.warn { background: var(--red-bg); }
+  .callout.ok { background: var(--green-bg); }
+  .callout.info { background: var(--blue-bg); }
+  .callout.note { background: var(--yellow-bg); }
+  .callout.warn code, .callout.ok code, .callout.info code, .callout.note code { background: rgba(255,255,255,.65); }
+
+  /* ===== Code / diagram ===== */
+  pre {
+    background: var(--block); border-radius: 5px;
+    padding: 16px 18px; margin: 14px 0; overflow-x: auto;
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.62;
+    color: var(--text); letter-spacing: 0; white-space: pre;
+  }
+  .figcap { font-size: 12.5px; color: var(--text-3); margin: -6px 0 16px; }
+
+
+  /* ===== Table ===== */
+  .tw { overflow-x: auto; margin: 14px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 380px; }
+  th, td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--block); font-weight: 600; color: var(--text-2); font-size: 13px; }
+  td code { font-size: 13px; }
+
+  /* ===== Case ===== */
+  .case { margin-top: 46px; }
+  .case-tag {
+    display: inline-block; font-family: var(--mono); font-size: 11.5px; font-weight: 600;
+    letter-spacing: .06em; color: var(--text-3); margin-bottom: 4px;
+  }
+  .case h3 { margin-top: 2px; }
+  .case-sum {
+    font-size: 14.5px; color: var(--text-2); line-height: 1.7;
+    border-left: 3px solid var(--line); padding-left: 14px; margin: 12px 0 4px;
+  }
+  .case-sum b { color: var(--text); }
+
+  /* ===== Why block ===== */
+  .why {
+    margin: 18px 0 0; padding: 16px 18px;
+    border: 1px solid var(--line); border-radius: 5px; background: #fcfcfb;
+  }
+  .why .wt {
+    font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--text-3); margin-bottom: 8px;
+  }
+  .why h5 { font-size: 14.5px; margin: 14px 0 2px; }
+  .why h5:first-of-type { margin-top: 0; }
+  .why p { font-size: 14.5px; margin: 5px 0; }
+  .why ul.b > li { font-size: 14.5px; }
+
+  /* ===== Project ===== */
+  .proj { margin-top: 48px; }
+  .proj-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 14px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 12px;
+  }
+  .proj-head .t { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+  .proj-head .t .no {
+    font-family: var(--mono); font-size: 12px; color: var(--text-3);
+    display: block; font-weight: 500; letter-spacing: .06em; margin-bottom: 2px;
+  }
+  .proj-head .t .sv { font-size: 14px; font-weight: 500; color: var(--text-3); }
+  .proj-head .p { font-size: 13.5px; color: var(--text-3); font-family: var(--mono); letter-spacing: 0; white-space: nowrap; }
+  .meta { display: grid; grid-template-columns: 76px 1fr; gap: 5px 12px; font-size: 14px; margin: 16px 0; }
+  .meta dt { color: var(--text-3); }
+
+  /* ===== Metrics ===== */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 18px 0; }
+  .metric { background: var(--block); border-radius: 5px; padding: 14px 15px; }
+  .metric .v { font-size: 21px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.25; white-space: nowrap; }
+  .metric .l { font-size: 12px; color: var(--text-3); margin-top: 4px; line-height: 1.45; }
+
+  /* ===== Stack ===== */
+  .stack { display: grid; grid-template-columns: 118px 1fr; gap: 12px 16px; align-items: start; margin: 16px 0; }
+  .stack dt { font-size: 13px; font-weight: 700; color: var(--text-2); padding-top: 3px; }
+
+  /* ===== Rows ===== */
+  .rows { margin: 12px 0; }
+  .row {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 14px;
+    padding: 11px 0; border-bottom: 1px solid var(--line-soft); flex-wrap: wrap;
+  }
+  .row:last-child { border-bottom: 0; }
+  .row .m { font-size: 15px; font-weight: 600; }
+  .row .s { font-size: 13.5px; color: var(--text-3); margin-top: 1px; }
+  .row .d { font-size: 13px; color: var(--text-3); font-family: var(--mono); letter-spacing: 0; white-space: nowrap; }
+
+
+
+  .foot { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--text-3); }
+
+  /* ===== Mobile ===== */
+  .toc-m { display: none; }
+  @media (max-width: 1040px) {
+    .toc { display: none; }
+    .doc { max-width: none; padding: 36px 22px 90px; }
+    .print-btn { top: auto; bottom: 18px; right: 18px; }
+    .toc-m { display: block; margin: 26px 0 0; padding: 16px 18px; background: var(--block); border-radius: 6px; }
+    .toc-m .toc-head { padding: 0; margin-bottom: 8px; }
+    .toc-m ol { list-style: none; counter-reset: t; columns: 2; column-gap: 18px; }
+    .toc-m li { counter-increment: t; margin: 3px 0; break-inside: avoid; }
+    .toc-m a { font-size: 13.5px; color: var(--text-2); text-decoration: none; }
+    .toc-m a::before { content: counter(t, decimal-leading-zero) "  "; font-family: var(--mono); font-size: 11.5px; color: var(--text-3); }
+    .cover h1 { font-size: 30px; }
+    .cover .emoji { font-size: 46px; }
+    h2.sec { font-size: 23px; margin-top: 54px; }
+    h3 { font-size: 18px; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .stack { grid-template-columns: 1fr; gap: 3px 0; }
+    .stack dd { margin-bottom: 10px; }
+    .idcard { grid-template-columns: 80px 1fr; }
+    .meta { grid-template-columns: 66px 1fr; }
+    pre { font-size: 11.5px; }
+  }
+
+  /* ===== Print / PDF ===== */
+  @media print {
+    /* margin: 0 이어야 브라우저가 머리글과 바닥글을 찍지 않음.
+       위아래 여백은 .vpad 가, 좌우 여백은 .doc 패딩이 담당한다. */
+    @page { size: A4; margin: 0; }
+
+    html, body { background: #fff; }
+    body { font-size: 10pt; line-height: 1.6; }
+
+    .toc, .toc-m, .print-btn { display: none !important; }
+    .shell { display: block; max-width: none; }
+    .doc { max-width: none; padding: 0 14mm; }
+    .vpad { height: 13mm; }
+
+    /* 표지는 한 장으로 */
+    .cover { min-height: 240mm; display: flex; flex-direction: column; justify-content: center; break-after: page; }
+    .cover .emoji { font-size: 40pt; }
+    .cover h1 { font-size: 30pt; }
+    .cover .tag { font-size: 12.5pt; }
+    .cover .stackline { font-size: 9.5pt; }
+    .idcard { font-size: 10pt; margin-top: 12mm; }
+
+    /* 섹션 제목은 기본적으로 흐름을 따르고, 큰 단위만 새 페이지에서 시작 */
+    h2.sec { break-after: avoid; font-size: 18pt; margin: 8mm 0 3mm; padding-top: 0; }
+    h2.sec:first-of-type { margin-top: 0; }
+    h2.sec.newpage { break-before: page; margin-top: 0; }
+    h2.sec .num { font-size: 10.5pt; }
+    .sec-note { font-size: 10pt; }
+
+    h3 { font-size: 13pt; break-after: avoid; margin: 6mm 0 2mm; }
+    h4 { font-size: 8pt; margin: 4mm 0 1.5mm; break-after: avoid; }
+    h5 { font-size: 10.5pt; break-after: avoid; }
+    p { margin: 2mm 0; }
+    hr { display: none; }
+
+    /* 성과 하나와 프로젝트 하나를 각각 새 페이지에 */
+    .achv, .proj { break-before: page; margin-top: 0; }
+    .achv.first, .proj.first { break-before: auto; }
+
+    .case { margin-top: 0; }
+    .case-tag { font-size: 8pt; }
+    .case-sum { font-size: 10pt; margin: 2mm 0; }
+
+    pre { font-size: 7.6pt; line-height: 1.5; padding: 3mm 4mm; margin: 2.5mm 0; white-space: pre-wrap; }
+    .figcap { font-size: 8pt; margin: -1mm 0 3mm; }
+    .callout { font-size: 10pt; padding: 3mm 4mm; margin: 3mm 0; }
+    .callout .ic { font-size: 11pt; }
+    .why { padding: 4mm 5mm; margin-top: 4mm; }
+    .why p, .why ul.b > li { font-size: 10pt; }
+    .why .alt { font-size: 9.5pt; }
+    table { font-size: 9.5pt; }
+    th, td { padding: 1.5mm 3mm; }
+    .chip { font-size: 8.5pt; }
+    code { font-size: 9pt; }
+    .metrics { gap: 2.5mm; margin: 4mm 0; }
+    .metric { padding: 2.5mm 3mm; }
+    .metric .v { font-size: 12.5pt; }
+    .metric .l { font-size: 8pt; }
+    .row { padding: 2mm 0; }
+    .foot { margin-top: 8mm; padding-top: 3mm; font-size: 8.5pt; }
+
+    /* 쪼개지면 안 되는 블록 */
+    pre, .callout, .why, .metric, .metrics, .row,
+    .tw, .proj-head, .idcard, .case-sum, li { break-inside: avoid; }
+    ul.b, ol.n { break-inside: auto; }
+
+    a { color: var(--text); text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  PDF로 저장
+</button>
+
+<div class="shell">
+
+  <!-- ===================== 목차 ===================== -->
+  <nav class="toc" id="toc">
+    <div class="toc-head">Contents</div>
+    <a href="#summary"><span class="n">01</span>Summary</a>
+    <a href="#career"><span class="n">02</span>Career</a>
+    <a href="#achievements"><span class="n">03</span>Key Achievements</a>
+    <a class="sub" href="#a1">결제 정합성</a>
+    <a class="sub" href="#a2">OOM 장애</a>
+    <a class="sub" href="#a3">버퍼 풀 증설</a>
+    <a class="sub" href="#a4">비동기 파이프라인</a>
+    <a class="sub" href="#a5">N+1 쿼리 제거</a>
+    <a class="sub" href="#a6">클라우드 이전</a>
+    <a href="#projects"><span class="n">04</span>Projects</a>
+    <a class="sub" href="#p1">하잉 앱</a>
+    <a class="sub" href="#p2">NFC 콘텐츠</a>
+    <a class="sub" href="#p3">비글즈 앱</a>
+    <a href="#principles"><span class="n">05</span>Engineering Principles</a>
+    <a href="#stack"><span class="n">06</span>Tech Stack</a>
+    <a href="#edu"><span class="n">07</span>Certifications</a>
+  </nav>
+
+  <main class="doc">
+  <table class="sheet">
+  <thead><tr><td><div class="vpad"></div></td></tr></thead>
+  <tbody><tr><td>
+
+    <!-- ===================== Cover ===================== -->
+    <header class="cover">
+      <span class="emoji">👩‍💻</span>
+      <h1>Backend Developer<br>Portfolio</h1>
+      <p class="tag">실서비스의 문제를 분석하고 안정적인 시스템으로 개선하는 백엔드 개발자입니다.</p>
+
+      <dl class="idcard">
+        <dt>이름</dt><dd>최아영 / Choi A-yeong</dd>
+        <dt>직무</dt><dd>백엔드 개발자 · Backend Developer</dd>
+        <dt>경력</dt><dd>2년 10개월 (2023.05 – 2026.02)</dd>
+        <dt>Email</dt><dd><a href="mailto:choiorog@gmail.com">choiorog@gmail.com</a></dd>
+        <dt>GitHub</dt><dd><a href="https://github.com/surpmh" target="_blank" rel="noopener">github.com/surpmh</a></dd>
+      </dl>
+
+      <nav class="toc-m">
+        <div class="toc-head">Contents</div>
+        <ol>
+          <li><a href="#summary">Summary</a></li>
+          <li><a href="#career">Career</a></li>
+          <li><a href="#achievements">Key Achievements</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#principles">Principles</a></li>
+          <li><a href="#stack">Tech Stack</a></li>
+          <li><a href="#edu">Certifications</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <!-- ===================== 01 Summary ===================== -->
+    <h2 class="sec" id="summary"><span class="num">01</span>Summary</h2>
+
+    <p class="lead">
+      서비스의 핵심 비즈니스 로직부터 인증과 결제, 데이터 처리, 성능 개선, 운영까지 경험했습니다.
+      단순히 기능을 구현하는 것보다 문제의 원인을 분석하고 적절한 기술적 해결책을 선택하는 것을 중요하게 생각합니다.
+      운영 환경에서 발생한 장애와 성능 저하를 추측이 아니라 메모리 덤프와 실행 계획, 재현 조건으로 좁혀 원인을 찾고,
+      기존 서비스에 미치는 영향을 최소화하는 방식으로 개선해왔습니다.
+    </p>
+
+    <div class="callout info">
+      <span class="ic">💡</span>
+      <div class="bd">
+        기술을 도입하기 전에 <b>왜 그 선택이어야 하는지</b>를 먼저 따져보려고 합니다.
+        아래 각 성과에는 그 판단의 근거를 함께 정리했습니다.
+      </div>
+    </div>
+
+    <!-- ===================== 02 Career ===================== -->
+    <h2 class="sec" id="career"><span class="num">02</span>Career</h2>
+
+    <div class="proj-head">
+      <div class="t">(주)비글즈 <span class="sv">플랫폼팀 · Backend Engineer</span></div>
+      <div class="p">2023.05 — 2026.02 · 2년 10개월</div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric"><div class="v">2년 10개월</div><div class="l">Backend Engineer</div></div>
+      <div class="metric"><div class="v">10만+</div><div class="l">하잉 앱 누적 다운로드</div></div>
+      <div class="metric"><div class="v">3</div><div class="l">담당 서비스</div></div>
+      <div class="metric"><div class="v">0건</div><div class="l">운영 기간 중 결제 중복 지급</div></div>
+    </div>
+
+    <h4>주요 업무</h4>
+    <ul class="b">
+      <li>서비스 API 개발 및 운영 (회원 인증, 인앱결제, 콘텐츠, AI 기능)</li>
+      <li>데이터베이스 설계와 쿼리 작성, 성능 관리</li>
+      <li>서버 장애 분석 및 대응, 운영 지표 모니터링</li>
+      <li>AWS와 GCP 기반 서비스 운영</li>
+      <li>Admin Backoffice 개발과 운영 지원</li>
+    </ul>
+
+    <h4>담당 서비스</h4>
+    <div class="rows">
+      <div class="row">
+        <div><div class="m">하잉 앱</div><div class="s">AI 캐릭터 기반 서비스 · 인증, 결제, AI 파이프라인, 콘텐츠 API</div></div>
+        <div class="d">2024.01 – 2026.02</div>
+      </div>
+      <div class="row">
+        <div><div class="m">NFC 콘텐츠</div><div class="s">태그 연동 콘텐츠 API · 클라우드 이전, CI/CD 전환</div></div>
+        <div class="d">2025.07 – 2026.02</div>
+      </div>
+      <div class="row">
+        <div><div class="m">비글즈 앱</div><div class="s">게임 서비스 · 콘텐츠 API, 이벤트 웹, 관리자 페이지</div></div>
+        <div class="d">2023.05 – 2023.12</div>
+      </div>
+    </div>
+
+    <!-- ===================== 03 Key Achievements ===================== -->
+    <h2 class="sec newpage" id="achievements"><span class="num">03</span>Key Achievements</h2>
+    <p class="sec-note">
+      실무에서 해결한 문제를 문제 인식과 원인 분석, 해결, 결과 순으로 정리했습니다.
+      각 성과 끝에는 <b>왜 그 방법을 선택했는지</b>와 다른 선택지와의 비교를 함께 담았습니다.
+    </p>
+
+    <!-- ---------- A1 ---------- -->
+    <section class="case achv first" id="a1">
+      <div class="case-tag">ACHIEVEMENT 01 · PAYMENT SECURITY · 하잉 앱</div>
+      <h3>결제 중복 처리 방지와 데이터 정합성 확보</h3>
+      <p class="case-sum">
+        클라이언트가 보낸 결제 결과를 신뢰하지 않고 <b>스토어 원장을 소스 오브 트루스</b>로 삼아 위변조와 재전송을 차단하고,
+        지급 갱신 구간을 행 락으로 직렬화해 <b>운영 기간 중 중복 지급 0건</b>을 유지했습니다.
+      </p>
+
+      <h4>Problem</h4>
+      <p>인앱결제에서 앱이 보내는 “결제에 성공했다”는 신호를 그대로 신뢰하면 세 가지 사고가 발생합니다.</p>
+      <ul class="b">
+        <li><b>위변조</b> — 결제하지 않고도 성공 응답을 만들어 서버에 보낼 수 있습니다.</li>
+        <li><b>재전송</b> — 성공한 영수증을 그대로 여러 번 보내면 지급이 반복됩니다.</li>
+        <li><b>동시 요청</b> — 같은 영수증이 동시에 들어오면 중복 확인과 잔액 갱신 사이에 경쟁 상태가 생깁니다.</li>
+      </ul>
+
+      <h4>Investigation</h4>
+      <p>
+        문제를 “중복을 어떻게 막을까”가 아니라 <em>결제 사실을 누가 보증하는가</em>의 문제로 정리했습니다.
+        앱은 조작 가능한 실행 환경이므로 신뢰 경계 바깥이고, 지급의 근거가 될 수 있는 것은 스토어 서버의 거래 원장뿐이라고 판단했습니다.
+      </p>
+
+      <h4>Architecture</h4>
+<pre>Client
+  │  purchase token / receipt
+  ▼
+Payment API
+  │
+  ├─▶ ① 서버 사이드 영수증 검증
+  │      Google Play Developer API · App Store Server API
+  │
+  ├─▶ ② transaction_id UNIQUE 제약 (멱등성)
+  │      재전송 영수증은 DB 제약에서 차단
+  │
+  ├─▶ ③ SELECT ... FOR UPDATE (비관적 락)
+  │      유저 행 잠금 → 지급 갱신 직렬화
+  ▼
+Payment DB (MySQL)
+  ▲
+  │  refund / cancel
+  └── Google RTDN · App Store Server Notifications</pre>
+      <p class="figcap">Fig. 1 — 결제 검증 파이프라인</p>
+
+      <h4>Solution</h4>
+      <ul class="b">
+        <li><b>서버 사이드 영수증 검증</b> — 앱의 결제 결과를 신뢰하지 않고 Google Play Developer API와 App Store Server API로 영수증을 서버에서 직접 검증합니다.</li>
+        <li><b><code>transaction_id</code> UNIQUE 제약</b> — 재전송이 들어와도 DB 제약에서 차단됩니다. 애플리케이션 조건문이 아니라 스키마가 중복을 막게 했습니다.</li>
+        <li><b>비관적 락</b> — 잔액 갱신 구간에 <code>SELECT ... FOR UPDATE</code>로 유저 행을 잠가 동시 요청에서도 순차 처리를 보장했습니다.</li>
+        <li><b>환불 자동 반영</b> — Google RTDN과 App Store Server Notifications로 환불과 취소를 수신해 수기 대응 없이 서버 상태를 스토어와 정합하게 유지합니다.</li>
+      </ul>
+
+      <h4>Result</h4>
+      <div class="callout ok">
+        <span class="ic">✅</span>
+        <div class="bd">
+          <ul class="b">
+            <li>위변조와 재전송 결제를 서버에서 차단</li>
+            <li>Google과 Apple 결제를 <b>동일한 검증 인터페이스</b>로 통합해 플랫폼 분기를 결제 로직 밖으로 분리</li>
+            <li>환불과 취소가 스토어 알림으로 자동 반영되어 수기 대응 제거</li>
+            <li>운영 기간 중 <b>중복 지급 0건</b></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="why">
+        <div class="wt">Why — 분산 락 대신 UNIQUE 제약과 DB 행 락</div>
+        <h5>중복 방지를 DB 제약에 둔 이유</h5>
+        <p>
+          중복 방지 같은 불변식을 애플리케이션 조건문에 두면 호출 경로가 늘어날 때마다 빠뜨릴 수 있습니다.
+          <em>우회할 수 없는 층</em>에 두는 편이 안전하다고 판단해 스키마 제약을 선택했습니다.
+        </p>
+        <h5>Redis 분산 락이 아니라 DB 행 락인 이유</h5>
+        <ul class="b">
+          <li>분산 락이 필요한 상황은 <b>여러 서버가 DB 밖의 자원을 두고 경합할 때</b>입니다. 당시 문제는 같은 DB 행에 대한 동시 갱신이었고, 이 경합은 DB가 이미 트랜잭션으로 직렬화해 줍니다.</li>
+          <li>행 락은 <b>트랜잭션과 수명주기가 일치</b>합니다. 커밋과 롤백에 맞춰 해제되므로 분산 락에서 신경 써야 하는 TTL 만료와 락 유실, 해제 누락 같은 실패 모드가 없습니다.</li>
+          <li>Redis에 락을 두면 정합성의 핵심 구간이 외부 인프라의 가용성에 의존하게 됩니다. 지켜야 할 데이터가 있는 곳에서 지키는 편이 구조적으로 단순합니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ---------- A2 ---------- -->
+    <section class="case achv" id="a2">
+      <div class="case-tag">ACHIEVEMENT 02 · INCIDENT · 하잉 앱</div>
+      <h3>반복되던 서버 OOM 장애의 원인별 대응</h3>
+      <p class="case-sum">
+        메모리 초과로 프로세스가 강제 종료되는 장애가 운영 중 여러 차례 발생했고 <b>매번 원인이 달랐습니다.</b>
+        증상이 아니라 원인 단위로 접근해 건마다 따로 좁혀 들어갔고, 그중 두 건을 정리했습니다.
+      </p>
+
+      <h4>Problem</h4>
+      <p>
+        운영 중 서버 메모리가 계속 올라가다 OOM Kill로 프로세스가 강제 종료되는 장애가 반복됐습니다.
+        증상은 매번 같았지만 <b>원인은 건마다 달랐고</b>, 공통적으로 직전 배포가 없어 배포 이력에는 단서가 없었습니다.
+      </p>
+      <div class="callout warn">
+        <span class="ic">⚠️</span>
+        <div class="bd">
+          같은 증상이라고 같은 원인이 아니었습니다.
+          한 번 고친 방법을 다음 장애에 그대로 적용할 수 없었기 때문에,
+          <b>증상이 아니라 원인 단위로</b> 매번 처음부터 좁혀야 했습니다.
+        </div>
+      </div>
+
+      <h4>공통 접근</h4>
+      <ul class="b">
+        <li><b>메모리를 점유하는 주체부터 특정</b> — 추측으로 코드를 고치지 않고, 어떤 요청과 어떤 객체가 힙을 점유하는지 먼저 확인했습니다.</li>
+        <li><b>배포 이력이 없으면 데이터를 의심</b> — 코드가 그대로인데 증상이 새로 생겼다면 시간에 따라 변하는 조건, 즉 데이터 누적을 원인 축으로 잡았습니다.</li>
+      </ul>
+
+      <hr>
+
+      <h4>사례 1 — 애플리케이션 메모리에서 하던 가공</h4>
+      <h5>원인 파악</h5>
+      <ul class="b">
+        <li><b>의심 엔드포인트에 반복 요청</b> — 메모리 증가와 상관관계가 있는 요청을 찾기 위해 후보 엔드포인트를 반복 호출하며 사용량 변화를 관찰했습니다.</li>
+        <li><b>메모리 덤프 분석</b> — 어떤 객체가 힙을 점유하는지 덤프로 확인해 추측이 아니라 실제 점유 주체를 근거로 범위를 좁혔습니다.</li>
+      </ul>
+      <p>
+        여러 테이블을 각각 통째로 조회한 뒤 <b>애플리케이션 메모리에서 Join과 GroupBy로 가공</b>하는 패턴이었습니다.
+        최종 응답은 작아도 중간 단계에서 원본 데이터 전체가 힙에 올라오는 구조였습니다.
+      </p>
+
+      <h5>조치</h5>
+      <ul class="b">
+        <li><b>가공을 DB 쿼리 레벨로 이관</b> — 조인과 집계를 SQL에서 처리하고 서버는 이미 좁혀진 결과만 받도록 바꿨습니다. 인덱스와 옵티마이저를 쓸 수 있는 계층에서 처리하게 한 것입니다.</li>
+        <li><b>중간 결과의 크기를 데이터 증가와 분리</b> — 힙에 올라오는 양이 전체 데이터량이 아니라 응답 크기에 비례하도록 만들었습니다.</li>
+      </ul>
+
+      <hr>
+
+      <h4>사례 2 — 데이터가 쌓이면서 뒤늦게 드러난 조회 결함</h4>
+      <h5>원인 파악</h5>
+      <ul class="b">
+        <li><b>에러 로그에서 출발</b> — 프로세스 종료 시점의 로그를 기준으로 어떤 요청 처리 중에 발생했는지 범위를 좁혔습니다.</li>
+        <li><b>EXPLAIN으로 실행 계획 확인</b> — 해당 조회가 인덱스를 타지 못하고 전체 스캔으로 떨어진다는 것을 확인했습니다.</li>
+      </ul>
+      <p>
+        채팅 기록 조회에 필터링은 이미 걸려 있었지만, <b>필터 조건과 <code>ORDER BY</code> 순서가 인덱스 컬럼 구성과 어긋나</b> 있었습니다.
+        데이터가 적을 때는 전체 스캔 비용이 감당돼 드러나지 않다가, <em>누적량이 임계를 넘은 시점에</em> 한 번의 요청이 방대한 행을 메모리에 올리면서 장애로 나타났습니다.
+      </p>
+
+      <h5>조치</h5>
+      <ul class="b">
+        <li><b>조회 패턴 기준 복합 인덱스 구성</b> — <code>WHERE</code>가 항상 <code>(user_id, character_id)</code>로 들어오고 정렬이 <code>created_at</code>이었으므로 <code>(user_id, character_id, created_at)</code> 순서로 두어 필터와 정렬을 인덱스 하나로 커버했습니다.</li>
+        <li><b>조회량의 상한을 서버가 결정</b> — 목록 조회는 요청이 요구하는 만큼이 아니라 서버가 정한 상한 안에서 응답하도록 했습니다.</li>
+        <li><b>필요한 곳에만</b> — 인덱스는 쓰기 비용을 늘리므로 실제 조회 패턴이 확인된 컬럼에만 적용했습니다.</li>
+      </ul>
+
+      <hr>
+
+      <h4>Result</h4>
+      <div class="callout ok">
+        <span class="ic">✅</span>
+        <div class="bd">
+          <ul class="b">
+            <li>두 건 모두 <b>동일 원인의 OOM이 재발하지 않았고</b> 서버 메모리 사용량이 안정화</li>
+            <li>사례 2는 EXPLAIN 기준 접근 방식이 <b>전체 스캔에서 인덱스 range 스캔으로 전환</b></li>
+            <li>데이터가 늘어도 해당 요청이 점유하는 메모리가 그에 비례해 늘지 않게 됨</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="why">
+        <div class="wt">Why — 증상이 같아도 원인은 다르다</div>
+        <p>
+          두 건 모두 “메모리 초과로 인한 프로세스 종료”라는 같은 증상이었지만,
+          하나는 <b>가공하는 계층</b>의 문제였고 다른 하나는 <b>인덱스와 조회 패턴</b>의 문제였습니다.
+          증상에 이름을 붙여 대응하면 다음 건에서도 같은 곳만 들여다보게 됩니다.
+          그래서 매번 <em>무엇이 힙을 점유하는가</em>부터 다시 확인했고, 그 확인은 감이 아니라 덤프와 EXPLAIN으로 했습니다.
+        </p>
+        <p>
+          두 건에서 공통으로 얻은 것은 <b>메모리를 결정하는 것이 데이터의 총량이 아니라 그것을 다루는 방식</b>이라는 점입니다.
+          그래서 이후로는 “지금 정상 동작하는가”보다
+          <b>“데이터가 100배가 돼도 같은 비용으로 동작하는가”</b>를 함께 확인하게 됐습니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ---------- A3 ---------- -->
+    <section class="case achv" id="a3">
+      <div class="case-tag">ACHIEVEMENT 03 · DB TUNING · 하잉 앱</div>
+      <h3>간헐적 API 응답 지연과 InnoDB 버퍼 풀 증설</h3>
+      <p class="case-sum">
+        간헐적으로 수 초씩 걸리던 응답의 원인을 쿼리가 아닌 <b>DB 서버 설정</b>에서 찾아,
+        서비스 중단 없이 버퍼 풀을 증설해 콜드 쿼리 지연과 앱 첫 진입 로딩 지연을 해소했습니다.
+      </p>
+
+      <h4>Problem</h4>
+      <p>
+        API 응답이 간헐적으로 수 초씩 지연되고 앱을 처음 실행할 때의 로딩도 유독 느리다는 증상이 있었습니다.
+        느린 쿼리를 의심했지만 같은 쿼리를 다시 실행하면 정상 속도로 돌아왔습니다.
+        느린 쿼리라기보다 <em>같은 쿼리가 어떤 때는 느리고 어떤 때는 빠른</em> 문제였습니다.
+      </p>
+
+      <h4>Investigation</h4>
+      <ul class="b">
+        <li><b>재현 조건에서 출발</b> — 처음 실행되거나 오랜만에 실행되는 쿼리만 느리고 직후 재실행은 빠르다는 패턴을 확인했습니다. 쿼리 자체가 아니라 데이터를 어디서 읽어오는지의 차이라고 판단했습니다.</li>
+        <li><b>디스크 읽기 병목 의심</b> — 첫 실행은 디스크에서, 재실행은 메모리에서 읽는다면 증상이 정확히 설명됩니다. InnoDB 버퍼 풀 설정을 확인했습니다.</li>
+        <li><b>기본값 그대로 운영 중</b> — 버퍼 풀이 MySQL 기본값 <code>128MB</code>로 운영되고 있었습니다. 누적된 데이터 대비 턱없이 작아 자주 읽는 데이터조차 메모리에 머물지 못하고 매번 디스크로 밀려나는 상태였습니다.</li>
+      </ul>
+
+      <h4>Root Cause</h4>
+      <div class="callout warn">
+        <span class="ic">⚠️</span>
+        <div class="bd">
+          DB를 관리형 서비스가 아니라 EC2에 직접 구성해 운영했기 때문에 스키마와 인덱스뿐 아니라
+          <b>DB 서버의 설정과 자원도 직접 관리 대상</b>이었고, <code>innodb_buffer_pool_size</code>가 기본값으로 남아 있었습니다.
+        </div>
+      </div>
+
+      <h4>Solution</h4>
+      <ul class="b">
+        <li><b>인스턴스 메모리 사전 확인 후 증설</b> — DB가 EC2에서 직접 운영 중이었으므로 서버의 가용 메모리를 먼저 확인하고 애플리케이션과 OS 몫을 제외한 범위에서 5GB로 잡았습니다.</li>
+        <li><b>서비스 중단 없이 적용</b> — <code>innodb_buffer_pool_size</code>는 동적 변경이 가능한 파라미터라 재시작 없이 반영하고, 재부팅 이후에도 유지되도록 설정 파일에 함께 기록했습니다.</li>
+      </ul>
+
+      <h4>Result</h4>
+      <div class="callout ok">
+        <span class="ic">✅</span>
+        <div class="bd">
+          <ul class="b">
+            <li>간헐적으로 수 초씩 걸리던 콜드 쿼리 지연과 앱 첫 진입 로딩 지연 해소</li>
+            <li>자주 읽는 데이터가 메모리에 머물게 되어 같은 쿼리의 응답 시간이 <b>실행 시점과 무관하게 일정</b>해짐</li>
+            <li>서비스 중단 없이 적용</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="why">
+        <div class="wt">Why — 쿼리를 고치지 않고 설정을 본 이유</div>
+        <p>
+          같은 쿼리의 첫 실행과 재실행이 다르게 동작한다면 의심할 곳은 SQL이 아니라
+          <em>데이터가 어느 계층에서 읽히는가</em>입니다. 쿼리를 튜닝해도 디스크에서 읽는다는 사실은 바뀌지 않습니다.
+        </p>
+        <p>
+          DB의 기본 설정은 운영 데이터 규모를 알지 못합니다.
+          그래서 <b>기본값으로 남아 있는 설정 자체가 점검 대상</b>이라고 보고, 인스턴스 메모리를 먼저 확인한 뒤
+          동적 변경이 가능한 파라미터를 골라 무중단으로 반영했습니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ---------- A4 ---------- -->
+    <section class="case achv" id="a4">
+      <div class="case-tag">ACHIEVEMENT 04 · ASYNC PIPELINE · 하잉 앱</div>
+      <h3>요청과 실행을 분리한 AI 이미지 생성 파이프라인</h3>
+      <p class="case-sum">
+        요청 즉시 실행하던 30초짜리 외부 호출을 대기열로 옮겨 <b>동시 실행 수의 상한을 서버가 정하고</b>,
+        재시작에도 작업이 유실되지 않도록 전환했습니다.
+      </p>
+
+      <h4>Problem</h4>
+      <p>
+        이미지 생성은 사내 AI팀이 제공하는 API를 호출해 처리했고 한 건에 30초 정도가 걸렸습니다.
+        요청을 받으면 그 자리에서 생성 API를 호출하고 완료되면 S3에 업로드한 뒤 소켓으로 알리는 구조였습니다.
+        클라이언트는 기다리지 않았지만 서버 쪽에는 문제가 남아 있었습니다.
+      </p>
+      <ul class="b">
+        <li>요청이 들어오는 만큼 30초짜리 외부 호출이 그대로 늘어나 <b>동시 실행 수에 상한이 없었습니다.</b> 스레드와 커넥션이 묶이고 외부 API 호출 제한에도 걸립니다.</li>
+        <li>진행 중인 작업이 <b>서버 메모리에만 존재</b>해 재배포나 재시작, 예외가 나면 그대로 사라졌습니다. 사용자는 완료 알림을 받지 못합니다.</li>
+        <li>실패가 <b>어디에도 기록되지 않았습니다.</b> 무엇이 왜 실패했는지 알 수 없으니 후속 처리의 근거도 남지 않습니다.</li>
+      </ul>
+
+      <h4>Architecture</h4>
+<pre>[접수]  API ──▶ 요청을 PENDING 으로 저장하고 즉시 응답
+                        │
+[실행]  Scheduler ──▶ 정해진 개수만 조회 (동시 실행 상한)
+                        │
+                  PENDING → PROCESSING
+                        │
+                  외부 생성 API 호출 (약 30초)
+                        │
+              ┌─────────┴─────────┐
+              ▼                   ▼
+            DONE                FAILED
+       S3 업로드 · 소켓 알림    환불 처리 · 원인 기록</pre>
+      <p class="figcap">Fig. 2 — 대기열 기반 생성 파이프라인</p>
+
+      <h4>Solution</h4>
+      <ul class="b">
+        <li><b>접수와 실행의 분리</b> — API는 생성 요청을 대기 상태로 저장만 하고 끝냅니다. 실제 호출은 스케줄러가 담당합니다.</li>
+        <li><b>상태를 저장소에 남김</b> — <code>PENDING → PROCESSING → DONE / FAILED</code>로 관리해 서버가 중간에 내려가도 재시작 후 이어서 처리할 수 있게 했습니다.</li>
+        <li><b>동시 실행 수의 상한</b> — 스케줄러가 한 번에 정해진 개수만 꺼내 처리합니다. 요청이 몰려도 외부 API 동시 호출 수는 서버가 정한 값을 넘지 않습니다.</li>
+        <li><b>실패의 후속 처리</b> — 생성 실패는 다시 시도하지 않고 환불로 처리했습니다. 대상을 특정할 수 있어야 하므로 실패도 결과의 한 종류로 기록했습니다.</li>
+      </ul>
+
+      <h4>Result</h4>
+      <div class="callout ok">
+        <span class="ic">✅</span>
+        <div class="bd">
+          <ul class="b">
+            <li>생성 작업이 요청 처리 자원을 점유하지 않게 되어 <b>외부 API의 지연과 장애가 다른 API로 번지지 않도록 격리</b></li>
+            <li>요청이 몰려도 외부 API 동시 호출 수가 서버가 정한 상한을 넘지 않음</li>
+            <li>서버가 재시작돼도 대기 중이거나 처리 중이던 요청이 남아 있어 작업이 유실되지 않음</li>
+            <li>실패한 작업이 상태로 남아 환불 처리와 원인 파악이 가능</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="why">
+        <div class="wt">Why — 메시지 큐 대신 DB 테이블과 스케줄러</div>
+        <p>처음에는 메시지 큐 도입을 먼저 떠올렸지만 필요 조건을 따져보며 DB 기반 대기열로 방향을 잡았습니다.</p>
+        <ul class="b">
+          <li>필요한 것은 <b>버퍼링과 순차 처리, 실패 기록, 상태 조회</b>였습니다. 이 중 “지금 어떤 작업이 어떤 상태인가”를 들여다보는 운영 가시성은 SQL로 바로 조회되는 DB가 브로커보다 낫습니다.</li>
+          <li>소비자가 스케줄러 하나뿐이고 처리량도 낮아 큐가 강점을 갖는 <b>다중 컨슈머 분배나 고처리량 상황이 아니었습니다.</b> 이 조건에서 브로커는 성능 이점 없이 운영과 모니터링, 장애 지점만 추가합니다.</li>
+          <li>작업 상태가 서비스 데이터와 같은 DB에 있어 접수와 상태 기록을 <b>하나의 트랜잭션</b>으로 다룰 수 있었습니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ---------- A5 ---------- -->
+    <section class="case achv" id="a5">
+      <div class="case-tag">ACHIEVEMENT 05 · QUERY OPTIMIZATION · 하잉 앱</div>
+      <h3>목록 조회의 N+1 쿼리 제거</h3>
+      <p class="case-sum">
+        목록 한 건마다 이미지 조회가 따로 나가던 구조를 <b>일괄 조회 한 번</b>으로 바꿔,
+        DB 왕복 횟수가 목록 건수에 비례하지 않도록 만들었습니다.
+      </p>
+
+      <h4>Problem</h4>
+      <p>
+목록 API가 느리다는 제보가 있었습니다.
+        목록 자체는 한 번의 쿼리로 가져오고 있었지만, 각 항목의 대표 이미지를 붙이는 코드가
+        <b>반복문 안에서 항목 한 건마다 이미지 테이블을 다시 조회</b>하고 있었습니다.
+      </p>
+      <ul class="b">
+        <li>목록이 N건이면 쿼리가 <code>1 + N</code>회 나갑니다. 개별 쿼리는 각각 빠르므로 <em>느린 쿼리를 찾는 방식으로는 원인이 잡히지 않습니다.</em></li>
+        <li>지연이 데이터의 총량이 아니라 <b>한 화면에 보여주는 건수</b>에 비례합니다. 목록을 더 많이 내려줄수록 선형으로 느려집니다.</li>
+        <li>요청 하나가 커넥션을 잡고 왕복을 반복하므로 요청이 몰릴 때 커넥션 점유 시간이 함께 늘어납니다.</li>
+      </ul>
+
+      <h4>Investigation</h4>
+      <ul class="b">
+        <li><b>비례 관계부터 확인</b> — 특정 데이터에서만 느린 것이 아니라 목록 건수를 늘릴수록 응답이 함께 늘었습니다. 쿼리 한 번의 비용이 아니라 횟수가 비용이라고 판단했습니다.</li>
+        <li><b>정렬과 상위 1건 추출의 위치</b> — <code>OrderByDescending</code>과 <code>FirstOrDefault</code>가 <code>await</code> 뒤에 붙어 있었습니다. DB가 아니라 애플리케이션에서 동작하므로, <b>한 건만 쓰면서 해당 항목의 성공 이미지를 전부 전송받고</b> 있었습니다.</li>
+        <li><b>인덱스 확인</b> — 조회 조건이 <code>(항목 식별자, 상태)</code>이고 정렬이 <code>등록일시</code>였으므로 이 순서의 복합 인덱스가 있는지 함께 점검했습니다.</li>
+      </ul>
+
+      <h4>Root Cause</h4>
+      <div class="callout warn">
+        <span class="ic">⚠️</span>
+        <div class="bd">
+          조건식을 받아 즉시 실행하는 조회 메서드를 <b>반복문 안에서 호출</b>하면 호출 한 번이 그대로 DB 왕복 한 번이 됩니다.
+          코드 한 줄이라 비용이 드러나지 않지만, 실제 비용은 그 줄이 아니라 <b>그 줄을 감싼 반복문</b>이 결정합니다.
+        </div>
+      </div>
+
+      <h4>조회 패턴</h4>
+<pre>[변경 전]  목록 조회 1회
+             │
+             └─▶ for each (N건)
+                    └─▶ 이미지 조회 ──▶ DB      총 1 + N회
+                         (전체 수신 후 메모리에서 정렬·1건 선택)
+
+[변경 후]  목록 조회 1회
+             │
+             └─▶ 식별자 수집 ──▶ IN 일괄 조회 1회 ──▶ DB   총 2회
+                    │
+                    └─▶ 메모리에서 Dictionary 매핑 (건별 O(1))</pre>
+      <p class="figcap">Fig. 3 — 조회 패턴 변경 전후</p>
+
+      <h4>Solution</h4>
+      <ul class="b">
+        <li><b>선행 수집 후 일괄 조회</b> — 목록에서 항목 식별자를 먼저 모으고 <code>IN</code> 조건으로 이미지를 한 번에 가져왔습니다. 왕복이 목록 건수와 분리됩니다.</li>
+        <li><b>딕셔너리로 매핑</b> — 가져온 이미지를 항목 식별자로 그룹지어 사전에 담고, 각 항목은 조회 없이 사전에서 꺼내 씁니다.</li>
+        <li><b>조회 대상 좁히기</b> — 성공 상태 조건을 일괄 조회에 그대로 걸고, 최신 한 건 선택은 그룹 안에서 처리했습니다.</li>
+        <li><b>인덱스 정렬</b> — <code>(항목 식별자, 상태, 등록일시)</code> 순서의 복합 인덱스로 필터와 정렬을 인덱스 하나로 커버하게 했습니다.</li>
+        <li><b>식별자 개수의 상한</b> — <code>IN</code> 목록이 커지면 파라미터 한계에 걸리므로, 목록 크기를 서버가 정한 상한 안에서만 다루도록 두었습니다.</li>
+      </ul>
+
+      <h4>Result</h4>
+      <div class="callout ok">
+        <span class="ic">✅</span>
+        <div class="bd">
+          <ul class="b">
+            <li>DB 왕복이 <b><code>1 + N</code>회에서 2회로 고정</b>되어 목록 건수와 무관해짐</li>
+            <li>목록을 더 많이 내려줘도 응답 시간이 건수에 비례해 늘지 않음</li>
+            <li>요청 하나가 커넥션을 잡고 있는 시간이 줄어 동시 요청 상황에서의 여유 확보</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="why">
+        <div class="wt">Why — 조인 한 번이 아니라 일괄 조회 두 번</div>
+        <p>
+          한 번의 쿼리로 끝내는 조인을 먼저 검토했지만, 항목 하나에 이미지가 여러 건이라
+          조인하면 <b>항목 정보가 이미지 수만큼 중복되어 전송</b>됩니다. 필요한 것은 항목당 대표 한 건뿐이었습니다.
+          DB에서 항목별 최신 한 건만 뽑는 방법도 있지만 쿼리가 복잡해지는 데 비해,
+          이 문제의 비용은 <em>쿼리의 정교함이 아니라 왕복 횟수</em>에 있었습니다. 두 번으로 줄이면 목적은 달성됩니다.
+        </p>
+        <h5>같은 목록 조회라도 실패하는 방식이 다르다</h5>
+        <p>
+          앞선 OOM 사례가 <b>한 번에 너무 많이 읽어서</b> 생긴 문제였다면, 이번은 <b>조금씩 너무 여러 번 읽어서</b> 생긴 문제였습니다.
+          전자는 한 요청이 점유하는 메모리가, 후자는 한 요청이 만드는 왕복 횟수가 데이터에 따라 커집니다.
+          그래서 목록을 다루는 코드에서는 응답 크기뿐 아니라
+          <b>이 코드가 만드는 쿼리가 몇 번인지</b>를 함께 보게 됐습니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ---------- A6 ---------- -->
+    <section class="case achv" id="a6">
+      <div class="case-tag">ACHIEVEMENT 06 · MIGRATION &amp; CI/CD · NFC 콘텐츠</div>
+      <h3>AWS에서 GCP로 API 서버 이전과 배포 파이프라인 통합</h3>
+      <p class="case-sum">
+        실행 환경만 옮기는 작업으로 범위를 좁히고 DNS 전환을 마지막에 두어
+        <b>이전 후 동작 차이로 인한 장애 없이</b> 이전을 완료하고, Jenkins 기반 배포를 GitHub Actions로 통합했습니다.
+      </p>
+
+      <h4>Background</h4>
+      <p>
+        회사에서 GCP 크레딧을 지원받게 되면서 운영 비용 절감을 위해 API 서버를 AWS EC2에서 GCP Compute Engine으로 이전했습니다.
+        성능 개선이 목적이 아니라 실행 환경만 변경하는 작업이었기 때문에
+        <em>서비스 중단 없이 기존 동작을 그대로 유지하는 것</em>을 가장 중요한 목표로 삼았습니다.
+      </p>
+
+
+      <h4>Migration Strategy</h4>
+      <ol class="n">
+        <li><b>애플리케이션 계층만 이전</b> — 데이터베이스는 기존 위치에 두고 실행 위치만 옮겼습니다.</li>
+        <li><b>새 환경 구성</b> — GCP Compute Engine에 동일한 런타임과 Nginx 구성을 올렸습니다.</li>
+        <li><b>사전 검증</b> — 옮긴 서버가 기존 데이터베이스에 정상적으로 연결되고 응답이 이전과 같은지 먼저 확인했습니다.</li>
+        <li><b>DNS 전환은 마지막에</b> — 도메인은 그대로 두고 레코드가 가리키는 주소만 새 서버로 바꿔 프론트 수정 없이 트래픽을 옮겼고 문제 발생 시 되돌릴 수 있는 상태를 유지했습니다.</li>
+      </ol>
+
+      <h4>CI/CD 통합</h4>
+      <p>
+        인계받은 서비스는 Jenkins로 배포되고 있었고 배포를 위해 <b>별도의 CI 서버를 계속 띄워두고 관리</b>해야 했습니다.
+        빌드와 배포 과정을 GitHub Actions로 옮겨 저장소와 파이프라인을 한곳에서 관리하도록 통합했습니다.
+        브랜치는 <code>main</code>과 <code>develop</code>으로 운영해 기능 작업은 develop에 모아 검증한 뒤 main으로 병합하고,
+        main 기준으로만 운영 배포가 나가도록 배포 대상 코드를 한 브랜치로 고정했습니다.
+      </p>
+
+      <h4>Result</h4>
+      <div class="callout ok">
+        <span class="ic">✅</span>
+        <div class="bd">
+          <ul class="b">
+            <li>이전 이후 기능 차이나 운영 장애 없이 서비스를 안정적으로 유지</li>
+            <li>되돌릴 수 있는 상태를 유지한 채 전환</li>
+            <li>크레딧 지원을 활용해 <b>API 서버 운영 비용 절감</b></li>
+            <li>별도 CI 서버 운영이 필요 없어져 <b>서버 한 대와 그 관리 부담을 함께 제거</b></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="why">
+        <div class="wt">Why — 이전과 개선을 동시에 하지 않은 이유</div>
+        <p>
+          이전과 리팩터링을 함께 하면 문제가 생겼을 때 원인이 인프라인지 코드인지 가릴 수 없습니다.
+          <b>변경 지점을 하나로 좁혀야</b> 원인을 특정할 수 있어서, 개선 욕심을 접고 데이터베이스는 이전 범위에서 제외했습니다.
+        </p>
+        <p>
+          DNS 전환을 마지막에 둔 것도 같은 이유입니다.
+          새 환경을 먼저 검증하고 트래픽만 옮기면, 문제가 생겼을 때 <em>되돌리는 비용이 레코드 원복 하나</em>로 끝납니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== 04 Projects ===================== -->
+    <h2 class="sec newpage" id="projects"><span class="num">04</span>Projects</h2>
+    <p class="sec-note">담당한 세 개의 서비스와 그 안에서 내린 설계 결정입니다. 문제 해결 사례는 위 Key Achievements에서 다룹니다.</p>
+
+    <!-- ---------- P1 ---------- -->
+    <section class="proj first" id="p1">
+      <div class="proj-head">
+        <div class="t"><span class="no">PROJECT 01</span>하잉 앱 <span class="sv">AI 캐릭터 기반 서비스</span></div>
+        <div class="p">2024.01 – 2026.02 · 2년 2개월</div>
+      </div>
+
+      <h4>Overview</h4>
+      <p>
+        AI 캐릭터와 사용자가 대화하고 콘텐츠를 소비하는 모바일 서비스입니다.
+        회원 인증과 인앱결제, AI 이미지 생성 파이프라인, 채팅과 콘텐츠 API 등 서비스의 주요 기능을 개발했고
+        기능 개선과 장애 대응, 운영 이슈 해결을 함께 수행했습니다.
+      </p>
+
+      <dl class="meta">
+        <dt>다운로드</dt><dd>누적 10만+</dd>
+        <dt>Role</dt><dd>백엔드 개발 (결제, 인증, AI 파이프라인 담당)</dd>
+        <dt>Stack</dt><dd>C# / .NET / Entity Framework / MySQL / MongoDB / Redis / OpenAI API / FCM / Docker / Jenkins</dd>
+      </dl>
+
+      <h4>My Role</h4>
+      <ul class="b">
+        <li><b>회원 인증</b> — 카카오와 애플 소셜 로그인, SMS 본인인증 기반 가입과 로그인 (JWT / Refresh Token)</li>
+        <li><b>인앱결제</b> — 서버 사이드 영수증 검증, 중복 지급 방지, 환불 자동 반영</li>
+        <li><b>AI 이미지 생성</b> — 요청과 실행을 분리한 비동기 배치 파이프라인</li>
+        <li><b>채팅과 콘텐츠 API</b> — 대화 기록 저장과 조회, 콘텐츠 목록 및 상세</li>
+        <li><b>AI 선톡과 FCM 동적 푸시</b> — OpenAI API로 생성한 메시지의 개인화 자동 발송</li>
+        <li><b>다국어 지원</b> — Accept-Language 기반 i18n 응답 구조</li>
+        <li><b>운영 API와 어드민 백오피스</b></li>
+      </ul>
+
+      <h4>Architecture</h4>
+<pre>                       Mobile App
+                            │
+                            ▼
+                           ALB
+                            │
+              ┌─────────────┴─────────────┐
+              ▼                           ▼
+        API Server (EC2)             Chat Server
+        .NET · 2 instances           Flask
+              │                           │
+   ┌──────────┼──────────┬───────────┐    │
+   ▼          ▼          ▼           ▼    ▼
+ MySQL      Redis       S3      External API
+ 핵심 데이터   캐시      이미지          │
+                              ┌─────────┼─────────┐
+                              ▼         ▼         ▼
+                        Google Play  App Store  AI 이미지 API
+
+                    MongoDB ◀── 채팅 로그 (append 위주)
+
+ Deploy : Jenkins ─▶ Docker Image ─▶ EC2 Container</pre>
+      <p class="figcap">Fig. 4 — 하잉 앱 아키텍처 (AWS)</p>
+      <p>
+        데이터는 성격에 따라 <b>MySQL(핵심 데이터)</b>와 <b>Redis(캐시)</b>, <b>MongoDB(채팅 로그)</b>로 나누고 이미지는 S3에 저장했습니다.
+        DB는 관리형 서비스가 아니라 EC2에 직접 구성해 운영했기 때문에 스키마와 인덱스뿐 아니라
+        <em>DB 서버의 설정과 자원도 직접 관리 대상</em>이었고, Achievement 02와 03이 이 조건에서 나온 문제입니다.
+      </p>
+
+      <h4>설계 결정</h4>
+
+      <div class="why">
+        <div class="wt">채팅 로그 저장소로 MongoDB</div>
+        <p>회원과 캐릭터 조합마다 끝없이 누적되는 채팅 로그의 저장소로 MySQL과 MongoDB가 후보였습니다.</p>
+        <ul class="b">
+          <li>조회가 항상 <b>대화 단위</b>로 들어오고 다른 테이블과의 조인이 필요 없는, 읽기 패턴이 단순한 데이터였습니다.</li>
+          <li>메시지에 텍스트와 이미지, 시스템 메시지 등 형태가 다른 필드가 섞이고 스키마 변경이 잦아 문서 모델이 자연스러웠습니다.</li>
+          <li>쓰기가 append 위주인 로그성 데이터를 분리해 <b>핵심 트랜잭션 데이터가 있는 MySQL의 부하와 격리</b>했습니다.</li>
+        </ul>
+      </div>
+
+      <div class="why">
+        <div class="wt">클라이언트가 언어를 관리하지 않는 다국어 응답 구조</div>
+        <p>
+          앱과 웹, 백오피스가 각자 번역을 관리하면 서버가 새 에러 코드를 추가할 때마다 모든 클라이언트 배포가 필요해지고,
+          번역이 누락되면 사용자에게 코드값이 그대로 노출됩니다.
+          서버에서 처리하더라도 메시지를 반환하는 모든 지점이 언어 분기를 갖게 되면 같은 문제가 코드 안으로 옮겨올 뿐입니다.
+        </p>
+        <ul class="b">
+          <li><b>미들웨어에서 언어를 한 번만 판별</b> — Accept-Language 헤더를 요청 진입 지점에서 해석해 이후 컨트롤러와 서비스는 언어를 알 필요가 없게 했습니다.</li>
+          <li><b>번역 테이블을 단일 소스로</b> — 메시지를 코드가 아니라 데이터로 관리해 문구 수정과 지원 언어 추가를 코드 변경 없이 처리할 수 있게 했습니다.</li>
+          <li><b>조회 캐싱</b> — 거의 모든 응답에서 조회되는 데이터라 매 요청 DB를 거치지 않도록 캐싱했습니다. 대신 수정 반영에 캐시 갱신만큼의 시차가 생깁니다.</li>
+          <li><b>기본 언어 폴백</b> — 헤더가 없거나 미지원 언어여도 코드값이 그대로 노출되지 않게 했습니다.</li>
+        </ul>
+        <p>
+          <b>결과</b> — 세 클라이언트가 동일한 메시지 소스를 참조하게 되어 문구 수정과 지원 언어 추가가
+          클라이언트 배포 없이 <b>번역 테이블 수정만으로</b> 반영됩니다.
+          다국어는 번역 파일을 만드는 일이 아니라 어느 계층이 언어를 책임질지 정하는 설계 문제였습니다.
+        </p>
+      </div>
+
+      <h4>운영 자동화 — 어드민 백오피스</h4>
+      <p>
+        운영팀의 반복적인 데이터 조회와 수정 요청이 개발자에게 지속적으로 전달됐습니다.
+        운영팀이 직접 콘텐츠와 회원 데이터를 관리할 수 있는 백오피스를 개발해
+        <b>반복성 운영 요청이 개발자를 거치지 않고 처리되는 환경</b>을 만들었고, 운영 과정의 개발 의존도를 낮췄습니다.
+      </p>
+      <div class="chips">
+        <span class="chip k">회원 관리</span><span class="chip k">콘텐츠 관리</span><span class="chip k">운영 데이터 조회</span>
+        <span class="chip k">상태 변경</span><span class="chip k">검색과 필터</span><span class="chip k">권한 관리</span>
+      </div>
+    </section>
+
+    <!-- ---------- P2 ---------- -->
+    <section class="proj" id="p2">
+      <div class="proj-head">
+        <div class="t"><span class="no">PROJECT 02</span>NFC 콘텐츠 <span class="sv">태그 연동 콘텐츠 서비스</span></div>
+        <div class="p">2025.07 – 2026.02 · 8개월</div>
+      </div>
+
+      <h4>Overview</h4>
+      <p>
+        NFC 태그와 연동되는 운세와 타로, 룰렛 등 콘텐츠 API를 인수인계받아 개발하고 운영하며
+        배포 파이프라인 전환과 클라우드 환경 이전을 담당했습니다.
+      </p>
+      <div class="callout info">
+        <span class="ic">💡</span>
+        <div class="bd">
+          동작하는 서비스를 다른 인프라 위에서 동일하게 동작시키는 일을 처음 맡은 프로젝트이자,
+          .NET에서 익힌 서버 설계와 운영 원칙이 <b>Java와 Spring 환경에서도 그대로 통한다는 것을 확인한</b> 프로젝트입니다.
+        </div>
+      </div>
+
+      <dl class="meta">
+        <dt>Role</dt><dd>API 운영, 배포 파이프라인 전환, 클라우드 이전</dd>
+        <dt>Stack</dt><dd>Java / Spring Boot / Spring Data JPA / MySQL / Nginx / AWS / GCP / GitHub Actions</dd>
+      </dl>
+
+      <h4>My Role</h4>
+      <ul class="b">
+        <li>NFC 태그 기반 콘텐츠 API 개발과 유지보수</li>
+        <li>AWS EC2에서 GCP Compute Engine으로 API 서버 이전 (Achievement 05)</li>
+        <li>Jenkins 기반 CI/CD를 GitHub Actions로 전환</li>
+        <li>브랜치 전략 정리와 배포 대상 고정</li>
+      </ul>
+    </section>
+
+    <!-- ---------- P3 ---------- -->
+    <section class="proj" id="p3">
+      <div class="proj-head">
+        <div class="t"><span class="no">PROJECT 03</span>비글즈 앱 <span class="sv">게임 서비스</span></div>
+        <div class="p">2023.05 – 2023.12 · 8개월</div>
+      </div>
+
+      <h4>Overview</h4>
+      <p>
+        첫 실무 프로젝트입니다. 룰렛과 빙고, 뽑기 등 인앱 이벤트 웹 페이지와 관리자 페이지는 백엔드와 React 프론트엔드를 함께 개발했고,
+        앱에서 호출하는 게임 콘텐츠 API는 유니티 클라이언트 개발자와 응답 규격과 예외 처리 방식을 맞춰가며 설계했습니다.
+      </p>
+      <div class="callout info">
+        <span class="ic">💡</span>
+        <div class="bd">
+          서버 혼자 정하는 규격이 아니라 <b>쓰는 쪽과 합의해야 하는 인터페이스</b>라는 것을 처음 체감한 프로젝트입니다.
+        </div>
+      </div>
+
+      <dl class="meta">
+        <dt>다운로드</dt><dd>누적 50만</dd>
+        <dt>Role</dt><dd>콘텐츠 API, 이벤트 웹, 관리자 페이지</dd>
+        <dt>Stack</dt><dd>C# / .NET / RepoDB / MySQL / Redis / React</dd>
+      </dl>
+
+      <h4>My Role</h4>
+      <ul class="b">
+        <li>게임 콘텐츠 API 설계와 구현</li>
+        <li>룰렛과 빙고, 뽑기 등 인앱 이벤트 웹 페이지 백엔드 및 React 연동</li>
+        <li>모든 회원이 같은 결과를 보는 랭킹 조회를 Redis에 10분 TTL로 캐싱해 매 요청 반복되던 집계 쿼리 제거</li>
+        <li>회원 관리와 게임 밸런스 조정을 위한 관리자 페이지 개발</li>
+      </ul>
+    </section>
+
+    <!-- ===================== 05 Principles ===================== -->
+    <h2 class="sec" id="principles"><span class="num">05</span>Engineering Principles</h2>
+
+    <h3>01. 데이터 정합성을 우선합니다</h3>
+    <p>
+      기능이 정상적으로 동작하는 것뿐 아니라 동시에 여러 요청이 들어왔을 때도 올바른 상태를 유지하는 것을 중요하게 생각합니다.
+      중복을 막는 불변식은 애플리케이션 조건문보다 <em>우회할 수 없는 층</em>에 두는 편을 택합니다.
+    </p>
+
+    <h3>02. 문제의 원인을 먼저 확인합니다</h3>
+    <p>
+      단순히 코드를 수정하기보다 로그와 메모리 덤프, 실행 계획, 재현 조건을 통해 원인을 확인한 후 해결 방법을 선택합니다.
+      증상이 같아도 원인은 다를 수 있으므로 <em>증상이 아니라 원인 단위로</em> 확인합니다.
+    </p>
+
+    <h3>03. 운영 환경을 고려합니다</h3>
+    <p>
+      개발 환경에서 동작하는 코드보다 실제 운영 환경에서 안정적으로 동작하고 관리할 수 있는 시스템을 지향합니다.
+      변경은 되돌릴 수 있는 상태를 유지한 채 진행하고, 기술 선택에는 <em>언제 다른 선택으로 넘어갈지</em>의 기준을 함께 정해둡니다.
+    </p>
+
+    <!-- ===================== 06 Tech Stack ===================== -->
+    <h2 class="sec" id="stack"><span class="num">06</span>Tech Stack</h2>
+
+    <dl class="stack">
+      <dt>Language</dt>
+      <dd class="chips"><span class="chip">C#</span><span class="chip">Java</span><span class="chip">JavaScript</span><span class="chip">SQL</span></dd>
+
+      <dt>Framework</dt>
+      <dd class="chips"><span class="chip">.NET</span><span class="chip">Entity Framework</span><span class="chip">RepoDB</span><span class="chip">Spring Boot</span><span class="chip">Spring Data JPA</span><span class="chip">React</span></dd>
+
+      <dt>Database</dt>
+      <dd class="chips"><span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">Redis</span></dd>
+
+      <dt>Infrastructure</dt>
+      <dd class="chips"><span class="chip">AWS</span><span class="chip">GCP</span><span class="chip">Docker</span><span class="chip">Nginx</span><span class="chip">Jenkins</span><span class="chip">GitHub Actions</span><span class="chip">Git</span></dd>
+    </dl>
+
+    <!-- ===================== 07 Certifications ===================== -->
+    <h2 class="sec" id="edu"><span class="num">07</span>Certifications &amp; Education</h2>
+
+    <h4>자격증</h4>
+    <div class="rows">
+      <div class="row">
+        <div><div class="m">정보보안기사</div><div class="s">필기 합격, 실기 결과 발표 예정</div></div>
+        <div class="d">2026.03</div>
+      </div>
+      <div class="row">
+        <div><div class="m">SQL 개발자 (SQLD)</div><div class="s">한국데이터산업진흥원</div></div>
+        <div class="d">2022.12</div>
+      </div>
+      <div class="row">
+        <div><div class="m">컴퓨터활용능력 1급</div><div class="s">대한상공회의소</div></div>
+        <div class="d">2022.01</div>
+      </div>
+      <div class="row">
+        <div><div class="m">정보처리기사</div><div class="s">한국산업인력공단</div></div>
+        <div class="d">2021.06</div>
+      </div>
+    </div>
+
+    <h4>Education</h4>
+    <div class="rows">
+      <div class="row">
+        <div><div class="m">멋쟁이사자처럼</div><div class="s">백엔드 스쿨 수료 (Java, Spring Boot)</div></div>
+        <div class="d">2022.09 – 2023.02</div>
+      </div>
+      <div class="row">
+        <div><div class="m">우석대학교</div><div class="s">정보보안 전공</div></div>
+        <div class="d">2018.03 – 2022.02</div>
+      </div>
+    </div>
+
+    <div class="foot">최아영 · Backend Engineer · choiorog@gmail.com · github.com/surpmh</div>
+
+  </td></tr></tbody>
+  <tfoot><tr><td><div class="vpad"></div></td></tr></tfoot>
+  </table>
+  </main>
+</div>
+
+<script>
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('#toc a'));
+    var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+
+    function sync() {
+      var y = window.scrollY + 150, cur = -1;
+      for (var i = 0; i < targets.length; i++) {
+        if (targets[i] && targets[i].offsetTop <= y) cur = i;
+      }
+      links.forEach(function (a, i) { a.classList.toggle('on', i === cur); });
+    }
+
+    var tick = false;
+    window.addEventListener('scroll', function () {
+      if (tick) return;
+      tick = true;
+      requestAnimationFrame(function () { sync(); tick = false; });
+    }, { passive: true });
+    sync();
+  })();
+</script>
+
+</body>
+</html>
