@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>최아영 | 이력서</title>
+<meta name="description" content="백엔드 개발자 최아영의 이력서">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #1c1c1c;
+    --sub: #555555;
+    --muted: #8a8a8a;
+    --accent: #333333;
+    --line: #e2e2e2;
+    --soft: #f4f4f4;
+    --paper: #ffffff;
+  }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    background: #ececec;
+    color: var(--ink);
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+    padding: 32px 16px;
+  }
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--paper);
+    padding: 56px 60px 64px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.09);
+    border-radius: 4px;
+  }
+
+  /* 인쇄 시 모든 페이지 상·하단에 반복되는 여백(브라우저 머리글·바닥글 없이 여백 확보) */
+  table.sheet { width: 100%; border-collapse: collapse; }
+  table.sheet > thead > tr > td,
+  table.sheet > tbody > tr > td,
+  table.sheet > tfoot > tr > td { padding: 0; border: 0; }
+  .vpad { height: 0; }
+
+  /* ===== Header ===== */
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; padding-bottom: 22px; border-bottom: 2px solid var(--ink); }
+  .head h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+  .head .role { font-size: 15px; font-weight: 600; color: var(--sub); margin-top: 8px; }
+  .head .meta { font-size: 12.5px; color: var(--sub); text-align: right; line-height: 1.9; }
+  .head .meta a { color: var(--sub); text-decoration: none; }
+  .head .meta .k { display: inline-block; min-width: 62px; color: var(--muted); font-weight: 600; }
+
+  /* ===== Section ===== */
+  section { margin-top: 34px; }
+  h2.sec {
+    font-size: 15px; font-weight: 800; letter-spacing: 0.02em; color: var(--ink);
+    text-transform: uppercase; padding-bottom: 8px; margin-bottom: 18px;
+    border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 9px;
+  }
+  h2.sec::before { content: ""; width: 4px; height: 15px; background: var(--accent); border-radius: 2px; display: inline-block; }
+
+  .summary { font-size: 14.5px; color: var(--sub); line-height: 1.85; }
+  .summary strong { color: var(--ink); font-weight: 700; }
+  .summary.headline { font-size: 15.5px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+
+  /* ===== Skills ===== */
+  .skills { display: grid; grid-template-columns: 130px 1fr; gap: 10px 18px; align-items: baseline; }
+  .skills dt { font-size: 12.5px; font-weight: 700; color: var(--muted); padding-top: 3px; }
+  .skills dd { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 12px; font-weight: 500; color: var(--ink); background: var(--soft); border: 1px solid var(--line); border-radius: 6px; padding: 3px 9px; }
+
+  /* ===== Career ===== */
+  .company { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+  .company .left { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .company .name { font-size: 17px; font-weight: 800; }
+  .company .pos { font-size: 13px; font-weight: 600; color: var(--muted); }
+  .company .period { font-size: 12.5px; font-weight: 600; color: var(--sub); }
+  .company .period b { color: var(--ink); font-weight: 700; }
+
+  .job { position: relative; padding-left: 18px; margin-top: 16px; border-left: 2px solid var(--line); }
+  .job:first-of-type { margin-top: 0; }
+  .job .jt { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .job .jname { font-size: 14.5px; font-weight: 700; color: var(--ink); }
+  .job .jperiod { font-size: 12px; font-weight: 600; color: var(--muted); }
+  .job .jstack { font-size: 12px; color: var(--muted); font-family: "JetBrains Mono", ui-monospace, monospace; margin-top: 4px; margin-bottom: 3px; }
+  .job .jscale { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .job .jscale b { color: var(--sub); font-weight: 600; }
+  .job ul { list-style: none; display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+  .job li { position: relative; padding-left: 14px; font-size: 12.5px; color: var(--sub); line-height: 1.6; }
+  .job li::before { content: ""; position: absolute; left: 1px; top: 8px; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+  .job li b { color: var(--ink); font-weight: 700; }
+
+  /* ===== simple list (edu / cert) ===== */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 44px; }
+  .line-item { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .line-item:last-child { border-bottom: none; }
+  .line-item .li-main { font-size: 13.5px; font-weight: 700; }
+  .line-item .li-sub { font-size: 12px; color: var(--sub); font-weight: 500; margin-top: 2px; }
+  .line-item .li-date { font-size: 11.5px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .sub-head { font-size: 12.5px; font-weight: 800; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 4px; }
+
+  .foot { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); text-align: center; font-size: 11.5px; color: var(--muted); }
+  .foot a { color: var(--muted); text-decoration: none; }
+
+  /* ===== Print button ===== */
+  .print-btn {
+    position: fixed; top: 20px; right: 20px; z-index: 50;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #fff; border: none; border-radius: 10px;
+    padding: 11px 17px; font-size: 13.5px; font-weight: 600; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,.18); font-family: inherit;
+  }
+  .print-btn:hover { opacity: .9; }
+  .print-btn svg { width: 16px; height: 16px; }
+
+  @media (max-width: 640px) {
+    body { padding: 0; }
+    .page { padding: 32px 22px 40px; border-radius: 0; box-shadow: none; }
+    .skills { grid-template-columns: 1fr; gap: 4px 0; }
+    .skills dd { margin-bottom: 12px; }
+    .two { grid-template-columns: 1fr; gap: 0; }
+    .head .meta { text-align: left; }
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; font-size: 10.5pt; }
+    .page { max-width: none; box-shadow: none; border-radius: 0; padding: 0 13mm; }
+    .print-btn { display: none; }
+    /* thead/tfoot은 모든 인쇄 페이지에 반복 → 2페이지 이후에도 상·하단 여백 유지 */
+    .vpad { height: 13mm; }
+    .head { padding-bottom: 11px; }
+    .summary { line-height: 1.62; }
+    section { margin-top: 13px; }
+    .skills { gap: 6px 18px; }
+    .company { padding-bottom: 10px; margin-bottom: 12px; }
+    .job { margin-top: 12px; }
+    .job .jstack { margin-bottom: 2px; }
+    .job .jscale { margin-bottom: 6px; }
+    .job ul { gap: 4px; }
+    .line-item { padding: 8px 0; }
+
+    /* 제목·회사 줄이 페이지 끝에 홀로 남지 않도록 */
+    h2.sec { margin-bottom: 12px; break-after: avoid; page-break-after: avoid; }
+    h2.sec + * { break-before: avoid; page-break-before: avoid; }
+    .company { break-after: avoid; page-break-after: avoid; }
+    .job .jt, .job .jstack, .job .jscale { break-after: avoid; page-break-after: avoid; }
+
+    /* 최소 단위 블록은 페이지 경계에서 쪼개지 않음 */
+    .job, .job li, .line-item, .two > div, .skills dd, .foot {
+      break-inside: avoid; page-break-inside: avoid;
+    }
+    p, li { orphans: 3; widows: 3; }
+
+    .foot { margin-top: 26px; }
+    /* margin: 0 이어야 브라우저 머리글·바닥글이 인쇄되지 않음 */
+    @page { size: A4; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  PDF로 저장
+</button>
+
+<div class="page">
+<table class="sheet">
+<thead><tr><td><div class="vpad"></div></td></tr></thead>
+<tbody><tr><td>
+
+  <!-- 인적사항 / 연락처 -->
+  <header class="head">
+    <div>
+      <h1>최아영</h1>
+      <div class="role">백엔드 개발자 · Backend Developer</div>
+    </div>
+    <div class="meta">
+      <div><span class="k">총 경력</span> 2년 10개월</div>
+      <div><span class="k">Email</span> <a href="mailto:choiorog@gmail.com">choiorog@gmail.com</a></div>
+      <div><span class="k">GitHub</span> <a href="https://github.com/surpmh" target="_blank" rel="noopener">github.com/surpmh</a></div>
+    </div>
+  </header>
+
+  <!-- 한 줄 소개 / 요약 -->
+  <section>
+    <h2 class="sec">Introduction</h2>
+    <p class="summary headline">서비스의 문제를 분석하고 안정적인 시스템으로 개선하는 개발자 최아영입니다.</p>
+    <p class="summary">
+      서비스의 핵심 비즈니스 로직부터 운영까지 경험했습니다.
+      단순히 기능을 구현하는 것보다 <strong>문제의 원인을 분석하고 적절한 기술적 해결책을 선택하는 것</strong>을 중요하게 생각합니다.
+      운영 환경에서 발생한 장애와 성능 저하를 <strong>힙 덤프와 재현 조건으로 좁혀 원인을 찾고</strong>
+      기존 서비스에 미치는 영향을 최소화하는 방식으로 개선해왔습니다.
+    </p>
+  </section>
+
+  <!-- 스킬 -->
+  <section>
+    <h2 class="sec">Skills</h2>
+    <dl class="skills">
+      <dt>Backend</dt>
+      <dd>
+        <span class="tag">C#</span><span class="tag">.NET</span><span class="tag">Java</span>
+        <span class="tag">Spring Boot</span><span class="tag">JPA</span>
+      </dd>
+      <dt>Database / Cache</dt>
+      <dd>
+        <span class="tag">MySQL</span><span class="tag">MongoDB</span><span class="tag">Redis</span>
+      </dd>
+      <dt>Cloud / DevOps</dt>
+      <dd>
+        <span class="tag">AWS</span><span class="tag">GCP</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span>
+      </dd>
+      <dt>Frontend</dt>
+      <dd>
+        <span class="tag">React</span>
+      </dd>
+    </dl>
+  </section>
+
+  <!-- 경력 요약 -->
+  <section>
+    <h2 class="sec">Career</h2>
+    <div class="company">
+      <div class="left">
+        <span class="name">(주)비글즈</span>
+        <span class="pos">플랫폼팀 / 팀원</span>
+      </div>
+      <span class="period">2023.05 – 2026.02 · <b>2년 10개월</b></span>
+    </div>
+
+    <div class="job">
+      <div class="jt">
+        <span class="jname">NFC 콘텐츠</span>
+        <span class="jperiod">2025.07 – 2026.02</span>
+      </div>
+      <div class="jstack">Java / Spring Boot / JPA / MySQL / Docker / GCP</div>
+      <div class="jscale"><b>역할</b> · API 서버 운영과 인프라 이전</div>
+      <ul>
+        <li>AWS EC2에서 GCP Compute Engine으로 API 서버를 기능 차이 없이 이관</li>
+        <li>Jenkins CI/CD를 GitHub Actions로 전환해 별도 빌드 서버 제거</li>
+        <li>NFC 태그 기반 운세, 타로, 룰렛 콘텐츠 API 운영</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="jt">
+        <span class="jname">하잉 앱</span>
+        <span class="jperiod">2024.01 – 2026.02</span>
+      </div>
+      <div class="jstack">C# / .NET / OpenAI API / MySQL / MongoDB / Redis / Docker / AWS</div>
+      <div class="jscale"><b>역할</b> · 백엔드 개발과 운영 전반</div>
+      <div class="jscale"><b>운영 규모</b> · 누적 다운로드 10만+ · 누적 채팅 100만 건 이상 · 피크 TPS 한 자릿수</div>
+      <ul>
+        <li>인앱결제 서버 검증과 스토어 환불 알림 연동으로 운영 기간 중 중복 지급 0건</li>
+        <li>힙 덤프 비교로 힙 증가분의 76%를 차지한 메모리 내 Join과 GroupBy를 찾아 DB 쿼리로 옮겨 OOM Kill 해소</li>
+        <li>복합 인덱스 재설계로 Full Scan 조회를 index range 스캔으로 전환</li>
+        <li>목록의 이미지 조회 N+1을 일괄 조회로 바꿔 DB 왕복을 1+N회에서 2회로 고정</li>
+        <li>InnoDB 버퍼 풀을 128MB에서 5GB로 무중단 증설해 간헐적 수 초 API 지연 해소</li>
+        <li>번역 테이블 기반 다국어 체계를 설계하고 조회 빈도가 높은 문구는 Redis에 캐싱</li>
+        <li>카카오와 애플 소셜 로그인, SMS 인증, JWT와 Refresh Token 기반 회원 인증 구축</li>
+        <li>AI 이미지 생성을 비동기 배치로 분리해 외부 API 지연이 다른 API로 번지지 않게 격리</li>
+        <li>OpenAI API로 메시지를 생성하는 AI 선톡 스케줄러와 FCM 동적 푸시 구현</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="jt">
+        <span class="jname">비글즈 앱</span>
+        <span class="jperiod">2023.05 – 2023.12</span>
+      </div>
+      <div class="jstack">C# / .NET / MySQL / Redis / React / AWS</div>
+      <div class="jscale"><b>역할</b> · 게임 콘텐츠 API와 이벤트 웹 개발</div>
+      <div class="jscale"><b>운영 규모</b> · 누적 다운로드 50만</div>
+      <ul>
+        <li>앱에서 호출하는 게임 콘텐츠 CRUD API 개발</li>
+        <li>공통 조회 결과를 Redis에 캐싱해 요청마다 반복되던 DB 조회 제거</li>
+        <li>룰렛, 빙고, 뽑기 이벤트 웹 페이지 백엔드와 React 프론트엔드 개발</li>
+        <li>회원 관리와 게임 에셋 등록, 수정용 관리자 페이지 개발</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 개인 프로젝트 -->
+  <section>
+    <h2 class="sec">Side Projects</h2>
+    <div class="job">
+      <div class="jt">
+        <span class="jname">Draw &amp; Seek</span>
+        <span class="jperiod">2026.07 – 운영 중</span>
+      </div>
+      <div class="jstack">TypeScript / Next.js / Supabase / PostgreSQL / Vercel</div>
+      <div class="jscale"><b>서비스</b> · 공용 캔버스 숨은그림찾기 웹 게임 · drawandseek.com 운영 중 · 기획부터 배포까지 1인</div>
+      <ul>
+        <li>캔버스를 512px 타일로 나눠 버전을 붙인 immutable 캐시로 CDN에서 서빙해 스토리지 왕복을 타일당 최초 1회로 축소</li>
+        <li>판정은 즉시 확정하고 재합성은 백그라운드로 미뤄 판정 지연을 없앴고 동시 클릭은 조건부 업데이트로 한 명만 성공하도록 처리</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="jt">
+        <span class="jname">Snowball Fund</span>
+        <span class="jperiod">2026.02 – 진행 중</span>
+      </div>
+      <div class="jstack">Python / FastAPI / PostgreSQL / GCP / Terraform</div>
+      <div class="jscale"><b>기여</b> · 팀 3명 · 머지 제외 커밋 317/937 (34%) · 테스트 파일 235개 중 177개 커밋</div>
+      <ul>
+        <li>LLM 시장 분석(Brain)과 주문 집행(Hands)을 분리하고 실거래는 fail-closed 게이트를 거치는 자동 트레이딩 플랫폼</li>
+        <li>Claude Code 에이전트 워크플로로 개발하며 주문 집행 로직과 단위 테스트, 멀티유저 API, 분석 워커 도메인 로직, Terraform 인프라에 커밋</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <div class="foot">
+    최아영 · 백엔드 개발자 &nbsp;|&nbsp; choiorog@gmail.com
+  </div>
+
+</td></tr></tbody>
+<tfoot><tr><td><div class="vpad"></div></td></tr></tfoot>
+</table>
+</div>
+</body>
+</html>
