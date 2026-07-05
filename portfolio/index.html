@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>최아영 | 포트폴리오</title>
+<meta name="description" content="백엔드 개발자 최아영의 포트폴리오 — 인앱결제 검증, 비동기 파이프라인, DB 튜닝">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBFBF8;
+  --text:#191E28;
+  --text-2:#4A5262;
+  --muted:#8A909C;
+  --border:#E4E3DC;
+  --border-strong:#C9C8BF;
+  --accent:#1F6F6B;
+  --accent-bg:#E4F0EE;
+  --warning:#C98A1E;
+  --card:#FFFFFF;
+  --code-bg:#161A21;
+
+  --display:"Space Grotesk","Inter",system-ui,sans-serif;
+  --body:"Inter","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"JetBrains Mono","SFMono-Regular",Menlo,monospace;
+
+  --w:920px;
+}
+
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--body);
+  font-size:15px;
+  line-height:1.75;
+  letter-spacing:-0.005em;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;}
+
+/* ---------- layout ---------- */
+.wrap{max-width:var(--w);margin:0 auto;padding:0 32px;}
+section{border-top:1px solid var(--border);}
+section:first-of-type{border-top:none;}
+.block{padding:96px 0;}
+
+/* ---------- type ---------- */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+h1{
+  font-family:var(--display);
+  font-size:clamp(30px,5vw,46px);
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:-0.03em;
+  margin:22px 0 0;
+  max-width:17ch;
+}
+h2{
+  font-family:var(--display);
+  font-size:26px;
+  font-weight:600;
+  letter-spacing:-0.025em;
+  line-height:1.3;
+  margin:10px 0 0;
+}
+h3{
+  font-family:var(--display);
+  font-size:19px;
+  font-weight:600;
+  letter-spacing:-0.02em;
+  margin:0;
+}
+h4{
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:0 0 12px;
+}
+p{margin:16px 0 0;color:var(--text-2);}
+p.lead{font-size:16.5px;color:var(--text-2);max-width:60ch;}
+strong{color:var(--text);font-weight:600;}
+
+/* ---------- hero ---------- */
+.hero{padding:120px 0 88px;}
+.hero .sig{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--accent);
+  margin-top:34px;
+  padding-left:14px;
+  border-left:2px solid var(--accent);
+  line-height:1.9;
+}
+.meta{
+  margin-top:64px;
+  border-top:1px solid var(--border-strong);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+}
+.meta div{
+  padding:20px 20px 20px 0;
+  border-bottom:1px solid var(--border);
+}
+.meta dt{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.meta dd{
+  margin:6px 0 0;
+  font-size:14px;
+  font-weight:500;
+  overflow-wrap:anywhere;
+}
+.meta a{text-decoration:none;border-bottom:1px solid var(--border-strong);}
+.meta a:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ---------- chips ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+.chip{
+  font-family:var(--mono);
+  font-size:11.5px;
+  letter-spacing:0.02em;
+  color:var(--text-2);
+  border:1px solid var(--border-strong);
+  border-radius:8px;
+  padding:5px 11px;
+  background:var(--card);
+}
+.chip.on{color:var(--accent);border-color:var(--accent);background:var(--accent-bg);}
+.stack-row{display:grid;grid-template-columns:132px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid var(--border);align-items:start;}
+.stack-row:last-child{border-bottom:none;}
+.stack-row h4{margin:6px 0 0;}
+.stack-row .chips{margin-top:0;}
+
+/* ---------- project header ---------- */
+.proj-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;}
+.proj-num{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:0.1em;
+  color:var(--muted);
+}
+.tag{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--accent);
+  background:var(--accent-bg);
+  border-radius:6px;
+  padding:3px 8px;
+}
+.factgrid{
+  margin-top:36px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--card);
+  overflow:hidden;
+}
+.factgrid div{padding:18px 20px;border-right:1px solid var(--border);}
+.factgrid div:last-child{border-right:none;}
+.factgrid dt{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+.factgrid dd{margin:6px 0 0;font-size:13.5px;font-weight:500;line-height:1.6;}
+
+/* ---------- case study ---------- */
+.case{margin-top:80px;padding-top:40px;border-top:1px solid var(--border);}
+.case-label{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.12em;
+  color:var(--muted);
+  display:block;
+  margin-bottom:10px;
+}
+.invariant{
+  font-family:var(--mono);
+  font-size:12.5px;
+  color:var(--accent);
+  margin-top:14px;
+}
+.impact{
+  margin-top:16px;
+  padding:12px 16px;
+  background:var(--accent-bg);
+  border-left:3px solid var(--accent);
+  border-radius:0 8px 8px 0;
+  font-size:14.5px;
+  color:var(--text);
+  font-weight:500;
+}
+.step{margin-top:40px;}
+ul{margin:14px 0 0;padding-left:0;list-style:none;}
+li{
+  position:relative;
+  padding-left:20px;
+  margin-top:9px;
+  color:var(--text-2);
+}
+li::before{
+  content:"";
+  position:absolute;
+  left:2px;top:11px;
+  width:5px;height:5px;
+  border:1px solid var(--border-strong);
+  border-radius:1px;
+}
+ul.check li::before{border-color:var(--accent);background:var(--accent);}
+
+/* ---------- figure / svg ---------- */
+figure{margin:28px 0 0;}
+.fig-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:12px;background:var(--card);}
+.fig-scroll svg{display:block;min-width:660px;width:100%;height:auto;}
+figcaption{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:10px;
+}
+.svg-box{fill:#fff;stroke:var(--border-strong);stroke-width:1;}
+.svg-box-accent{fill:var(--accent-bg);stroke:var(--accent);stroke-width:1;}
+.svg-box-ghost{fill:none;stroke:var(--border);stroke-width:1;stroke-dasharray:3 3;}
+.svg-t{font-family:"Inter",sans-serif;font-size:11.5px;fill:var(--text);}
+.svg-t-sm{font-family:"JetBrains Mono",monospace;font-size:9.5px;fill:var(--muted);letter-spacing:0.06em;}
+.svg-t-mono{font-family:"JetBrains Mono",monospace;font-size:10px;fill:var(--text-2);}
+.svg-t-acc{font-family:"JetBrains Mono",monospace;font-size:10px;fill:var(--accent);}
+.svg-line{stroke:var(--border-strong);stroke-width:1;fill:none;}
+.svg-line-acc{stroke:var(--accent);stroke-width:1;fill:none;}
+.svg-line-dash{stroke:var(--border-strong);stroke-width:1;fill:none;stroke-dasharray:4 3;}
+
+/* ---------- code ---------- */
+pre{
+  margin:24px 0 0;
+  background:var(--code-bg);
+  border-radius:10px;
+  padding:22px 24px;
+  overflow-x:auto;
+  font-family:var(--mono);
+  font-size:12.5px;
+  line-height:1.85;
+  color:#C9CFD8;
+}
+.c-kw{color:#8FB8F2;}
+.c-ty{color:#6FC3B6;}
+.c-st{color:#D2A96A;}
+.c-cm{color:#5F6975;font-style:italic;}
+.c-fn{color:#E5E8EC;}
+.c-nu{color:#C69AE0;}
+
+/* ---------- result ---------- */
+.result{
+  margin-top:28px;
+  background:var(--accent-bg);
+  border:1px solid #CFE3E0;
+  border-radius:10px;
+  padding:20px 22px;
+}
+.result h4{color:var(--accent);margin-bottom:10px;}
+.result ul li{color:#2C4A47;}
+.result ul li::before{border-color:var(--accent);background:var(--accent);}
+
+/* ---------- callouts ---------- */
+.callout{
+  margin-top:28px;
+  padding:2px 0 2px 20px;
+  border-left:2px solid var(--border-strong);
+}
+.callout h4{margin-bottom:6px;}
+.callout p{margin-top:4px;font-size:14.5px;}
+.callout.learn{border-left-color:var(--accent);}
+.callout.learn h4{color:var(--accent);}
+.callout.warn{border-left-color:var(--warning);}
+.callout.warn h4{color:var(--warning);}
+.callout.note{border-left-color:var(--border-strong);}
+
+/* ---------- misc ---------- */
+.also{margin-top:56px;padding-top:28px;border-top:1px solid var(--border);}
+.also-list{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;}
+.also-list div{padding:16px 0;border-bottom:1px solid var(--border);}
+.also-list h4{font-family:var(--display);font-size:14.5px;font-weight:600;letter-spacing:-0.01em;text-transform:none;color:var(--text);margin:0;}
+.also-list p{margin-top:5px;font-size:13.5px;}
+
+footer{border-top:1px solid var(--border-strong);padding:44px 0 56px;}
+footer p{font-family:var(--mono);font-size:12px;color:var(--muted);margin:0;}
+
+/* ---------- responsive ---------- */
+@media (max-width:760px){
+  .wrap{padding:0 22px;}
+  .block{padding:64px 0;}
+  .hero{padding:80px 0 64px;}
+  .meta{grid-template-columns:1fr 1fr;}
+  .factgrid{grid-template-columns:1fr;}
+  .factgrid div{border-right:none;border-bottom:1px solid var(--border);}
+  .factgrid div:last-child{border-bottom:none;}
+  .stack-row{grid-template-columns:1fr;gap:12px;}
+  .also-list{grid-template-columns:1fr;}
+}
+@media (prefers-reduced-motion:no-preference){
+  a,.chip{transition:color .15s ease,border-color .15s ease;}
+}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+</style>
+</head>
+<body>
+
+<!-- 문서 전역 화살표 마커 — 아래 모든 그림이 이 정의를 참조한다 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <marker id="a" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0 0 L7 3.5 L0 7 z" fill="#C9C8BF"/>
+    </marker>
+    <marker id="b" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0 0 L7 3.5 L0 7 z" fill="#1F6F6B"/>
+    </marker>
+    <marker id="sa-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#C9C8BF"/>
+    </marker>
+    <marker id="sa-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1F6F6B"/>
+    </marker>
+  </defs>
+</svg>
+
+<!-- ============ HERO ============ -->
+<section>
+<div class="wrap hero">
+  <span class="eyebrow">Backend Engineer · 2023 — 2026</span>
+  <h1>서비스 안정성과 데이터 정합성을 우선하는 백엔드 개발자입니다.</h1>
+  <p class="lead">
+    회원 인증, 인앱 결제, 게임 콘텐츠 API 등 서비스 핵심 기능을 개발하며,
+    외부 입력 검증과 동시성 제어를 통해 신뢰할 수 있는 서버 구조를 고민해왔습니다.
+    운영 환경에서 발생한 성능 저하와 장애의 원인을 분석하고 개선했으며,
+    기존 서비스에 미치는 영향을 최소화하는 안정적인 변경과 운영을 중요하게 생각합니다.
+  </p>
+
+  <dl class="meta">
+    <div><dt>Name</dt><dd>최아영 / Choi A-yeong</dd></div>
+    <div><dt>Experience</dt><dd>2년 10개월</dd></div>
+    <div><dt>Email</dt><dd><a href="mailto:choiorog@gmail.com">choiorog@gmail.com</a></dd></div>
+    <div><dt>GitHub</dt><dd><a href="https://github.com/surpmh">github.com/surpmh</a></dd></div>
+  </dl>
+</div>
+</section>
+
+<!-- ============ STACK ============ -->
+<section>
+<div class="wrap block">
+  <span class="eyebrow">Tech Stack</span>
+  <h2>사용 기술</h2>
+
+  <div style="margin-top:32px">
+    <div class="stack-row">
+      <h4>Language</h4>
+      <div class="chips">
+        <span class="chip on">C#</span><span class="chip on">Java</span>
+        <span class="chip">JavaScript</span>
+      </div>
+    </div>
+    <div class="stack-row">
+      <h4>Framework</h4>
+      <div class="chips">
+        <span class="chip on">.NET Core</span><span class="chip on">Spring Boot</span>
+        <span class="chip">Entity Framework</span><span class="chip">RepoDB</span><span class="chip">JPA</span><span class="chip">React</span>
+      </div>
+    </div>
+    <div class="stack-row">
+      <h4>Data</h4>
+      <div class="chips">
+        <span class="chip on">MySQL</span><span class="chip">MongoDB</span><span class="chip">Redis</span>
+      </div>
+    </div>
+    <div class="stack-row">
+      <h4>Infra</h4>
+      <div class="chips">
+        <span class="chip">AWS</span><span class="chip">GCP</span>
+        <span class="chip">GitHub Actions</span><span class="chip">Jenkins</span><span class="chip">Docker</span><span class="chip">Nginx</span><span class="chip">Git</span>
+      </div>
+    </div>
+    <div class="stack-row">
+      <h4>Domain</h4>
+      <div class="chips">
+        <span class="chip">In-App Purchase</span><span class="chip">OAuth / JWT</span>
+        <span class="chip">Batch / Scheduler</span><span class="chip">OpenAI API</span><span class="chip">i18n</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ PROJECT 01 : 하잉 ============ -->
+<section>
+<div class="wrap block">
+  <div class="proj-head">
+    <span class="proj-num">PROJECT 01</span>
+  </div>
+  <h2>하잉 앱</h2>
+  <p class="lead">
+    AI 캐릭터 기반 서비스의 백엔드 개발과 운영을 담당했습니다.
+    카카오와 애플 소셜 로그인과 SMS 본인인증 기반 회원 가입과 로그인(JWT / Refresh Token), 인앱결제,
+    AI 이미지 생성 파이프라인, 채팅 및 콘텐츠 API 등 서비스의 주요 기능을 개발했으며
+    기능 개선과 장애 대응, 운영 이슈 해결을 함께 수행했습니다.
+  </p>
+
+  <dl class="factgrid">
+    <div><dt>Period</dt><dd>2024.01 – 2026.02 (2년 2개월)</dd></div>
+    <div><dt>Role</dt><dd>백엔드 개발 · 결제 / 인증 / AI 파이프라인 담당</dd></div>
+    <div><dt>Stack</dt><dd>C# / .NET Core / Entity Framework / MySQL / MongoDB / Redis / OpenAI / FCM / Docker / Jenkins</dd></div>
+  </dl>
+
+  <div class="chips" style="margin-top:20px">
+    <span class="chip">Pessimistic Lock</span><span class="chip">Unique Constraint</span>
+    <span class="chip">RTDN</span><span class="chip">JWT</span><span class="chip">OAuth 2.0</span>
+    <span class="chip">Redis</span><span class="chip">Batch</span><span class="chip">Scheduler</span>
+    <span class="chip">i18n</span>
+  </div>
+
+  <!-- ---- SYSTEM ARCHITECTURE ---- -->
+  <div class="case">
+    <span class="case-label">SYSTEM ARCHITECTURE</span>
+    <h3>하잉 앱 아키텍처</h3>
+
+    <div class="step">
+      <figure>
+        <div class="fig-scroll">
+        <svg viewBox="0 0 880 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="하잉 앱 AWS 아키텍처">
+          <text x="24" y="30" class="svg-t-sm">SERVICE ARCHITECTURE · AWS</text>
+          <line x1="24" y1="42" x2="856" y2="42" class="svg-line" opacity="0.5"/>
+
+          <!-- CLIENT -->
+          <text x="24" y="72" class="svg-t-sm">CLIENT</text>
+          <rect x="24" y="84" width="110" height="66" rx="10" class="svg-box"/>
+          <text x="79" y="112" class="svg-t" text-anchor="middle">App</text>
+          <text x="79" y="131" class="svg-t-mono" text-anchor="middle">iOS / Android</text>
+
+          <!-- ALB -->
+          <path d="M134 117 H166" class="svg-line" marker-end="url(#sa-a)"/>
+          <rect x="168" y="84" width="96" height="66" rx="10" class="svg-box"/>
+          <text x="216" y="112" class="svg-t" text-anchor="middle">ALB</text>
+          <text x="216" y="131" class="svg-t-mono" text-anchor="middle">load balancer</text>
+
+          <!-- APPLICATION -->
+          <text x="300" y="72" class="svg-t-sm">APPLICATION · EC2</text>
+          <path d="M264 110 H298" class="svg-line" marker-end="url(#sa-a)"/>
+          <rect x="300" y="84" width="216" height="78" rx="10" class="svg-box-accent"/>
+          <text x="408" y="110" class="svg-t" text-anchor="middle">API Server ×2</text>
+          <text x="408" y="128" class="svg-t-acc" text-anchor="middle">.NET Core · Docker</text>
+          <line x1="320" y1="140" x2="496" y2="140" class="svg-line" opacity="0.4"/>
+          <text x="408" y="156" class="svg-t-mono" text-anchor="middle">REST API · Scheduler · Socket</text>
+
+          <path d="M264 132 C 282 132, 286 198, 298 209" class="svg-line" marker-end="url(#sa-a)"/>
+          <rect x="300" y="180" width="216" height="62" rx="10" class="svg-box"/>
+          <text x="408" y="206" class="svg-t" text-anchor="middle">Chat Server</text>
+          <text x="408" y="225" class="svg-t-mono" text-anchor="middle">Flask · Python</text>
+
+          <!-- DATA -->
+          <text x="556" y="72" class="svg-t-sm">DATA · STORAGE</text>
+
+          <rect x="556" y="84" width="180" height="50" rx="8" class="svg-box-accent"/>
+          <ellipse cx="576" cy="100" rx="8" ry="3.4" fill="none" stroke="#1F6F6B" stroke-width="1.2"/>
+          <path d="M568 100 v14 a8 3.4 0 0 0 16 0 v-14" fill="none" stroke="#1F6F6B" stroke-width="1.2"/>
+          <text x="650" y="104" class="svg-t" text-anchor="middle">MySQL</text>
+          <text x="650" y="121" class="svg-t-mono" text-anchor="middle">core data · EC2</text>
+
+          <rect x="556" y="146" width="180" height="50" rx="8" class="svg-box-accent"/>
+          <ellipse cx="576" cy="162" rx="8" ry="3.4" fill="none" stroke="#1F6F6B" stroke-width="1.2"/>
+          <path d="M568 162 v14 a8 3.4 0 0 0 16 0 v-14" fill="none" stroke="#1F6F6B" stroke-width="1.2"/>
+          <text x="650" y="166" class="svg-t" text-anchor="middle">Redis</text>
+          <text x="650" y="183" class="svg-t-mono" text-anchor="middle">cache</text>
+
+          <rect x="556" y="208" width="180" height="50" rx="8" class="svg-box-accent"/>
+          <ellipse cx="576" cy="224" rx="8" ry="3.4" fill="none" stroke="#1F6F6B" stroke-width="1.2"/>
+          <path d="M568 224 v14 a8 3.4 0 0 0 16 0 v-14" fill="none" stroke="#1F6F6B" stroke-width="1.2"/>
+          <text x="650" y="228" class="svg-t" text-anchor="middle">MongoDB</text>
+          <text x="650" y="245" class="svg-t-mono" text-anchor="middle">chat log</text>
+
+          <rect x="556" y="270" width="180" height="50" rx="8" class="svg-box"/>
+          <text x="650" y="290" class="svg-t" text-anchor="middle">S3</text>
+          <text x="650" y="307" class="svg-t-mono" text-anchor="middle">images</text>
+
+          <path d="M516 106 H554" class="svg-line" marker-end="url(#sa-a)"/>
+          <path d="M516 126 C 534 126, 538 164, 554 169" class="svg-line" marker-end="url(#sa-a)"/>
+          <path d="M516 148 C 536 148, 540 284, 554 293" class="svg-line" marker-end="url(#sa-a)"/>
+          <path d="M516 211 C 534 211, 538 226, 554 231" class="svg-line" marker-end="url(#sa-a)"/>
+
+          <!-- DEPLOY -->
+          <text x="24" y="372" class="svg-t-sm">BUILD &amp; DEPLOY</text>
+          <line x1="24" y1="384" x2="856" y2="384" class="svg-line" opacity="0.5"/>
+
+          <rect x="24" y="402" width="178" height="56" rx="8" class="svg-box"/>
+          <text x="113" y="426" class="svg-t" text-anchor="middle">Git Repository</text>
+          <text x="113" y="444" class="svg-t-mono" text-anchor="middle">source</text>
+
+          <path d="M202 430 H238" class="svg-line" marker-end="url(#sa-a)"/>
+          <rect x="240" y="402" width="178" height="56" rx="8" class="svg-box-accent"/>
+          <text x="329" y="426" class="svg-t" text-anchor="middle">Jenkins</text>
+          <text x="329" y="444" class="svg-t-acc" text-anchor="middle">build · CI/CD</text>
+
+          <path d="M418 430 H454" class="svg-line" marker-end="url(#sa-a)"/>
+          <rect x="456" y="402" width="180" height="56" rx="8" class="svg-box-accent"/>
+          <text x="546" y="426" class="svg-t" text-anchor="middle">Docker Image</text>
+          <text x="546" y="444" class="svg-t-acc" text-anchor="middle">container build</text>
+
+          <path d="M636 430 H672" class="svg-line" marker-end="url(#sa-a)"/>
+          <rect x="674" y="402" width="182" height="56" rx="8" class="svg-box"/>
+          <text x="765" y="426" class="svg-t" text-anchor="middle">EC2 배포</text>
+          <text x="765" y="444" class="svg-t-mono" text-anchor="middle">컨테이너 실행</text>
+        </svg>
+        </div>
+        <figcaption>Fig. 1 — 하잉 앱 아키텍처 (AWS)</figcaption>
+      </figure>
+    </div>
+
+    <div class="step">
+      <p>
+        AWS 위에서 운영한 구성입니다. 클라이언트 요청은 ALB를 거쳐 EC2의 API 서버 두 대로 분산되고, 채팅은 별도의 Flask 서버가 처리합니다.
+        데이터는 성격에 따라 <strong>MySQL(핵심 데이터)와 Redis(캐시), MongoDB(채팅 로그)</strong>로 나누고, 이미지는 S3에 저장했습니다.
+        배포는 Jenkins에서 빌드한 Docker 이미지를 EC2에 올려 컨테이너로 실행했습니다.
+      </p>
+      <p>
+        DB는 관리형 서비스(RDS)가 아니라 EC2에 직접 구성해 운영했기 때문에,
+        스키마와 인덱스뿐 아니라 <strong>DB 서버의 설정과 자원도 직접 관리 대상</strong>이었습니다.
+        아래 CASE 04와 05가 이 조건에서 나온 문제들입니다.
+      </p>
+    </div>
+  </div>
+
+  <!-- ---- CASE 1 : PAYMENT ---- -->
+  <div class="case">
+    <span class="case-label">CASE 01 · PAYMENT</span>
+    <h3>서버가 직접 검증하는 인앱결제 처리 구조</h3>
+    <p class="invariant">// invariant &nbsp;— 지급은 스토어가 검증해준 거래에만 일어난다</p>
+    <p class="impact">클라이언트가 보낸 결제 결과를 신뢰하지 않고 <strong>스토어 원장(Google과 Apple)을 소스 오브 트루스</strong>로 삼아 위변조와 재전송을 차단하고, 환불과 취소는 <strong>스토어 서버 알림으로 자동 반영</strong></p>
+
+    <div class="step">
+      <h4>Problem</h4>
+      <p>
+        인앱결제에서 앱이 보내는 “결제에 성공했다”는 신호를 그대로 신뢰하면 세 가지 사고가 발생합니다.
+      </p>
+      <ul>
+        <li><strong>위변조</strong> — 결제하지 않고도 성공 응답을 만들어 서버에 보낼 수 있습니다.</li>
+        <li><strong>재전송(replay)</strong> — 성공한 영수증을 그대로 여러 번 보내면 지급이 반복됩니다.</li>
+        <li><strong>동시 요청</strong> — 같은 영수증이 동시에 들어오면 중복 체크와 잔액 갱신 사이에 경쟁 상태가 생깁니다.</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <h4>Architecture</h4>
+      <figure>
+        <div class="fig-scroll">
+        <svg viewBox="0 0 880 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="인앱결제 서버 검증 파이프라인">
+          <text x="24" y="30" class="svg-t-sm">PURCHASE VERIFICATION PIPELINE</text>
+          <line x1="24" y1="42" x2="856" y2="42" class="svg-line" opacity="0.5"/>
+
+          <!-- client -->
+          <rect x="24" y="80" width="130" height="58" rx="8" class="svg-box"/>
+          <text x="89" y="104" class="svg-t" text-anchor="middle">Client</text>
+          <text x="89" y="122" class="svg-t-mono" text-anchor="middle">receipt / token</text>
+
+          <path d="M154 109 H208" class="svg-line" marker-end="url(#a)"/>
+
+          <!-- api -->
+          <rect x="210" y="80" width="130" height="58" rx="8" class="svg-box"/>
+          <text x="275" y="104" class="svg-t" text-anchor="middle">API Server</text>
+          <text x="275" y="122" class="svg-t-mono" text-anchor="middle">.NET Core</text>
+
+          <path d="M340 109 H396" class="svg-line-acc" marker-end="url(#b)"/>
+
+          <!-- store -->
+          <rect x="398" y="66" width="200" height="86" rx="8" class="svg-box-accent"/>
+          <text x="498" y="90" class="svg-t" text-anchor="middle">Store Verification</text>
+          <text x="498" y="110" class="svg-t-acc" text-anchor="middle">Google Play Developer API</text>
+          <text x="498" y="127" class="svg-t-acc" text-anchor="middle">App Store Server API</text>
+          <text x="498" y="144" class="svg-t-sm" text-anchor="middle">SOURCE OF TRUTH</text>
+
+          <path d="M598 109 H660" class="svg-line" marker-end="url(#a)"/>
+          <text x="629" y="100" class="svg-t-sm" text-anchor="middle">VALID</text>
+
+          <!-- decision -->
+          <rect x="662" y="80" width="120" height="58" rx="8" class="svg-box"/>
+          <text x="722" y="104" class="svg-t" text-anchor="middle">Grant</text>
+          <text x="722" y="122" class="svg-t-mono" text-anchor="middle">transaction</text>
+
+          <!-- reject -->
+          <path d="M498 152 V196" class="svg-line-dash"/>
+          <rect x="398" y="198" width="200" height="44" rx="8" class="svg-box-ghost"/>
+          <text x="498" y="225" class="svg-t-mono" text-anchor="middle">INVALID → 400, 지급 없음</text>
+
+          <!-- transaction lane -->
+          <line x1="24" y1="272" x2="856" y2="272" class="svg-line" opacity="0.5"/>
+          <text x="24" y="264" class="svg-t-sm">DB TRANSACTION · SERIALIZED PER USER</text>
+
+          <rect x="24" y="290" width="250" height="66" rx="8" class="svg-box"/>
+          <text x="149" y="314" class="svg-t" text-anchor="middle">1. transaction_id UNIQUE</text>
+          <text x="149" y="333" class="svg-t-mono" text-anchor="middle">중복이면 INSERT 자체가 실패</text>
+
+          <path d="M274 323 H316" class="svg-line" marker-end="url(#a)"/>
+
+          <rect x="318" y="290" width="250" height="66" rx="8" class="svg-box"/>
+          <text x="443" y="314" class="svg-t" text-anchor="middle">2. SELECT … FOR UPDATE</text>
+          <text x="443" y="333" class="svg-t-mono" text-anchor="middle">user_balance 행 잠금</text>
+
+          <path d="M568 323 H610" class="svg-line" marker-end="url(#a)"/>
+
+          <rect x="612" y="290" width="244" height="66" rx="8" class="svg-box-accent"/>
+          <text x="734" y="314" class="svg-t" text-anchor="middle">3. 지급 후 COMMIT</text>
+          <text x="734" y="333" class="svg-t-acc" text-anchor="middle">실패 시 전체 ROLLBACK</text>
+        </svg>
+        </div>
+        <figcaption>Fig. 2 — 결제 검증 파이프라인 (Flow)</figcaption>
+      </figure>
+    </div>
+
+    <div class="step">
+      <h4>Solution</h4>
+      <ul class="check">
+        <li><strong>서버 사이드 영수증 검증</strong> — 앱의 결제 결과를 신뢰하지 않고 Google Play Developer API와 App Store Server API를 통해 영수증을 서버에서 직접 검증합니다.</li>
+        <li><strong>환불 자동 반영</strong> — 환불과 취소 상태 변경을 스토어의 서버 알림(Google RTDN과 App Store Server Notifications)으로 수신해 수기 대응 없이 서버 상태를 스토어와 정합하게 유지합니다.</li>
+        <li><strong>transaction_id UNIQUE 제약 (멱등성)</strong> — 재전송이 들어와도 DB 제약에서 차단됩니다. 애플리케이션 로직이 아니라 스키마가 중복을 막게 했습니다.</li>
+        <li><strong>비관적 락</strong> — 결제 빈도가 높진 않아 경쟁이 잦진 않았지만 잔액 갱신 구간에 <code style="font-family:var(--mono);font-size:12.5px">SELECT … FOR UPDATE</code>로 유저 행을 잠가 동시 요청에서도 순차 처리를 보장했습니다.</li>
+      </ul>
+    </div>
+
+    <div class="result">
+      <h4>Result</h4>
+      <ul>
+        <li>앱이 보낸 결제 결과를 신뢰하지 않고 <strong>스토어 원장에서 직접 검증</strong>하는 구조로, 위변조와 재전송 결제를 서버에서 차단했습니다.</li>
+        <li>Google과 Apple 양쪽 결제를 <strong>동일한 검증 인터페이스</strong>로 통합해 플랫폼별 분기를 결제 로직 밖으로 밀어냈습니다.</li>
+        <li>환불과 취소를 <strong>스토어 서버 알림으로 자동 반영</strong>해, 수기 대응 없이 서버 상태와 스토어 상태를 일치시켰습니다.</li>
+        <li>재전송을 DB 제약에서 차단하고 지급 갱신 구간을 행 락으로 직렬화해, <strong>운영 기간 중 중복 지급 0건</strong>을 유지했습니다.</li>
+      </ul>
+    </div>
+
+    <div class="callout learn">
+      <h4>What I learned</h4>
+      <p>결제는 “성공했다”는 신호를 믿는 일이 아니라 서버가 검증하는 일이라는 것을 배웠습니다.
+      그리고 중복 방지 같은 불변식은 애플리케이션 조건문보다 <strong>DB 제약처럼 우회할 수 없는 층</strong>에 두는 편이 훨씬 안전하다는 것도 함께 배웠습니다.</p>
+    </div>
+  </div>
+
+  <!-- ---- CASE 2 : AI ---- -->
+  <div class="case">
+    <span class="case-label">CASE 02 · ASYNC PIPELINE</span>
+    <h3>요청과 실행을 분리한 AI 이미지 생성 파이프라인</h3>
+    <p class="invariant">// invariant &nbsp;— 진행 중인 작업은 서버가 죽어도 사라지지 않는다</p>
+    <p class="impact">요청 즉시 실행하던 30초짜리 외부 호출을 대기열로 옮겨, <strong>동시 실행 수의 상한을 서버가 정하고 재시작에도 작업이 유실되지 않도록</strong> 전환</p>
+
+    <div class="step">
+      <h4>Problem</h4>
+      <p>
+        이미지 생성은 사내 AI팀이 제공하는 API를 호출해 처리했고, 한 건에 30초 정도가 걸렸습니다.
+        요청을 받으면 그 자리에서 생성 API를 호출하고, 완료되면 S3에 업로드한 뒤 소켓으로 클라이언트에 알리는 구조였습니다.
+        클라이언트는 기다리지 않았지만, 서버 쪽에는 문제가 남아 있었습니다.
+      </p>
+      <ul>
+        <li>요청이 들어오는 만큼 30초짜리 외부 호출이 그대로 늘어나 <strong>동시 실행 수에 상한이 없었습니다.</strong> 스레드와 커넥션이 묶이고 외부 API 호출 제한에도 걸립니다.</li>
+        <li>진행 중인 작업이 <strong>서버 메모리에만 존재</strong>해, 재배포나 재시작, 예외가 나면 그대로 사라졌습니다. 사용자는 완료 알림을 영영 받지 못합니다.</li>
+        <li>실패가 <strong>어디에도 기록되지 않았습니다.</strong> 무엇이 왜 실패했는지 알 수 없으니, 사용자에게 후속 처리를 해줄 근거도 남지 않습니다.</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <h4>Architecture</h4>
+      <figure>
+        <div class="fig-scroll">
+        <svg viewBox="0 0 880 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI 이미지 생성 비동기 파이프라인">
+          <text x="24" y="30" class="svg-t-sm">REQUEST PATH · 즉시 응답</text>
+          <line x1="24" y1="42" x2="856" y2="42" class="svg-line" opacity="0.5"/>
+
+          <rect x="24" y="66" width="140" height="52" rx="8" class="svg-box"/>
+          <text x="94" y="97" class="svg-t" text-anchor="middle">Client</text>
+
+          <path d="M164 92 H216" class="svg-line" marker-end="url(#a)"/>
+
+          <rect x="218" y="66" width="160" height="52" rx="8" class="svg-box"/>
+          <text x="298" y="90" class="svg-t" text-anchor="middle">API Server</text>
+          <text x="298" y="108" class="svg-t-mono" text-anchor="middle">job 등록만 수행</text>
+
+          <path d="M378 92 H430" class="svg-line" marker-end="url(#a)"/>
+
+          <rect x="432" y="66" width="170" height="52" rx="8" class="svg-box"/>
+          <text x="517" y="90" class="svg-t" text-anchor="middle">Job Store</text>
+          <text x="517" y="108" class="svg-t-mono" text-anchor="middle">대기열 저장 · PENDING</text>
+
+          <path d="M298 118 V150 H100 V118" class="svg-line-acc" marker-end="url(#b)"/>
+          <text x="200" y="166" class="svg-t-acc" text-anchor="middle">즉시 응답 — 생성 결과를 기다리지 않음</text>
+
+          <!-- worker lane -->
+          <line x1="24" y1="210" x2="856" y2="210" class="svg-line" opacity="0.5"/>
+          <text x="24" y="202" class="svg-t-sm">EXECUTION PATH · 배치 처리</text>
+
+          <rect x="24" y="234" width="170" height="66" rx="8" class="svg-box"/>
+          <text x="109" y="258" class="svg-t" text-anchor="middle">Scheduler / Worker</text>
+          <text x="109" y="277" class="svg-t-mono" text-anchor="middle">PENDING 폴링 · 동시 실행 수 제한</text>
+
+          <path d="M194 267 H244" class="svg-line" marker-end="url(#a)"/>
+
+          <rect x="246" y="222" width="200" height="52" rx="8" class="svg-box-accent"/>
+          <text x="346" y="245" class="svg-t" text-anchor="middle">AI Service · 사내 AI팀</text>
+          <text x="346" y="263" class="svg-t-acc" text-anchor="middle">image generation API</text>
+
+          <path d="M346 274 V296" class="svg-line-dash"/>
+          <rect x="246" y="298" width="200" height="46" rx="8" class="svg-box-ghost"/>
+          <text x="346" y="320" class="svg-t" text-anchor="middle">LLM 공급자</text>
+          <text x="346" y="337" class="svg-t-mono" text-anchor="middle">AI팀 담당 영역</text>
+
+          <path d="M446 248 H512" class="svg-line" marker-end="url(#a)"/>
+          <rect x="514" y="222" width="170" height="52" rx="8" class="svg-box"/>
+          <text x="599" y="245" class="svg-t" text-anchor="middle">S3 업로드 · 상태 갱신</text>
+          <text x="599" y="263" class="svg-t-mono" text-anchor="middle">DONE / FAILED</text>
+
+          <path d="M684 248 H736" class="svg-line" marker-end="url(#a)"/>
+          <rect x="738" y="222" width="118" height="52" rx="8" class="svg-box"/>
+          <text x="797" y="245" class="svg-t" text-anchor="middle">Client</text>
+          <text x="797" y="263" class="svg-t-mono" text-anchor="middle">소켓으로 완료 수신</text>
+        </svg>
+        </div>
+        <figcaption>Fig. 3 — 대기열 기반 생성 파이프라인 (Pipeline)</figcaption>
+      </figure>
+    </div>
+
+    <div class="step">
+      <h4>Solution</h4>
+      <ul class="check">
+        <li><strong>접수와 실행의 분리</strong> — API는 생성 요청을 <strong>대기 상태로 저장만</strong> 하고 끝냅니다. 실제 호출은 스케줄러가 담당합니다.</li>
+        <li><strong>상태를 저장소에 남김</strong> — <code style="font-family:var(--mono);font-size:12.5px">PENDING → PROCESSING → DONE / FAILED</code>로 관리해, 서버가 중간에 내려가도 <strong>재시작 후 이어서 처리</strong>할 수 있게 했습니다.</li>
+        <li><strong>동시 실행 수의 상한</strong> — 스케줄러가 한 번에 정해진 개수만 꺼내 처리합니다. 요청이 몰려도 외부 API 동시 호출 수는 <strong>서버가 정한 값을 넘지 않습니다.</strong></li>
+        <li><strong>실패의 후속 처리</strong> — 생성 실패는 다시 시도하지 않고 <strong>환불로 처리</strong>했습니다. 어떤 요청이 실패했는지가 상태로 남아야 대상을 특정할 수 있으므로, 실패도 결과의 한 종류로 기록했습니다.</li>
+      </ul>
+    </div>
+
+    <div class="result">
+      <h4>Result</h4>
+      <ul>
+        <li>생성 작업이 요청 처리 자원을 점유하지 않게 되어, <strong>외부 API의 지연과 장애가 다른 API로 번지지 않도록 격리</strong>됐습니다.</li>
+        <li>요청이 몰려도 외부 API 동시 호출 수가 <strong>서버가 정한 상한을 넘지 않게</strong> 됐습니다.</li>
+        <li>서버가 재시작돼도 대기 중이거나 처리 중이던 요청이 남아 있어 <strong>작업이 유실되지 않습니다.</strong></li>
+        <li>실패한 작업이 상태로 남아 <strong>환불 처리와 원인 파악이 가능</strong>해졌습니다.</li>
+      </ul>
+    </div>
+
+    <div class="callout learn">
+      <h4>What I learned</h4>
+      <p>비동기로 만들었다고 해서 안정적인 것은 아니라는 걸 배웠습니다.
+      응답을 먼저 돌려주더라도 <strong>실행이 메모리에만 남아 있으면 서버가 죽는 순간 함께 사라집니다.</strong></p>
+      <p>“요청과 실행을 분리한다”는 말의 핵심은 응답 속도가 아니라,
+      실행의 결과를 <strong>성공이든 실패든 확인할 수 있는 형태로 남겨두는 것</strong>이었습니다.</p>
+    </div>
+  </div>
+
+  <!-- ---- CASE 3 : OOM / MEMORY PROFILING ---- -->
+  <div class="case">
+    <span class="case-label">CASE 03 · INCIDENT &amp; MEMORY</span>
+    <h3>메모리 덤프로 좁힌 OOM — 애플리케이션에서 하던 가공을 쿼리로</h3>
+    <p class="invariant">// invariant &nbsp;— 데이터를 합치고 묶는 일은 DB가 하고, 서버는 결과만 받는다</p>
+    <p class="impact">메모리가 치솟아 OOM Kill로 종료되던 장애 중 한 건 — 여러 테이블을 각각 조회해 <strong>애플리케이션 메모리에서 Join과 GroupBy 하던 패턴</strong>을 덤프 분석으로 특정하고 DB 쿼리 레벨로 이관</p>
+
+    <div class="step">
+      <h4>Problem</h4>
+      <p>
+        서버 메모리가 계속 올라가다 OOM Kill로 프로세스가 강제 종료되는 장애가 운영 중 반복됐고, 발생할 때마다 원인이 달랐습니다.
+        이 케이스는 그중 <strong>데이터를 가공하는 위치</strong>가 원인이었던 건입니다.
+        직전 배포가 없어 배포 이력에는 단서가 없었고, 어떤 요청이 메모리를 점유하는지부터 특정해야 했습니다.
+      </p>
+    </div>
+
+    <div class="step">
+      <h4>Diagnosis</h4>
+      <ul>
+        <li><strong>의심 엔드포인트에 반복 요청</strong> — 메모리 증가와 상관관계가 있는 요청을 찾기 위해 후보 엔드포인트를 반복 호출하며 사용량 변화를 관찰했습니다.</li>
+        <li><strong>메모리 덤프 분석</strong> — 어떤 객체가 힙을 점유하는지 덤프로 확인해, 추측이 아니라 실제 점유 주체를 근거로 범위를 좁혔습니다.</li>
+        <li><strong>가공 위치가 원인</strong> — 여러 테이블을 각각 통째로 조회한 뒤 <strong>애플리케이션 메모리에서 Join과 GroupBy로 가공</strong>하는 패턴이었습니다. 최종 응답은 작아도, 중간 단계에서 원본 데이터 전체가 힙에 올라오는 구조였습니다.</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <h4>Solution</h4>
+      <ul class="check">
+        <li><strong>가공을 DB 쿼리 레벨로 이관</strong> — 조인과 집계를 SQL에서 처리하고, 서버는 이미 좁혀진 결과 집합만 받도록 바꿨습니다. 인덱스와 옵티마이저를 쓸 수 있는 계층에서 처리하게 한 것입니다.</li>
+        <li><strong>중간 결과의 크기를 데이터 증가와 분리</strong> — 힙에 올라오는 양이 전체 데이터량이 아니라 응답 크기에 비례하도록 만들었습니다.</li>
+      </ul>
+    </div>
+
+    <div class="result">
+      <h4>Result</h4>
+      <ul>
+        <li>동일 원인의 OOM이 <strong>재발하지 않았고</strong>, 서버 메모리 사용량이 안정화됐습니다.</li>
+        <li>데이터가 늘어도 해당 요청이 점유하는 메모리가 <strong>그에 비례해 늘지 않게</strong> 됐습니다.</li>
+      </ul>
+    </div>
+
+    <div class="callout learn">
+      <h4>What I learned</h4>
+      <p>같은 결과를 만들더라도 <strong>어느 계층에서 가공하느냐가 자원 사용량을 결정</strong>한다는 것을 배웠습니다.
+      애플리케이션에서 하는 조인은 코드로는 자연스러워 보이지만, DB가 인덱스로 걸러줄 수 있는 일을 서버 메모리로 끌고 오는 선택이었습니다.</p>
+      <p>그리고 메모리 문제는 <strong>추측이 아니라 덤프로 좁혀야</strong> 한다는 것도 함께 배웠습니다.</p>
+    </div>
+
+    <div class="callout note">
+      <h4>Retrospective</h4>
+      <p>메모리 사용량 추이에 대한 알림이 있었다면 OOM Kill 이전에 대응할 수 있었을 것입니다.
+      이 건과 다음 CASE 04는 증상(메모리 초과로 인한 프로세스 종료)이 같아도 원인이 전혀 달랐고,
+      그래서 <strong>증상이 아니라 원인 단위로 확인하는 습관</strong>이 필요하다는 것을 알게 됐습니다.</p>
+    </div>
+  </div>
+
+  <!-- ---- CASE 4 : INCIDENT + INDEX ---- -->
+  <div class="case">
+    <span class="case-label">CASE 04 · INCIDENT &amp; QUERY</span>
+    <h3>데이터 누적으로 뒤늦게 드러난 조회 결함과 인덱스 재설계</h3>
+    <p class="invariant">// invariant &nbsp;— 기록이 쌓여도 한 페이지를 읽는 비용은 늘지 않는다</p>
+    <p class="impact">배포 이력 없는 서버 다운 — <strong>필터와 정렬 순서가 인덱스 구성과 어긋나</strong> 전체 스캔 → OOM. 복합 인덱스 재설계로 <strong>EXPLAIN 접근 방식이 full scan에서 index range로 전환</strong>, 동일 원인 재발 0건</p>
+
+    <div class="step">
+      <h4>Problem</h4>
+      <p>
+        메모리 초과로 서버가 종료되는 장애는 한 번이 아니었고, 원인도 서로 달랐습니다.
+        앞선 CASE 03이 <strong>가공 위치</strong>의 문제였다면, 이 건은 <strong>데이터 누적으로 뒤늦게 발현된</strong> 조회 결함입니다.
+        직전 배포도 없었고 코드도 그대로인데 서버가 다운됐습니다.
+        원인은 채팅 기록 조회였는데, <strong>필터링 자체는 이미 걸려 있었습니다.</strong>
+        문제는 <strong>필터 조건과 정렬(ORDER BY) 순서가 인덱스 컬럼 구성과 어긋나 있던 것</strong>이었습니다.
+        그 결과 조회가 인덱스를 타지 못하고 누적된 대화 기록 전체를 훑게 되면서, 한 번의 요청이 방대한 양의 행을 메모리에 올렸고 프로세스가 종료됐습니다.
+      </p>
+      <p>
+        채팅 기록은 <strong>사용자와 캐릭터의 조합마다 계속 누적되는 데이터</strong>이고,
+        조회는 언제나 “특정 사용자의 특정 캐릭터 대화를 최신순으로”라는 형태로 들어옵니다.
+        이 결함은 <strong>처음부터 있었지만 드러나지 않았습니다.</strong>
+        데이터가 적을 때는 인덱스를 타지 못해도 전체 스캔 비용이 감당됐고,
+        누적량이 임계를 넘은 시점에야 장애로 나타났습니다.
+      </p>
+    </div>
+
+    <div class="step">
+      <h4>Diagnosis</h4>
+      <figure>
+        <div class="fig-scroll">
+        <svg viewBox="0 0 880 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="데이터 누적에 따른 잠복 결함의 발현 시점">
+          <text x="24" y="30" class="svg-t-sm">LATENT DEFECT · 발현 시점</text>
+          <line x1="24" y1="42" x2="856" y2="42" class="svg-line" opacity="0.5"/>
+
+          <rect x="24" y="70" width="240" height="60" rx="8" class="svg-box"/>
+          <text x="144" y="94" class="svg-t" text-anchor="middle">배포 시점</text>
+          <text x="144" y="113" class="svg-t-mono" text-anchor="middle">결함 존재 · 증상 없음</text>
+
+          <path d="M264 100 H316" class="svg-line" marker-end="url(#a)"/>
+
+          <rect x="318" y="70" width="240" height="60" rx="8" class="svg-box"/>
+          <text x="438" y="94" class="svg-t" text-anchor="middle">운영 기간</text>
+          <text x="438" y="113" class="svg-t-mono" text-anchor="middle">데이터 누적 · 조회량 증가</text>
+
+          <path d="M558 100 H610" class="svg-line-acc" marker-end="url(#b)"/>
+
+          <rect x="612" y="70" width="244" height="60" rx="8" class="svg-box-accent"/>
+          <text x="734" y="94" class="svg-t" text-anchor="middle">임계 초과</text>
+          <text x="734" y="113" class="svg-t-acc" text-anchor="middle">메모리 초과 · 프로세스 종료</text>
+
+          <text x="440" y="172" class="svg-t-mono" text-anchor="middle">코드는 변하지 않았고, 데이터만 변했다 — 배포 이력에 단서가 없는 이유</text>
+        </svg>
+        </div>
+        <figcaption>Fig. 4 — 잠복 결함의 발현 (Timeline)</figcaption>
+      </figure>
+      <ul>
+        <li><strong>에러 로그에서 출발</strong> — 프로세스 종료 시점의 로그를 기준으로 어떤 요청 처리 중에 발생했는지 범위를 좁혔습니다.</li>
+        <li><strong>배포가 아닌 데이터를 의심</strong> — 코드 변경이 없는데 증상이 새로 생겼다는 점에서, 시간에 따라 변하는 조건인 <strong>데이터 누적</strong>을 원인 축으로 잡았습니다.</li>
+        <li><strong>EXPLAIN으로 실행 계획 확인</strong> — 해당 조회가 인덱스를 타지 못하고 전체 스캔으로 떨어진다는 것을, 필터와 정렬 순서가 인덱스 컬럼 구성과 어긋난 데서 확인했습니다.</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <h4>Solution</h4>
+      <ul class="check">
+        <li><strong>조회 패턴을 기준으로 복합 인덱스 구성</strong> — WHERE 조건이 항상 <code style="font-family:var(--mono);font-size:12.5px">(user_id, character_id)</code>로 함께 들어오고 정렬은 <code style="font-family:var(--mono);font-size:12.5px">created_at</code>이었으므로, <code style="font-family:var(--mono);font-size:12.5px">(user_id, character_id, created_at)</code> 순서로 두어 <strong>필터와 정렬을 인덱스 하나로 커버</strong>하도록 했습니다.</li>
+        <li><strong>조회량의 상한을 서버가 결정</strong> — 목록 조회는 요청이 요구하는 만큼이 아니라 서버가 정한 상한 안에서 응답하도록, 한 번에 메모리로 올라오는 행 수를 제한했습니다.</li>
+        <li><strong>필요한 곳에만</strong> — 인덱스는 조회를 빠르게 하는 대신 쓰기 비용을 늘리므로, 실제 조회 패턴이 확인된 컬럼에만 적용했습니다.</li>
+      </ul>
+    </div>
+
+    <div class="result">
+      <h4>Result</h4>
+      <ul>
+        <li>EXPLAIN 기준, 해당 조회의 접근 방식이 <strong>전체 스캔에서 인덱스 range 스캔으로 바뀌어</strong> 페이지당 읽는 행이 요청한 건수 수준으로 좁혀졌습니다.</li>
+        <li>동일 원인의 서버 다운이 <strong>재발하지 않았습니다.</strong></li>
+        <li>조회 대상이 해당 사용자와 캐릭터 범위로 좁혀져, <strong>전체 데이터 증가가 개별 조회 비용에 그대로 반영되지 않게</strong> 됐습니다.</li>
+      </ul>
+    </div>
+
+    <div class="callout learn">
+      <h4>What I learned</h4>
+      <p>테스트 환경에서 통과했다는 것이 안전하다는 뜻은 아니라는 걸 배웠습니다.
+      <strong>결함은 코드가 바뀔 때가 아니라 데이터가 바뀔 때도 드러납니다.</strong>
+      그래서 “지금 정상 동작하는가”보다 <strong>“데이터가 100배가 돼도 같은 비용으로 동작하는가”</strong>를
+      함께 확인하게 됐습니다.</p>
+      <p>인덱스도 많이 거는 게 아니라 <strong>조회 패턴에 맞게 거는 것</strong>이라는 걸 배웠습니다.
+      특히 복합 인덱스는 개수보다 <strong>컬럼 순서가 사용 가능 여부를 결정</strong>하고,
+      그 확인은 감이 아니라 EXPLAIN으로 해야 한다는 것도 함께 알게 됐습니다.</p>
+    </div>
+
+    <div class="callout note">
+      <h4>Retrospective</h4>
+      <p>당시에는 장애가 난 뒤에야 발견했습니다.
+      조회 건수나 응답 크기에 대한 <strong>모니터링 지표가 있었다면 다운 이전에 신호를 볼 수 있었을 것</strong>입니다.
+      또 대용량 데이터를 전제로 한 테스트가 있었다면, 운영 중이 아니라 개발 단계에서 잡혔을 문제였습니다.</p>
+      <p>인덱스가 필터와 정렬을 함께 커버하더라도, OFFSET 기반 페이징은 뒤 페이지로 갈수록 앞의 행을 읽고 버리는 비용이 커집니다.
+      데이터가 더 쌓였다면 <strong>커서 기반 페이징</strong>으로 바꿔, 깊은 페이지에서도 방금 읽은 위치부터 이어가도록 했을 것 같습니다.</p>
+    </div>
+  </div>
+
+  <!-- ---- CASE 5 : BUFFER POOL ---- -->
+  <div class="case">
+    <span class="case-label">CASE 05 · DB TUNING</span>
+    <h3>같은 쿼리인데 가끔만 느리다 — InnoDB 버퍼 풀 증설</h3>
+    <p class="invariant">// invariant &nbsp;— 자주 읽는 데이터는 디스크가 아니라 메모리에서 응답한다</p>
+    <p class="impact">간헐적으로 수 초씩 걸리던 API 응답의 원인을 쿼리가 아닌 <strong>DB 서버 설정(버퍼 풀 128MB)</strong>에서 찾아, <strong>서비스 중단 없이 5GB로 증설</strong>해 Cold 쿼리 지연과 앱 첫 진입 로딩 지연을 해소</p>
+
+    <div class="step">
+      <h4>Problem</h4>
+      <p>
+        API 응답이 간헐적으로 수 초씩 지연되고, 앱을 처음 실행할 때의 로딩도 유독 느리다는 증상이 있었습니다.
+        느린 쿼리를 의심했지만 같은 쿼리를 다시 실행하면 정상 속도로 돌아왔습니다.
+        느린 쿼리라기보다, <strong>같은 쿼리가 어떤 때는 느리고 어떤 때는 빠른</strong> 문제였습니다.
+      </p>
+    </div>
+
+    <div class="step">
+      <h4>Diagnosis</h4>
+      <ul>
+        <li><strong>재현 조건에서 출발</strong> — 처음 실행되거나 오랜만에 실행되는 쿼리만 느리고, 직후 재실행은 빠르다는 패턴을 확인했습니다. 쿼리 자체가 아니라 <strong>데이터를 어디서 읽어오는지</strong>의 차이라고 판단했습니다.</li>
+        <li><strong>디스크 읽기 병목 의심</strong> — 첫 실행은 디스크에서, 재실행은 메모리에서 읽는다면 증상이 정확히 설명됩니다. InnoDB 버퍼 풀 설정을 확인했습니다.</li>
+        <li><strong>기본값 그대로 운영 중</strong> — 버퍼 풀이 MySQL 기본값 <strong>128MB</strong>로 운영되고 있었습니다. 누적된 데이터 대비 턱없이 작아, 자주 읽는 데이터조차 메모리에 머물지 못하고 매번 디스크로 밀려나는 상태였습니다.</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <h4>Solution</h4>
+      <ul class="check">
+        <li><strong>인스턴스 메모리 사전 확인 후 증설</strong> — DB가 EC2에서 직접 운영 중이었으므로, 서버의 가용 메모리를 먼저 확인하고 애플리케이션과 OS 몫을 제외한 범위에서 5GB로 잡았습니다.</li>
+        <li><strong>서비스 중단 없이 적용</strong> — <span style="font-family:var(--mono);font-size:13px">innodb_buffer_pool_size</span>는 동적 변경이 가능한 파라미터라 재시작 없이 반영하고, 재부팅 이후에도 유지되도록 설정 파일에 함께 기록했습니다.</li>
+      </ul>
+    </div>
+
+    <div class="result">
+      <h4>Result</h4>
+      <ul>
+        <li>간헐적으로 수 초씩 걸리던 Cold 쿼리 지연과 <strong>앱 첫 진입 로딩 지연이 해소</strong>됐습니다.</li>
+        <li>자주 읽는 데이터가 메모리에 머물게 되어, 같은 쿼리의 응답 시간이 <strong>실행 시점과 무관하게 일정</strong>해졌습니다.</li>
+      </ul>
+    </div>
+
+    <div class="callout learn">
+      <h4>What I learned</h4>
+      <p>
+        느린 응답이 항상 쿼리의 문제는 아니라는 것을 배웠습니다. 같은 쿼리의 첫 실행과 재실행이 다르게 동작한다면
+        의심할 곳은 SQL이 아니라 <strong>데이터가 어느 계층(메모리 / 디스크)에서 읽히는가</strong>입니다.
+        그리고 DB의 기본 설정은 운영 데이터 규모를 알지 못하므로,
+        <strong>기본값으로 돌아가고 있는 설정 자체가 점검 대상</strong>이라는 것도 알게 됐습니다.
+      </p>
+    </div>
+
+    <div class="callout note">
+      <h4>Retrospective</h4>
+      <p>
+        당시에는 증상이 나타난 뒤에야 원인을 찾았습니다. 버퍼 풀 히트율
+        (<span style="font-family:var(--mono);font-size:13px">Innodb_buffer_pool_reads / read_requests</span>)을
+        모니터링 지표로 두었다면 사용자가 지연을 겪기 전에 신호를 볼 수 있었을 것입니다.
+        또 데이터가 계속 커지면 증설만으로는 한계가 오므로, 오래된 로그성 데이터의 아카이빙처럼
+        <strong>working set 자체를 줄이는 방향</strong>도 함께 준비했을 것 같습니다.
+      </p>
+    </div>
+  </div>
+
+  <!-- ---- CASE 6 : I18N ---- -->
+  <div class="case">
+    <span class="case-label">CASE 06 · GLOBALIZATION</span>
+    <h3>클라이언트가 언어를 관리하지 않는 다국어 응답 구조</h3>
+    <p class="invariant">// invariant &nbsp;— 같은 사용자에게는 어느 클라이언트에서든 같은 언어로 응답한다</p>
+
+    <div class="step">
+      <h4>Problem</h4>
+      <p>
+        앱과 웹, 백오피스가 각자 번역을 관리하면 서버가 새 에러 코드를 추가할 때마다 모든 클라이언트 배포가 필요해지고,
+        번역이 누락되면 사용자에게 코드값이 그대로 노출됩니다.
+        서버에서 처리하더라도 <strong>메시지를 반환하는 모든 지점이 언어 분기를 갖게 되면</strong> 같은 문제가 코드 안으로 옮겨올 뿐입니다.
+      </p>
+    </div>
+
+    <div class="step">
+      <h4>Solution</h4>
+      <ul class="check">
+        <li><strong>미들웨어에서 언어를 한 번만 판별</strong> — Accept-Language 헤더를 요청 진입 지점에서 해석해, 이후 컨트롤러와 서비스는 언어를 알 필요가 없게 했습니다. 언어 분기가 각 로직으로 번지지 않습니다.</li>
+        <li><strong>번역 테이블을 단일 소스로</strong> — 메시지를 코드가 아니라 <strong>데이터</strong>로 관리해, 문구 수정과 지원 언어 추가를 코드 변경 없이 처리할 수 있게 했습니다.</li>
+        <li><strong>조회 캐싱</strong> — 번역은 거의 모든 응답에서 조회되는 데이터라 매 요청 DB를 거치지 않도록 캐싱했습니다. 대신 수정 반영에는 캐시 갱신만큼의 시차가 생깁니다.</li>
+        <li><strong>기본 언어 폴백</strong> — 헤더가 없거나 미지원 언어여도 코드값이 그대로 노출되지 않게 했습니다.</li>
+      </ul>
+    </div>
+
+    <div class="result">
+      <h4>Result</h4>
+      <ul>
+        <li>세 클라이언트가 <strong>동일한 메시지 소스</strong>를 참조하게 되어, 문구 수정과 지원 언어 추가가 클라이언트 배포 없이 <strong>번역 테이블 수정만으로</strong> 반영됩니다.</li>
+        <li>언어 처리가 미들웨어 한 곳에 모여, 새 메시지를 추가할 때 <strong>다국어를 따로 신경 쓰지 않아도</strong> 되게 됐습니다.</li>
+      </ul>
+    </div>
+
+    <div class="callout learn">
+      <h4>What I learned</h4>
+      <p>다국어는 번역 파일을 만드는 일이 아니라 <strong>어느 계층이 언어를 책임질지 정하는 설계 문제</strong>라는 것을 배웠습니다.
+      언어를 미들웨어로 올리고 메시지를 데이터로 내리자, 나머지 코드가 다국어를 의식하지 않아도 되는 구조가 됐습니다.</p>
+    </div>
+  </div>
+
+  <!-- ---- OPERATIONS ---- -->
+  <div class="also">
+    <span class="case-label">OPERATIONS</span>
+    <h3>운영 경험 — 개발자 개입 없이 굴러가는 서비스</h3>
+    <div class="also-list" style="margin-top:24px">
+      <div>
+        <h4>어드민 백오피스</h4>
+        <p>운영팀이 콘텐츠와 회원 데이터를 직접 관리하는 백오피스를 개발해, 반복성 운영 요청이 개발자를 거치지 않고 처리되는 환경을 만들었습니다.</p>
+      </div>
+      <div>
+        <h4>회원 인증 체계</h4>
+        <p>카카오와 애플 소셜 로그인과 SMS 본인인증 기반 가입과 로그인(JWT / Refresh Token)을 구현해 인증 전 구간을 담당했습니다.</p>
+      </div>
+      <div>
+        <h4>AI 선톡 · FCM 동적 푸시</h4>
+        <p>OpenAI API로 메시지를 생성하고 회원별 변수를 발송 시점에 치환해 개인화 메시지를 자동 발송했으며, 딥링크와 동적 이미지를 담은 Payload로 다양한 알림 시나리오를 지원했습니다.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ============ DECISIONS ============ -->
+<section>
+<div class="wrap block">
+  <span class="eyebrow">Technical Decisions</span>
+  <h2>기술적 의사결정</h2>
+  <p class="lead">
+    같은 문제라도 규모와 팀 상황에 따라 답이 달라집니다.
+    당시 선택의 근거와, <strong>전제가 바뀌면 언제 다른 선택으로 넘어갈지</strong>를 함께 기록합니다.
+  </p>
+
+  <div class="case">
+    <span class="case-label">DECISION 01 · CONCURRENCY</span>
+    <h3>분산 락 대신 DB 행 락</h3>
+    <div class="step">
+      <h4>상황</h4>
+      <p>결제 지급 갱신 구간의 동시 요청 제어. Redis 기반 분산 락과 DB 비관적 락(<span style="font-family:var(--mono);font-size:13px">SELECT … FOR UPDATE</span>)이 후보였습니다.</p>
+    </div>
+    <div class="step">
+      <h4>판단</h4>
+      <ul class="check">
+        <li>분산 락이 필요한 상황은 <strong>여러 서버가 DB 밖의 자원을 두고 경합할 때</strong>입니다. 당시 문제는 <strong>같은 DB 행에 대한 동시 갱신</strong>이었고, 이 경합은 DB가 이미 트랜잭션으로 직렬화해 줍니다.</li>
+        <li>행 락은 <strong>트랜잭션과 수명주기가 일치</strong>합니다. 커밋과 롤백에 맞춰 해제되므로, 분산 락에서 신경 써야 하는 TTL 만료와 락 유실, 해제 누락 같은 실패 모드가 없습니다.</li>
+        <li>Redis에 락을 두면 <strong>정합성의 핵심 구간이 외부 인프라의 가용성에 의존</strong>하게 됩니다. 지켜야 할 데이터가 있는 곳(DB)에서 지키는 편이 구조적으로 단순합니다.</li>
+      </ul>
+    </div>
+    <div class="callout note">
+      <h4>전제가 바뀐다면</h4>
+      <p>DB가 샤딩되어 한 지급 처리가 여러 DB에 걸치거나, DB 락 대기가 처리량 병목으로 관측되는 시점이 분산 락 또는 다른 조율 방식을 검토할 기준입니다.</p>
+    </div>
+  </div>
+
+  <div class="case">
+    <span class="case-label">DECISION 02 · QUEUE</span>
+    <h3>메시지 큐 대신 DB 테이블 + 스케줄러</h3>
+    <div class="step">
+      <h4>상황</h4>
+      <p>AI 이미지 생성 대기열. 처음에는 메시지 큐 도입을 먼저 떠올렸지만, 필요 조건을 따져보며 DB 기반 대기열로 방향을 잡았습니다.</p>
+    </div>
+    <div class="step">
+      <h4>판단</h4>
+      <ul class="check">
+        <li>필요한 것은 <strong>버퍼링, 순차 처리, 실패 기록, 그리고 상태 조회</strong>였습니다. 이 중 "지금 어떤 작업이 어떤 상태인가"를 들여다보는 운영 가시성은 SQL로 바로 조회되는 DB가 브로커보다 낫습니다.</li>
+        <li>소비자가 스케줄러 하나뿐이고 처리량도 낮아, 큐가 강점을 갖는 <strong>다중 컨슈머 분배나 고처리량 상황이 아니었습니다</strong>. 이 조건에서 브로커는 성능 이점 없이 운영과 모니터링, 장애 지점만 추가합니다.</li>
+        <li>작업 상태가 서비스 데이터와 같은 DB에 있어, 접수와 상태 기록을 <strong>하나의 트랜잭션</strong>으로 다룰 수 있었습니다.</li>
+      </ul>
+    </div>
+    <div class="callout note">
+      <h4>전제가 바뀐다면</h4>
+      <p>워커를 여러 대로 늘려 작업 분배가 필요해지거나, 폴링 주기가 처리 지연의 병목이 되거나, 처리량이 크게 늘어나는 시점이 메시지 큐로 넘어갈 기준입니다. 도구가 아니라 <strong>전환 조건을 먼저 정의해 두는 것</strong>이 이 결정에서 배운 점입니다.</p>
+    </div>
+  </div>
+
+  <div class="case">
+    <span class="case-label">DECISION 03 · STORAGE</span>
+    <h3>채팅 로그 저장소로 MongoDB</h3>
+    <div class="step">
+      <h4>상황</h4>
+      <p>회원과 캐릭터 조합마다 끝없이 누적되는 채팅 로그의 저장소 선택. 핵심 데이터가 이미 있는 MySQL과 MongoDB가 후보였습니다.</p>
+    </div>
+    <div class="step">
+      <h4>판단</h4>
+      <ul class="check">
+        <li>조회가 항상 <strong>대화 단위</strong>로 들어오고 다른 테이블과의 조인이 필요 없는, 읽기 패턴이 단순한 데이터였습니다.</li>
+        <li>메시지에 텍스트와 이미지, 시스템 메시지 등 <strong>형태가 다른 필드가 섞이고 스키마 변경이 잦아</strong>, 문서 모델이 자연스러웠습니다.</li>
+        <li>쓰기가 append 위주인 로그성 데이터를 분리해, <strong>핵심 트랜잭션 데이터가 있는 MySQL의 부하와 격리</strong>했습니다.</li>
+      </ul>
+    </div>
+    <div class="callout note">
+      <h4>Retrospective</h4>
+      <p>
+        당시에는 대화를 큰 단위로 묶어 저장하는 설계를 택했는데, 대화가 길어질수록 문서가 비대해지고
+        일부 메시지만 다루는 작업의 비용이 커지는 한계가 있었습니다. 다시 설계한다면
+        <strong>메시지 단위 문서 + (user, character, created_at) 인덱스</strong>로 두어,
+        대화 길이와 무관하게 읽기와 쓰기 비용이 일정한 구조를 택할 것입니다.
+        저장 단위는 "묶어서 보는 단위"가 아니라 <strong>"가장 자주 다루는 단위"</strong>로 정해야 한다는 것을 배웠습니다.
+      </p>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ============ PROJECT 02 : NFC ============ -->
+<section>
+<div class="wrap block">
+  <div class="proj-head"><span class="proj-num">PROJECT 02</span></div>
+  <h2>NFC 콘텐츠</h2>
+  <p class="lead">
+    NFC 태그와 연동되는 운세, 타로, 룰렛 등 Java / Spring Boot 기반 콘텐츠 API를 인수인계받아 개발하고 운영하며,
+    배포 파이프라인 전환과 클라우드 환경 이전을 담당했습니다.
+    <strong>동작하는 서비스를 다른 인프라 위에서 동일하게 동작시키는 일</strong>을 처음 맡은 프로젝트이자,
+    .NET에서 익힌 서버 설계와 운영 원칙이 <strong>Java와 Spring 환경에서도 그대로 통한다는 것을 확인한</strong> 프로젝트입니다.
+  </p>
+
+  <dl class="factgrid">
+    <div><dt>Period</dt><dd>2025.07 – 2026.02 (8개월)</dd></div>
+    <div><dt>Role</dt><dd>API 운영 · 배포 파이프라인 전환 · 클라우드 이전</dd></div>
+    <div><dt>Stack</dt><dd>Java / Spring Boot / JPA / MySQL / Nginx / AWS / GCP / GitHub Actions</dd></div>
+  </dl>
+
+  <div class="chips" style="margin-top:20px">
+    <span class="chip">Spring Boot</span><span class="chip">JPA</span>
+    <span class="chip">GitHub Actions</span><span class="chip">CI/CD</span><span class="chip">Cloud Migration</span>
+  </div>
+
+  <div class="case">
+    <span class="case-label">CASE 01 · MIGRATION</span>
+    <h3>AWS에서 GCP로의 인프라 이전</h3>
+    <p class="invariant">// invariant &nbsp;— 인프라가 바뀌어도 서비스 동작은 동일해야 한다</p>
+    <p class="impact">DNS 전환으로 다운타임 10분 안에 이전 완료 — 이전 후 동작 차이로 인한 장애 0건</p>
+
+    <div class="step">
+      <h4>Context</h4>
+      <p>
+        회사에서 GCP 크레딧을 지원받게 되면서 운영 비용 절감을 위해 API 서버를 AWS EC2에서 GCP Compute Engine으로 이전했습니다.
+        <strong>데이터베이스는 이번 이전 범위에서 제외하고 애플리케이션 계층만 옮겼습니다.</strong>
+        성능 개선이 목적이 아니라 실행 환경만 변경하는 작업이었기 때문에, 서비스 중단 없이 기존 동작을 그대로 유지하는 것을 가장 중요한 목표로 삼았습니다.
+      </p>
+    </div>
+
+    <div class="step">
+      <h4>Approach</h4>
+      <ul>
+        <li><strong>애플리케이션 계층만 이전</strong> — 데이터베이스는 기존 위치에 두고 실행 위치만 옮겼습니다. 이전과 리팩터링을 동시에 하지 않고 변경 지점을 하나로 좁혀야, 문제가 생겼을 때 원인을 특정할 수 있기 때문입니다.</li>
+        <li><strong>사전 검증</strong> — 옮긴 서버가 기존 데이터베이스에 정상적으로 연결되고 응답이 이전과 같은지 먼저 확인했습니다.</li>
+        <li><strong>DNS 전환은 마지막에</strong> — 새 환경에서 동작을 먼저 확인한 뒤 트래픽을 옮겨 문제 발생 시 되돌릴 수 있는 상태를 유지했습니다.</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <h4>CI/CD</h4>
+      <p>
+        인계받은 서비스는 Jenkins로 배포되고 있었고, 배포를 위해 <strong>별도의 CI 서버를 계속 띄워두고 관리</strong>해야 했습니다.
+        빌드와 배포 과정을 GitHub Actions로 옮겨 <strong>저장소와 CI/CD 파이프라인을 한곳에서 관리하도록 통합</strong>했습니다.
+        별도 CI 서버를 운영할 필요가 없어졌고, 코드와 배포 파이프라인을 같은 곳에서 다루게 됐습니다.
+      </p>
+      <p>
+        브랜치는 <strong>main / develop</strong>으로 운영했습니다.
+        기능 작업은 develop에 모아 검증한 뒤 main으로 병합하고, main 기준으로만 운영 배포가 나가도록 해
+        <strong>배포 대상이 되는 코드를 한 브랜치로 고정</strong>했습니다.
+      </p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ PROJECT 03 : 비글즈 ============ -->
+<section>
+<div class="wrap block">
+  <div class="proj-head"><span class="proj-num">PROJECT 03</span></div>
+  <h2>비글즈 앱</h2>
+  <p class="lead">
+    첫 실무 프로젝트입니다. 룰렛, 빙고, 뽑기 등 인앱 이벤트 웹 페이지와 관리자 페이지는 백엔드와 React 프론트엔드를 함께 개발했고,
+    앱에서 호출하는 게임 콘텐츠 API는 <strong>유니티 클라이언트 개발자와 응답 규격과 예외 처리 방식을 맞춰가며</strong> 설계했습니다.
+    서버 혼자 정하는 규격이 아니라, 쓰는 쪽과 합의해야 하는 인터페이스라는 것을 처음 체감한 프로젝트입니다.
+  </p>
+
+  <dl class="factgrid">
+    <div><dt>Period</dt><dd>2023.05 – 2023.12 (8개월)</dd></div>
+    <div><dt>Role</dt><dd>콘텐츠 API · 이벤트 웹 · 관리자 페이지</dd></div>
+    <div><dt>Stack</dt><dd>C# / .NET / RepoDB / MySQL / Redis / React</dd></div>
+  </dl>
+
+  <div class="case">
+    <span class="case-label">CASE 01 · CACHING</span>
+    <h3>게임 랭킹 조회의 캐시 적용</h3>
+
+    <div class="step">
+      <h4>Problem</h4>
+      <p>
+        랭킹은 <strong>모든 사용자가 같은 결과를 보는 데이터</strong>인데, 조회할 때마다 집계 쿼리가 실행됐습니다.
+        사용자 수에 비례해 동일한 계산이 반복되는 구조였습니다.
+      </p>
+    </div>
+
+    <div class="step">
+      <h4>Solution</h4>
+      <ul class="check">
+        <li>랭킹 결과를 Redis에 <strong>10분 TTL</strong>로 캐싱해, 만료 전까지는 집계 없이 응답하도록 했습니다.</li>
+        <li>랭킹은 실시간성이 엄격하게 요구되지 않는 데이터라고 판단해, <strong>최신성을 일부 포기하는 대신 부하를 줄이는 쪽</strong>을 택했습니다.</li>
+        <li>이후 <strong>변경 빈도가 낮고 모든 사용자가 같은 결과를 보는 조회</strong>를 같은 기준으로 판별해 캐싱을 넓혀 적용했습니다.</li>
+      </ul>
+    </div>
+
+    <div class="callout learn">
+      <h4>What I learned</h4>
+      <p>캐시는 단순히 성능을 높이는 기술이 아니라
+      <strong>데이터가 얼마나 최신이어야 하는지를 결정하는 설계</strong>라는 점을 배웠습니다.
+      이를 통해 데이터마다 허용 가능한 지연 시간이 다르다는 것을 고려하며
+      캐시 적용 여부를 판단하게 되었습니다.</p>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>최아영 · Backend Engineer · choiorog@gmail.com · github.com/surpmh</p>
+  </div>
+</footer>
+
+</body>
+</html>

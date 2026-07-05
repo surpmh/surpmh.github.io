@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>최아영 | 경력기술서</title>
+<meta name="description" content="백엔드 개발자 최아영의 경력기술서">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #1c1c1c;
+    --sub: #555555;
+    --muted: #8a8a8a;
+    --accent: #333333;
+    --line: #e2e2e2;
+    --soft: #f4f4f4;
+    --paper: #ffffff;
+  }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    background: #ececec;
+    color: var(--ink);
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+    padding: 32px 16px;
+  }
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--paper);
+    padding: 56px 60px 64px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.09);
+    border-radius: 4px;
+  }
+
+  /* 인쇄 시 모든 페이지 상·하단에 반복되는 여백(브라우저 머리글·바닥글 없이 여백 확보) */
+  table.sheet { width: 100%; border-collapse: collapse; }
+  table.sheet > thead > tr > td,
+  table.sheet > tbody > tr > td,
+  table.sheet > tfoot > tr > td { padding: 0; border: 0; }
+  .vpad { height: 0; }
+
+  /* ===== Header ===== */
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; padding-bottom: 22px; border-bottom: 2px solid var(--ink); }
+  .head h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+  .head .role { font-size: 15px; font-weight: 600; color: var(--sub); margin-top: 8px; }
+  .head .meta { font-size: 12.5px; color: var(--sub); text-align: right; line-height: 1.9; }
+  .head .meta a { color: var(--sub); text-decoration: none; }
+  .head .meta .k { display: inline-block; min-width: 62px; color: var(--muted); font-weight: 600; }
+
+  /* ===== Section ===== */
+  section { margin-top: 34px; }
+  h2.sec {
+    font-size: 15px; font-weight: 800; letter-spacing: 0.02em; color: var(--ink);
+    text-transform: uppercase; padding-bottom: 8px; margin-bottom: 18px;
+    border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 9px;
+  }
+  h2.sec::before { content: ""; width: 4px; height: 15px; background: var(--accent); border-radius: 2px; display: inline-block; }
+
+  /* ===== Company ===== */
+  .company { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .company .left { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .company .name { font-size: 18px; font-weight: 800; }
+  .company .pos { font-size: 13px; font-weight: 600; color: var(--muted); }
+  .company .period { font-size: 12.5px; font-weight: 600; color: var(--sub); }
+  .company .period b { color: var(--ink); font-weight: 700; }
+
+  /* ===== Project group ===== */
+  .pgroup { margin-top: 30px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .pgroup .pgname { font-size: 16px; font-weight: 800; }
+  .pgmeta { display: grid; grid-template-columns: 90px 1fr; gap: 4px 16px; margin-top: 8px; }
+  .pgmeta dt { font-size: 12px; font-weight: 700; color: var(--muted); }
+  .pgmeta dd { font-size: 12.5px; color: var(--sub); font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+  /* ===== Achievement block ===== */
+  .job { position: relative; padding-left: 18px; margin-top: 18px; border-left: 2px solid var(--line); }
+  .job .jname { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .job .jbody { font-size: 13px; color: var(--sub); line-height: 1.78; margin-top: 7px; }
+  .job .jbody b { color: var(--ink); font-weight: 700; }
+
+  /* ===== Category heading ===== */
+  .cat {
+    margin-top: 22px; display: flex; align-items: center; gap: 10px;
+    font-size: 12px; font-weight: 800; letter-spacing: 0.03em; color: var(--muted);
+  }
+  .cat::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .cat + .job { margin-top: 12px; }
+
+  .foot { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); text-align: center; font-size: 11.5px; color: var(--muted); }
+
+  /* ===== Print button ===== */
+  .print-btn {
+    position: fixed; top: 20px; right: 20px; z-index: 50;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #fff; border: none; border-radius: 10px;
+    padding: 11px 17px; font-size: 13.5px; font-weight: 600; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,.18); font-family: inherit;
+  }
+  .print-btn:hover { opacity: .9; }
+  .print-btn svg { width: 16px; height: 16px; }
+
+  @media (max-width: 640px) {
+    body { padding: 0; }
+    .page { padding: 32px 22px 40px; border-radius: 0; box-shadow: none; }
+    .pgmeta { grid-template-columns: 1fr; gap: 2px; }
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; font-size: 10.5pt; }
+    .page { max-width: none; box-shadow: none; border-radius: 0; padding: 0 13mm; }
+    .print-btn { display: none; }
+    /* thead/tfoot은 모든 인쇄 페이지에 반복 → 2페이지 이후에도 상·하단 여백 유지 */
+    .vpad { height: 13mm; }
+    .head { padding-bottom: 14px; }
+    section { margin-top: 14px; }
+    .company { padding-bottom: 10px; }
+
+    /* 제목·프로젝트 헤더가 페이지 끝에 홀로 남지 않도록 */
+    h2.sec { break-after: avoid; page-break-after: avoid; }
+    .company { break-after: avoid; page-break-after: avoid; }
+    .pgroup { margin-top: 18px; padding-bottom: 7px; break-after: avoid; page-break-after: avoid; }
+    .pgmeta { gap: 2px 16px; margin-top: 6px; }
+    .job .jname { break-after: avoid; page-break-after: avoid; }
+
+    /* 최소 단위 블록은 페이지 경계에서 쪼개지 않음 */
+    .job, .pgroup, .foot { break-inside: avoid; page-break-inside: avoid; }
+    .job { margin-top: 12px; }
+    /* 본문 크기가 px 절대값이라 인쇄용으로 여기서 직접 조정 */
+    .job .jname { font-size: 13.3px; }
+    .job .jbody { font-size: 12.2px; line-height: 1.6; margin-top: 3px; orphans: 3; widows: 3; }
+    .cat { margin-top: 14px; font-size: 11px; break-after: avoid; page-break-after: avoid; }
+    .cat + .job { margin-top: 8px; }
+
+    .foot { margin-top: 24px; padding-top: 14px; }
+    /* margin: 0 이어야 브라우저 머리글·바닥글이 인쇄되지 않음 */
+    @page { size: A4; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  PDF로 저장
+</button>
+
+<div class="page">
+<table class="sheet">
+<thead><tr><td><div class="vpad"></div></td></tr></thead>
+<tbody><tr><td>
+
+  <!-- Header -->
+  <header class="head">
+    <div>
+      <h1>최아영</h1>
+      <div class="role">백엔드 개발자 · Backend Developer</div>
+    </div>
+    <div class="meta">
+      <div><span class="k">총 경력</span> 2년 10개월</div>
+      <div><span class="k">Email</span> <a href="mailto:choiorog@gmail.com">choiorog@gmail.com</a></div>
+      <div><span class="k">GitHub</span> <a href="https://github.com/surpmh" target="_blank" rel="noopener">github.com/surpmh</a></div>
+    </div>
+  </header>
+
+  <section>
+    <h2 class="sec">Work Experience</h2>
+
+    <div class="company">
+      <div class="left">
+        <span class="name">(주)비글즈</span>
+        <span class="pos">플랫폼팀 / 팀원</span>
+      </div>
+      <span class="period">2023.05 – 2026.02 · <b>2년 10개월</b></span>
+    </div>
+
+    <!-- ===== PROJECT 01. 하잉 앱 ===== -->
+    <div class="pgroup">
+      <span class="pgname">PROJECT 01. 하잉 앱 — AI 캐릭터 채팅 서비스</span>
+      <dl class="pgmeta">
+        <dt>기간</dt><dd>2024.01 ~ 2026.02</dd>
+        <dt>기술 스택</dt><dd>C#, .NET Core, Entity Framework, OpenAI API, MySQL, MongoDB, Redis, FCM</dd>
+      </dl>
+    </div>
+
+    <div class="cat">핵심 시스템 및 비동기 파이프라인 구축</div>
+
+    <div class="job">
+      <span class="jname">인앱결제 서버 검증 및 환불 자동화 시스템 구축</span>
+      <p class="jbody">
+        클라이언트가 보내는 결제 신호를 그대로 신뢰하면 영수증 위변조와 재전송으로 인한 부정 결제 위험이 있었습니다.
+        구글과 애플 스토어 서버에 직접 조회하는 서버 사이드 영수증 검증을 구현했습니다.
+        또한 거래 식별자에 유니크 제약을 걸어 재전송을 DB 층에서 차단하고
+        지급 갱신 구간은 비관적 락을 적용해 동시 요청에도 데이터 정합성을 유지했습니다.
+        Google RTDN과 App Store Server Notifications를 연동해 환불 이벤트를 실시간으로 자동 반영했으며
+        <b>운영 기간 중 중복 지급 0건을 유지했습니다.</b>
+      </p>
+    </div>
+
+    <div class="job">
+      <span class="jname">AI 이미지 생성 비동기 파이프라인 및 동적 푸시 발송 구축</span>
+      <p class="jbody">
+        건당 수십 초가 걸리는 AI 이미지 생성을 요청 경로에서 분리해 요청은 대기 상태로 저장하고 순차 처리하는 비동기 배치 구조로 구성했습니다.
+        생성 작업이 요청 처리 자원을 점유하지 않게 되어 <b>외부 API의 지연과 장애가 다른 API로 번지지 않도록 격리</b>했습니다.
+        스케줄러 기반 AI 선톡은 OpenAI API로 메시지를 생성하고 회원별 변수를 발송 시점에 치환해 개인화했으며,
+        FCM 푸시는 딥링크와 동적 이미지를 담은 Payload로 다양한 알림 시나리오를 지원했습니다.
+      </p>
+    </div>
+
+    <div class="cat">핵심 문제 해결 및 성능 최적화</div>
+
+    <div class="job">
+      <span class="jname">OOM 서버 강제 종료 원인 추적 및 메모리 최적화</span>
+      <p class="jbody">
+        운영 중 서버 메모리 증가로 인한 OOM Kill 장애 원인을 분석하고 발생 원인별 최적화를 진행했습니다.
+        의심 엔드포인트에 반복 요청을 보내며 메모리 덤프를 분석해 여러 테이블 데이터를 조회한 뒤 
+        애플리케이션 메모리에서 Join 및 GroupBy 연산을 수행하는 비효율적인 처리 구조를 확인하여 
+        데이터베이스 쿼리 단계에서 처리하도록 개선했습니다.
+        또한 인덱스 구성과 맞지 않아 Full Scan이 발생하던 조회 로직은 복합 인덱스를 재설계하여 range 스캔으로 전환했습니다.
+        <b>원인별로 데이터 처리 구조와 조회 성능을 개선해 서버 메모리 사용량을 안정화했습니다.</b>
+      </p>
+    </div>
+
+    <div class="job">
+      <span class="jname">InnoDB 버퍼 풀 증설로 Cold 쿼리 지연 해소</span>
+      <p class="jbody">
+        API 응답이 간헐적으로 수 초씩 지연되고 앱 최초 실행 로딩도 느린 증상이 있었습니다.
+        쿼리 최초 실행 또는 오랜 시간 미사용 후 실행 시 지연되는 패턴을 분석해 디스크 I/O 병목을 의심했고
+        버퍼 풀이 기본값 128MB로 운영 중임을 확인했습니다.
+        <b>서비스 중단 없이 5GB로 증설해 수 초 단위 쿼리 지연과 앱 첫 진입 로딩 지연을 해소했습니다.</b>
+      </p>
+    </div>
+
+    <div class="cat">서비스 공통 기반 및 백오피스</div>
+
+    <div class="job">
+      <span class="jname">회원 인증, 다국어 체계 및 관리자 페이지 구축</span>
+      <p class="jbody">
+        카카오와 애플 소셜 로그인, SMS 인증 기반 회원가입 체계를 구현했습니다. 
+        Accept-Language 헤더를 미들웨어에서 판별하는 i18n 구조를 설계해 이후 로직이 언어 분기를 갖지 않도록 했고,
+        메시지는 코드가 아닌 번역 테이블로 관리하되 조회 빈도가 높아 캐싱을 적용했습니다.
+        헤더가 없거나 미지원 언어인 경우 기본 언어로 폴백하며,
+        <b>문구 수정과 지원 언어 추가가 클라이언트 배포 없이 번역 테이블 수정만으로 반영</b>됩니다.
+        또한 운영팀이 콘텐츠와 회원 데이터를 직접 관리할 수 있는 어드민 백오피스를 개발하여 운영 과정의 개발 의존도를 낮췄습니다.
+      </p>
+    </div>
+
+    <!-- ===== PROJECT 02. NFC 콘텐츠 ===== -->
+    <div class="pgroup">
+      <span class="pgname">PROJECT 02. NFC 콘텐츠 서비스</span>
+      <dl class="pgmeta">
+        <dt>기간</dt><dd>2025.07 ~ 2026.02</dd>
+        <dt>기술 스택</dt><dd>Java, Spring Boot, Spring Data JPA, MySQL, Nginx, AWS, GCP, GitHub Actions</dd>
+      </dl>
+    </div>
+
+    <div class="job">
+      <span class="jname">AWS에서 GCP로 인프라 마이그레이션</span>
+      <p class="jbody">
+        GCP 크레딧 지원 프로그램 활용에 따라 AWS EC2에서 운영 중인 API 서버를 GCP Compute Engine으로 이전했습니다.
+        데이터베이스는 이전 범위에서 제외하고 애플리케이션 계층만 옮겨 변경 지점을 한 곳으로 좁혔고
+        새 환경에서 기존 데이터베이스 연결과 응답 동작을 먼저 검증한 뒤 DNS를 전환해 문제 발생 시 되돌릴 수 있는 상태를 유지했습니다.
+        <b>이전 이후 기능 차이나 운영 장애 없이 서비스를 안정적으로 유지했습니다.</b>
+      </p>
+    </div>
+
+    <div class="job">
+      <span class="jname">CI/CD 워크플로 통합 및 콘텐츠 API 운영</span>
+      <p class="jbody">
+        별도 서버로 관리되던 Jenkins 기반 CI/CD를 GitHub Actions로 전환해
+        <b>배포 프로세스를 저장소 중심으로 단일화</b>했습니다.
+        NFC 태그와 연동되는 운세, 타로, 룰렛 등 콘텐츠 API를 개발하고 유지보수했습니다.
+      </p>
+    </div>
+
+    <!-- ===== PROJECT 03. 비글즈 앱 ===== -->
+    <div class="pgroup">
+      <span class="pgname">PROJECT 03. 비글즈 앱 — 게임 서비스</span>
+      <dl class="pgmeta">
+        <dt>기간</dt><dd>2023.05 ~ 2023.12</dd>
+        <dt>기술 스택</dt><dd>C#, .NET, RepoDB, MySQL, Redis, React</dd>
+      </dl>
+    </div>
+
+    <div class="job">
+      <span class="jname">게임 콘텐츠 API 및 인앱 이벤트 개발</span>
+      <p class="jbody">
+        룰렛, 빙고, 뽑기 등 인앱 이벤트 웹페이지는 백엔드와 React 프론트엔드를 함께 개발했습니다.
+        앱에서 호출하는 게임 콘텐츠 API는 유니티 클라이언트 개발자와 응답 규격과 예외 처리 방식을 조율하며 설계했습니다.
+        또한 변경 빈도가 낮고 모든 회원이 같은 결과를 보는 조회 데이터는 Redis에 캐싱해
+        <b>매 요청마다 반복되던 집계 쿼리를 제거하고 데이터베이스 부하를 줄였습니다.</b>
+      </p>
+    </div>
+
+    <div class="job">
+      <span class="jname">운영 자동화 도구 개발</span>
+      <p class="jbody">
+        회원 정보 관리와 서비스 운영을 위한 관리자 기능을 개발했습니다.
+        기획팀이 개발자 개입 없이 직접 대응할 수 있게 되어 <b>반복성 운영 문의와 작업 공수를 줄였습니다.</b>
+      </p>
+    </div>
+
+  </section>
+
+  <div class="foot">
+    최아영 · 백엔드 개발자 &nbsp;|&nbsp; choiorog@gmail.com
+  </div>
+
+</td></tr></tbody>
+<tfoot><tr><td><div class="vpad"></div></td></tr></tfoot>
+</table>
+</div>
+</body>
+</html>
