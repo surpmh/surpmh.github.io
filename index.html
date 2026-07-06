@@ -179,14 +179,21 @@
         <p style="font-size:17px; line-height:1.75; color:var(--muted); margin:0; max-width:540px;">{{ t.about.p2 }}</p>
       </div>
       <div data-reveal data-reveal-delay=".08s" ref="{{ reveal }}">
-        <div style="background:var(--card); border:1px solid var(--border); border-radius:18px; padding:30px; box-shadow:var(--shadow);">
-          <div style="display:flex; align-items:baseline; gap:6px; margin-bottom:6px;">
-            <span style="font-size:clamp(28px,3.5vw,36px); font-weight:800; letter-spacing:-.03em; color:var(--accent); line-height:1.15;">{{ t.about.years }}</span>
-          </div>
-          <div style="font-size:14px; font-weight:500; color:var(--muted); margin-bottom:26px;">{{ t.about.yearsLabel }}</div>
-          <div style="height:1px; background:var(--border); margin-bottom:24px;"></div>
-          <div style="font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:11px;">{{ t.about.interestLabel }}</div>
-          <div style="font-size:15px; line-height:1.6; color:var(--text); font-weight:500;">{{ t.about.interestValue }}</div>
+        <div style="font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:20px;">{{ t.edu.title }}</div>
+        <div style="position:relative;">
+          <div style="position:absolute; left:7px; top:10px; bottom:10px; width:2px; background:var(--border);"></div>
+          <sc-for list="{{ eduItems }}" as="e" hint-placeholder-count="2">
+            <div style="position:relative; display:flex; gap:clamp(16px,2vw,24px); padding-bottom:20px;">
+              <div style="flex-shrink:0; width:16px; display:flex; justify-content:center;">
+                <span style="width:16px; height:16px; border-radius:50%; background:var(--accent); border:3px solid var(--bg); box-shadow:0 0 0 2px var(--accent); margin-top:6px; z-index:1;"></span>
+              </div>
+              <div style="flex:1; min-width:0; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:20px 22px; box-shadow:var(--shadow);">
+                <div style="font-size:16px; font-weight:700; color:var(--text); letter-spacing:-.01em; line-height:1.4;">{{ e.degree }}</div>
+                <div style="font-size:14px; font-weight:600; color:var(--accent); margin-top:5px;">{{ e.school }}</div>
+                <div style="font-size:12.5px; font-weight:500; color:var(--muted); margin-top:9px; padding:6px 12px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--border); display:inline-block; font-family:'JetBrains Mono', ui-monospace, monospace;">{{ e.period }}</div>
+              </div>
+            </div>
+          </sc-for>
         </div>
       </div>
     </div>
@@ -255,7 +262,7 @@
               <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>AWS S3</span>
               <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>AWS CloudWatch</span>
               <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>GCP</span>
-              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>Slack Webhook</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; padding:9px 13px; border-radius:11px; background:var(--bg-soft); border:1px solid var(--border); font-size:13px; font-weight:500; color:var(--text); font-family:'JetBrains Mono', ui-monospace, monospace;"><span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>Jenkins</span>
             </div>
           </div>
         </div>
@@ -454,34 +461,6 @@
     </div>
   </div>
 
-  <section id="education" style="max-width:1140px; margin:0 auto; padding:clamp(64px,9vh,104px) 24px;">
-    <div data-reveal ref="{{ reveal }}" style="margin-bottom:44px;">
-      <div style="display:flex; align-items:center; gap:11px; margin-bottom:16px;">
-        <span style="width:28px; height:2px; background:var(--accent); border-radius:2px;"></span>
-        <span style="font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);">{{ t.edu.label }}</span>
-      </div>
-      <h2 style="font-size:clamp(28px,3.6vw,42px); line-height:1.15; font-weight:800; letter-spacing:-.02em; margin:0; color:var(--text);">{{ t.edu.title }}</h2>
-    </div>
-
-    <div style="position:relative; max-width:760px;">
-      <div style="position:absolute; left:7px; top:10px; bottom:10px; width:2px; background:var(--border);"></div>
-      <sc-for list="{{ eduItems }}" as="e" hint-placeholder-count="2">
-        <div style="position:relative; display:flex; gap:clamp(18px,3vw,30px); padding-bottom:22px;">
-          <div style="flex-shrink:0; width:16px; display:flex; justify-content:center;">
-            <span style="width:16px; height:16px; border-radius:50%; background:var(--accent); border:3px solid var(--bg); box-shadow:0 0 0 2px var(--accent); margin-top:8px; z-index:1;"></span>
-          </div>
-          <div data-reveal ref="{{ reveal }}" style="flex:1; min-width:0; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:22px 24px; box-shadow:var(--shadow); display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px); box-shadow:var(--shadow-lg);">
-            <div>
-              <div style="font-size:18px; font-weight:700; color:var(--text); letter-spacing:-.01em;">{{ e.degree }}</div>
-              <div style="font-size:15px; font-weight:600; color:var(--accent); margin-top:4px;">{{ e.school }}</div>
-            </div>
-            <span style="font-size:13px; font-weight:500; color:var(--muted); white-space:nowrap; padding:7px 13px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--border); font-family:'JetBrains Mono', ui-monospace, monospace;">{{ e.period }}</span>
-          </div>
-        </div>
-      </sc-for>
-    </div>
-  </section>
-
   <div id="contact" style="background:var(--bg-soft); border-top:1px solid var(--border);">
     <div style="max-width:760px; margin:0 auto; padding:clamp(72px,11vh,120px) 24px; text-align:center;">
       <div data-reveal ref="{{ reveal }}">
@@ -594,6 +573,12 @@ class Component extends DCLogic {
         p2: '문제를 마주하면 증상보다 원인을 먼저 찾습니다. 서버가 메모리 부족(OOM)으로 불안정해졌을 때 인스턴스를 늘리는 대신 원인이 된 로직을 고쳐 추가 비용 없이 해결했습니다. 성능과 비용, 안정성을 함께 고민하는 습관은 이 과정에서 몸에 뱄습니다.',
         years: '2년 8개월',
         yearsLabel: '실무 경력',
+        downloads: '40만+',
+        downloadsLabel: '담당 서비스 누적 다운로드',
+        domainLabel: '주요 도메인',
+        domainValue: '결제·정산, 인앱 결제 서버 검증, 서비스 운영',
+        mainStackLabel: '주 기술',
+        mainStackValue: 'Java · Spring Boot · C# · .NET',
         interestLabel: '관심 분야',
         interestValue: '서비스 안정성, 성능 최적화, 결제 시스템',
       },
@@ -749,6 +734,12 @@ class Component extends DCLogic {
         p2: "When something breaks, I look for the cause before the symptom. When our server became unstable with out-of-memory errors, I fixed the offending logic instead of scaling up instances, resolving it at zero extra cost. That's how thinking about performance, cost, and stability together became a habit.",
         years: '2 yrs 8 mos',
         yearsLabel: 'Experience',
+        downloads: '400K+',
+        downloadsLabel: 'Downloads of services I built',
+        domainLabel: 'Core domains',
+        domainValue: 'Payments & settlement, server-side IAP verification, operations',
+        mainStackLabel: 'Main stack',
+        mainStackValue: 'Java · Spring Boot · C# · .NET',
         interestLabel: 'Interests',
         interestValue: 'Service reliability, performance tuning, payment systems',
       },
@@ -772,34 +763,42 @@ class Component extends DCLogic {
             summary: "Backend developer at the startup behind Beagles, a virtual-pet healing app (400K+ downloads), and Hi-ing, an AI counseling app (100K+). After the team lead's departure I carried server development solo, re-setting priorities and coordinating schedules with planners and frontend developers while owning payment and settlement reliability, service stability, and performance and cost optimization.",
             projects: [
               {
-                title: 'Beagles - Currency Settlement and IAP Hardening',
+                title: 'Beagles - Pet-Raising Simulation Game',
                 period: '',
                 paras: [
-                  'The settlement logic could produce duplicate payouts when concurrent requests overlapped. I applied pessimistic locking so settlement stays correct even under concurrent access, protecting currency-data integrity.',
-                  'Client-side checks alone could not stop fraudulent purchases, so I moved in-app purchase receipt verification to the server and wired up Google RTDN and App Store server notifications so refund events are handled automatically, without manual work.',
+                  '• Developed RESTful APIs',
+                  '• Built APIs for new content such as special pets and agility',
+                  '• Built the ranking system for mini-game results',
+                  '• Full-stack development of roulette, bingo, and gacha event pages',
+                  '• Prevented duplicate payouts by re-drawing when stock ran short after a draw, and reflected product stock in real time to deliver accurate results',
                 ],
               },
               {
-                title: 'Hi-ing - Performance and Cost Optimization',
+                title: 'Hi-ing - A Healing Chat App with an AI Chatbot',
                 period: '',
                 paras: [
-                  'The Hi-ing server became unstable with out-of-memory errors. Instead of papering over it by scaling up instances, I found and fixed the memory-hungry logic, resolving the incident at zero extra infra cost.',
-                  'For read-heavy APIs, I introduced Redis caching and cut average response time from 31ms to 17ms, about 45%.',
+                  '• Converted controller–service data passing from tuples to a DTO structure, clearly separating the data structure and improving code readability and maintainability',
+                  '• Handled application-wide exceptions with UseExceptionHandler middleware and sent logs to Slack on exceptions to shorten incident response time',
+                  '• Applied pessimistic locking during currency settlement to guarantee data integrity under concurrent access and prevent duplicate processing',
+                  '• Cached repeated data requests with Redis, improving response time from 31ms to 17ms (about 45%)',
+                  '• Developed FCM push notifications with dynamic payloads including deep links and image data',
+                  '• Verified Apple/Google in-app purchase receipts through a server verification API and recorded transactions in the DB to prevent fraudulent purchases and strengthen stability',
+                  '• Implemented an automated refund process by receiving real-time payment and refund events via Google RTDN (Real-Time Developer Notification) and App Store Server Notifications, reducing manual errors and improving operational efficiency',
                 ],
               },
               {
-                title: 'NFC Plush-Toy Content Service Backend',
+                title: 'Admin Console - Viewing and Managing Beagles and Hi-ing Data',
                 period: '',
                 paras: [
-                  'I owned the backend for a new service that serves exclusive content when the NFC tag embedded in a plush toy is scanned. Each toy carries a unique UUID, and I designed the APIs that resolve the tag and serve the matching content with Spring Boot, Spring Data JPA, and MySQL.',
+                  '• Built operations pages for tasks such as registering new data and adjusting balance, improving operational efficiency',
                 ],
               },
               {
-                title: 'Operations and Admin Tools',
+                title: 'NFC-Based Plush-Toy Content Service - Backend Development',
                 period: '',
                 paras: [
-                  'I overhauled global exception handling and connected automated Slack alerts, so the team notices and responds the moment an exception occurs. I also migrated tuple-based responses, where field meanings were opaque, to DTOs, making the data self-explanatory from the code alone.',
-                  'I picked up C# and .NET, which I first encountered on the job, from official docs and real projects fast enough to contribute immediately, and built the admin and event pages in React, which gave me a view of the whole service.',
+                  '• Developed interactive content APIs such as fortune, tarot, and roulette',
+                  '• Migrated the service from AWS to GCP',
                 ],
               },
             ],
@@ -881,7 +880,7 @@ class Component extends DCLogic {
     },
   };
 
-  NAV_IDS = ['home', 'about', 'skills', 'experience', 'projects', 'certificates', 'education', 'contact'];
+  NAV_IDS = ['home', 'about', 'skills', 'experience', 'projects', 'certificates', 'contact'];
 
   componentDidMount() {
     let theme = null, lang = null;
